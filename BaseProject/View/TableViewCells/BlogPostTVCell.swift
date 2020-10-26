@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import AACarousel
 
-class BlogPostTVCell: BaseTVCell<Blog> {
+class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     
     @IBOutlet weak var profileImageVw           : UIImageView!
     @IBOutlet weak var userNameLbl              : UILabel!
     @IBOutlet weak var timeAgoLbl               : UILabel!
     @IBOutlet weak var captionLbl               : UILabel!
-    @IBOutlet weak var postImageVw              : UIImageView!
+//    @IBOutlet weak var postImageVw              : UIImageView!
+    @IBOutlet weak var carousel                 : AACarousel!
     @IBOutlet weak var postStatusLbl            : UILabel!
     @IBOutlet weak var likeBtn                  : UIButton!
     @IBOutlet weak var commentBtn               : UIButton!
@@ -37,8 +39,34 @@ class BlogPostTVCell: BaseTVCell<Blog> {
         userNameLbl.text                        = item.owner?.name
         timeAgoLbl.text                         = item.createdDate?.displayText
         captionLbl.text                         = item.title!
-        postImageVw.image                       = UIImage(named: item.content?.first ?? "")
         postStatusLbl.text                      = "\(item.totalLikes!) Likes     \(item.totalComments!) Comments     \(item.totalShares!) Shares"
+        
+        //  postImageVw.image                   = UIImage(named: item.content?.first ?? "")
+        carousel.delegate                       = self
+        carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: "defaultImage")
+        //optional methods
+        carousel.setCarouselOpaque(layer: true, describedTitle: false, pageIndicator: false)
+        carousel.setCarouselLayout(displayStyle: 0, pageIndicatorPositon: 2, pageIndicatorColor: nil, describedTitleColor: nil, layerColor: nil)
+        
     }
     
+    func didSelectCarouselView(_ view: AACarousel, _ index: Int) {
+        print("\(index)")
+    }
+    
+    //optional method (show first image faster during downloading of all images)
+    func callBackFirstDisplayView(_ imageView: UIImageView, _ url: [String], _ index: Int) {
+        imageView.setImageWith(imagePath: url.first ?? "", completion: nil)
+    }
+    
+    func downloadImages(_ url: String, _ index: Int) {
+        let httpService = HTTPService()
+        httpService.downloadImage(imagePath: url) { [weak self](image) in
+            if let image = image {
+                self?.carousel.images[index] = image
+            } else {
+                print("nil image")
+            }
+        }
+    }
 }

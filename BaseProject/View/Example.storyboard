@@ -424,12 +424,6 @@
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_will_smith_post1" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-bv-4H7">
-                                                    <rect key="frame" x="0.0" y="118" width="414" height="220"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="OBE-bv-4H7" secondAttribute="height" multiplier="207:110" id="llF-ze-hBP"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Likes     30 Comments     5 Shares" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frb-ib-KNa">
                                                     <rect key="frame" x="12" y="350" width="390" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -485,22 +479,29 @@
                                                         <constraint firstAttribute="height" constant="8" id="IoH-XG-gGM"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2A-jS-BSC" customClass="AACarousel" customModule="AACarousel">
+                                                    <rect key="frame" x="0.0" y="118" width="414" height="220"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="a2A-jS-BSC" secondAttribute="height" multiplier="207:110" id="p0B-g7-eZm"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YaB-9t-x4F" firstAttribute="centerY" secondItem="LjZ-F0-mwa" secondAttribute="centerY" id="1MA-25-Fgp"/>
-                                                <constraint firstItem="OBE-bv-4H7" firstAttribute="top" secondItem="dBb-WF-Inv" secondAttribute="bottom" constant="8" id="4uN-1D-Nmt"/>
                                                 <constraint firstItem="LjZ-F0-mwa" firstAttribute="top" secondItem="sIE-lm-Yff" secondAttribute="bottom" constant="4" id="9nU-9m-CXo"/>
+                                                <constraint firstItem="a2A-jS-BSC" firstAttribute="top" secondItem="dBb-WF-Inv" secondAttribute="bottom" constant="8" id="Ay3-B5-sMe"/>
                                                 <constraint firstItem="frb-ib-KNa" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" constant="12" id="CUq-B0-M85"/>
                                                 <constraint firstAttribute="trailing" secondItem="sIE-lm-Yff" secondAttribute="trailing" constant="12" id="Ff8-OR-5Y3"/>
+                                                <constraint firstItem="a2A-jS-BSC" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" id="Fi1-ae-BIs"/>
                                                 <constraint firstItem="L5M-Xe-5JL" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" constant="12" id="GCX-NV-sse"/>
-                                                <constraint firstItem="OBE-bv-4H7" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" id="H2B-SA-NkW"/>
                                                 <constraint firstItem="h7M-qi-egJ" firstAttribute="top" secondItem="V0U-Ks-UrA" secondAttribute="top" constant="12" id="HXo-DJ-kOA"/>
                                                 <constraint firstItem="L5M-Xe-5JL" firstAttribute="top" secondItem="frb-ib-KNa" secondAttribute="bottom" constant="12" id="PaE-dz-hdR"/>
                                                 <constraint firstItem="sIE-lm-Yff" firstAttribute="leading" secondItem="h7M-qi-egJ" secondAttribute="trailing" constant="8" id="Rr3-Lh-We8"/>
                                                 <constraint firstItem="dBb-WF-Inv" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" constant="12" id="Tk7-xm-Iku"/>
+                                                <constraint firstItem="frb-ib-KNa" firstAttribute="top" secondItem="a2A-jS-BSC" secondAttribute="bottom" constant="12" id="Ugg-Yc-ih8"/>
                                                 <constraint firstItem="dBb-WF-Inv" firstAttribute="top" secondItem="h7M-qi-egJ" secondAttribute="bottom" constant="8" id="Z0W-co-izV"/>
                                                 <constraint firstItem="roi-MH-0zE" firstAttribute="top" secondItem="1Nu-wX-EPN" secondAttribute="bottom" constant="12.5" id="ZBy-mR-1j6"/>
-                                                <constraint firstItem="frb-ib-KNa" firstAttribute="top" secondItem="OBE-bv-4H7" secondAttribute="bottom" constant="12" id="bXa-4A-KS1"/>
                                                 <constraint firstItem="LjZ-F0-mwa" firstAttribute="leading" secondItem="h7M-qi-egJ" secondAttribute="trailing" constant="8" id="cVm-Ly-kDu"/>
                                                 <constraint firstItem="1Nu-wX-EPN" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" constant="12" id="glc-IT-hhf"/>
                                                 <constraint firstAttribute="trailing" secondItem="frb-ib-KNa" secondAttribute="trailing" constant="12" id="gze-ZI-64x"/>
@@ -511,17 +512,17 @@
                                                 <constraint firstAttribute="bottom" secondItem="roi-MH-0zE" secondAttribute="bottom" id="jp1-13-kU6"/>
                                                 <constraint firstAttribute="trailing" secondItem="dBb-WF-Inv" secondAttribute="trailing" constant="12" id="k56-cQ-TGb"/>
                                                 <constraint firstItem="h7M-qi-egJ" firstAttribute="leading" secondItem="V0U-Ks-UrA" secondAttribute="leading" constant="12" id="l8k-UT-jh3"/>
+                                                <constraint firstAttribute="trailing" secondItem="a2A-jS-BSC" secondAttribute="trailing" id="lii-Qc-9a1"/>
                                                 <constraint firstAttribute="trailing" secondItem="roi-MH-0zE" secondAttribute="trailing" id="rpJ-Zz-zoX"/>
                                                 <constraint firstItem="sIE-lm-Yff" firstAttribute="top" secondItem="V0U-Ks-UrA" secondAttribute="top" constant="12" id="uI6-11-9BP"/>
-                                                <constraint firstAttribute="trailing" secondItem="OBE-bv-4H7" secondAttribute="trailing" id="w3q-z8-NvJ"/>
                                                 <constraint firstItem="YaB-9t-x4F" firstAttribute="leading" secondItem="LjZ-F0-mwa" secondAttribute="trailing" constant="4" id="zfn-Jk-XDV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="captionLbl" destination="dBb-WF-Inv" id="JQ2-Qs-bG1"/>
+                                            <outlet property="carousel" destination="a2A-jS-BSC" id="Dok-nJ-iv2"/>
                                             <outlet property="commentBtn" destination="KX6-lk-7Gv" id="8jA-6X-UW4"/>
                                             <outlet property="likeBtn" destination="fE2-Mb-SzM" id="sgY-fc-MzS"/>
-                                            <outlet property="postImageVw" destination="OBE-bv-4H7" id="eve-dr-9t2"/>
                                             <outlet property="postStatusLbl" destination="frb-ib-KNa" id="MCz-La-PZp"/>
                                             <outlet property="profileImageVw" destination="h7M-qi-egJ" id="1vV-dq-Dbh"/>
                                             <outlet property="shareBtn" destination="hC3-kb-acP" id="4cB-zY-rbW"/>
@@ -601,6 +602,5 @@
         <image name="icon_share" width="24" height="24"/>
         <image name="icon_sync" width="100" height="100"/>
         <image name="image_will_smith" width="1024" height="682"/>
-        <image name="image_will_smith_post1" width="1200" height="640"/>
     </resources>
 </document>

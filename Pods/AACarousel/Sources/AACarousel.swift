@@ -42,6 +42,7 @@ public class AACarousel: UIView,UIScrollViewDelegate {
     private var timer:Timer?
     private var defaultImg:String?
     private var timerInterval:Double?
+    private var isAutoScrollEnabled: Bool?
     private var indicatorPosition:pageControlPosition = pageControlPosition.bottom
     private var carouselMode:displayModel = displayModel.full
     
@@ -135,9 +136,9 @@ public class AACarousel: UIView,UIScrollViewDelegate {
         beforeImageView = UIImageView()
         currentImageView = UIImageView()
         afterImageView = UIImageView()
-        beforeImageView.contentMode = UIView.ContentMode.scaleToFill
-        currentImageView.contentMode = UIView.ContentMode.scaleToFill
-        afterImageView.contentMode = UIView.ContentMode.scaleToFill
+        beforeImageView.contentMode = UIView.ContentMode.scaleAspectFill
+        currentImageView.contentMode = UIView.ContentMode.scaleAspectFill
+        afterImageView.contentMode = UIView.ContentMode.scaleAspectFill
         beforeImageView.clipsToBounds = true
         currentImageView.clipsToBounds = true
         afterImageView.clipsToBounds = true
@@ -280,6 +281,7 @@ public class AACarousel: UIView,UIScrollViewDelegate {
             return
         }
         timerInterval = timer
+        isAutoScrollEnabled = isAutoScroll
         defaultImg = defaultImage
         initWithData(paths,describedTitle)
         setImage(paths, currentIndex)
@@ -482,7 +484,9 @@ public class AACarousel: UIView,UIScrollViewDelegate {
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
        
-        startAutoScroll()
+        if isAutoScrollEnabled == true {
+            startAutoScroll()
+        }
         
     }
     
