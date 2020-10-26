@@ -5,7 +5,7 @@
 This project can be used as a Base Project which can be extended and implement on that. Supports MVVM-C Architecture and UI binding is powered by [RxSwift](https://github.com/ReactiveX/RxSwift).
 
 
-## Features
+## Architectural components
 - [x] Base MVVM-Coodinator architecture
 - [x] Base List view & Base Grid view that adopts to Base MVVM architecture
 - [x] Both Base Grid view & Base Grid view supports,
