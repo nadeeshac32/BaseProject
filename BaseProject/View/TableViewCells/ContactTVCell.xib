@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTVCell" rowHeight="70" id="KGk-i7-Jjw" customClass="ContactTVCell" customModule="Base_Project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_avatarPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="FMr-HT-Bqz">
+                        <rect key="frame" x="20" y="15" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="FMr-HT-Bqz" secondAttribute="height" multiplier="1:1" id="qwI-4H-hik"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="numberLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpX-Cs-po7">
+                        <rect key="frame" x="72" y="34" width="282" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="Up2-QL-JcS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.4666699171" green="0.46666067839999997" blue="0.4666669369" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIj-IM-Tdr">
+                        <rect key="frame" x="364" y="15" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="GP7-Ay-Yu5"/>
+                        </constraints>
+                        <color key="tintColor" red="0.39437699320000003" green="0.57159668210000003" blue="0.61569488049999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                        <state key="normal" image="icon_checkbox_unchecked"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="445-Kv-dLh">
+                        <rect key="frame" x="72" y="15" width="282" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="ThX-wu-5W8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.16078567499999999" green="0.1607818604" blue="0.16078448300000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jIj-IM-Tdr" firstAttribute="width" secondItem="jIj-IM-Tdr" secondAttribute="height" multiplier="1:1" id="0cJ-SI-8bT"/>
+                    <constraint firstItem="lpX-Cs-po7" firstAttribute="centerY" secondItem="FMr-HT-Bqz" secondAttribute="centerY" constant="8" id="8i0-9s-t8L"/>
+                    <constraint firstItem="445-Kv-dLh" firstAttribute="centerY" secondItem="FMr-HT-Bqz" secondAttribute="centerY" constant="-8" id="DgN-mR-SxZ"/>
+                    <constraint firstItem="lpX-Cs-po7" firstAttribute="trailing" secondItem="445-Kv-dLh" secondAttribute="trailing" id="K1G-nr-u5A"/>
+                    <constraint firstItem="445-Kv-dLh" firstAttribute="leading" secondItem="FMr-HT-Bqz" secondAttribute="trailing" constant="12" id="PQc-Hv-dg5"/>
+                    <constraint firstAttribute="trailing" secondItem="445-Kv-dLh" secondAttribute="trailing" constant="60" id="eRI-ut-wYi"/>
+                    <constraint firstAttribute="trailing" secondItem="jIj-IM-Tdr" secondAttribute="trailing" constant="10" id="ef1-Kk-w3Z"/>
+                    <constraint firstItem="jIj-IM-Tdr" firstAttribute="centerY" secondItem="FMr-HT-Bqz" secondAttribute="centerY" id="jcf-V1-qtC"/>
+                    <constraint firstAttribute="bottom" secondItem="FMr-HT-Bqz" secondAttribute="bottom" constant="15" id="oIu-N9-ZOC"/>
+                    <constraint firstItem="FMr-HT-Bqz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="prr-84-Nky"/>
+                    <constraint firstItem="FMr-HT-Bqz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="r1S-46-E5Y"/>
+                    <constraint firstItem="lpX-Cs-po7" firstAttribute="leading" secondItem="445-Kv-dLh" secondAttribute="leading" id="wzC-qt-iJl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkBoxBtn" destination="jIj-IM-Tdr" id="z0k-7s-kcu"/>
+                <outlet property="imageVw" destination="FMr-HT-Bqz" id="sDA-is-zdR"/>
+                <outlet property="nameLbl" destination="445-Kv-dLh" id="7zb-3m-s3t"/>
+                <outlet property="nameLblRightCons" destination="eRI-ut-wYi" id="0Id-vr-egu"/>
+                <outlet property="numberLbl" destination="lpX-Cs-po7" id="MQ3-oa-JTy"/>
+            </connections>
+            <point key="canvasLocation" x="205.79710144927537" y="161.38392857142856"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_avatarPlaceHolder" width="128" height="128"/>
+        <image name="icon_checkbox_unchecked" width="100" height="100"/>
+    </resources>
+</document>

@@ -1,0 +1,130 @@
+PODS:
+  - Alamofire (5.2.2)
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
+  - CalendarDateRangePickerViewController (0.1.0)
+  - CountryPickerView (3.1.3)
+  - DatePickerDialog (3.0)
+  - Differentiator (4.0.1)
+  - DropDown (2.3.13)
+  - FBSDKCoreKit (8.0.0):
+    - FBSDKCoreKit/Basics (= 8.0.0)
+    - FBSDKCoreKit/Core (= 8.0.0)
+  - FBSDKCoreKit/Basics (8.0.0)
+  - FBSDKCoreKit/Core (8.0.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (8.0.0):
+    - FBSDKLoginKit/Login (= 8.0.0)
+  - FBSDKLoginKit/Login (8.0.0):
+    - FBSDKCoreKit (~> 8.0.0)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GTMAppAuth (1.1.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.4.0):
+    - GTMSessionFetcher/Full (= 1.4.0)
+  - GTMSessionFetcher/Core (1.4.0)
+  - GTMSessionFetcher/Full (1.4.0):
+    - GTMSessionFetcher/Core (= 1.4.0)
+  - KeychainSwift (19.0.0)
+  - ObjectMapper (3.5.3)
+  - PinCodeTextField (0.1.0)
+  - QuickLayout (3.0.0)
+  - RxAppState (1.6.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - SnapKit (5.0.1)
+  - SwiftEntryKit (1.2.3):
+    - QuickLayout (= 3.0.0)
+  - Toast-Swift (5.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - CalendarDateRangePickerViewController
+  - CountryPickerView
+  - DatePickerDialog
+  - DropDown
+  - FBSDKLoginKit
+  - GoogleSignIn
+  - KeychainSwift (~> 19.0)
+  - ObjectMapper (~> 3.4)
+  - PinCodeTextField
+  - RxAppState
+  - RxCocoa
+  - RxDataSources (~> 4.0)
+  - SnapKit (~> 5.0.0)
+  - SwiftEntryKit (= 1.2.3)
+  - Toast-Swift (~> 5.0.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AppAuth
+    - CalendarDateRangePickerViewController
+    - CountryPickerView
+    - DatePickerDialog
+    - Differentiator
+    - DropDown
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - KeychainSwift
+    - ObjectMapper
+    - PinCodeTextField
+    - QuickLayout
+    - RxAppState
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
+    - SnapKit
+    - SwiftEntryKit
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  CalendarDateRangePickerViewController: 9e82a36a21ad7338f4e21a314469bfabe1f738fb
+  CountryPickerView: 383c09949f7455de9892db7ce3400b10da090150
+  DatePickerDialog: 03dbb8350bfa80302ab2a8c83cee1fec70184444
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  FBSDKCoreKit: 9d27fe97a2fa2abe5eeefea8240e837623ab88e0
+  FBSDKLoginKit: 2cbaf5405379731b22f2ebc224f7c30f62378171
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
+  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
+  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
+  PinCodeTextField: a3c39be58bde3ed1d6888d0fb1d88b0a4a2277cc
+  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  RxAppState: b633d7370970ecb80081912ea08a7bf3eb644b4e
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+
+PODFILE CHECKSUM: 0c7c90f70b30db3ea150898c641f50eb9a5df262
+
+COCOAPODS: 1.8.4
