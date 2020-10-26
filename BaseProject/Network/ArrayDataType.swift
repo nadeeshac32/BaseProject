@@ -9,8 +9,12 @@
 import ObjectMapper
 
 class ArrayDataType<DataType: BaseModel>: BaseModel {
-    var items   : [DataType]?
-    
+    var total               : Int?
+    var totalPages          : Int?
+    var page                : Int?
+    var size                : Int?
+    var displayLabel        : String?
+    var items               : [DataType]?
     
     required init?(map: Map) {
         super.init(map: map)
@@ -18,7 +22,12 @@ class ArrayDataType<DataType: BaseModel>: BaseModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        items   <- map[DataType.arrayKey]
+        total               <- map["totalItems"]
+        totalPages          <- map["totalPages"]
+        page                <- map["page"]
+        size                <- map["size"]
+        displayLabel        <- map["displayLabel"]
+        items               <- map[DataType.arrayKey]
     }
     
 }

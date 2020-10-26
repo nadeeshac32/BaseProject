@@ -9,7 +9,7 @@
 import UIKit
 import RxDataSources
 
-class BlogFeedVC: BaseListWithoutHeadersVC<BlogPost, BlogFeedVM, BlogPostTVCell> {
+class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogPostTVCell> {
 
     @IBOutlet weak var _tableView   : UITableView!
 

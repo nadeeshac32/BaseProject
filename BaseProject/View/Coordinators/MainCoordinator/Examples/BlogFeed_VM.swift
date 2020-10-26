@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
-class BlogFeedVM: BaseListVM<BlogPost> {
+class BlogFeedVM: BaseListVM<Blog> {
     
     override var loadFromAPI        : Bool { get { return false } set {} }
     override var loadAsDynemic      : Bool { get { return false } set {} }
@@ -26,7 +26,7 @@ class BlogFeedVM: BaseListVM<BlogPost> {
     
     // Class Methods
     func fetchFeed() {
-        let posts = BlogPost.fetchPosts()
+        let posts = BlogRepository.fetchPosts()
         self.addNewItems(items: posts)
         requestLoading.onNext(false)
     }

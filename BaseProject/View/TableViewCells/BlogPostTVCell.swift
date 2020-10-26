@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BlogPostTVCell: BaseTVCell<BlogPost> {
+class BlogPostTVCell: BaseTVCell<Blog> {
     
     @IBOutlet weak var profileImageVw           : UIImageView!
     @IBOutlet weak var userNameLbl              : UILabel!
@@ -31,14 +31,14 @@ class BlogPostTVCell: BaseTVCell<BlogPost> {
         shareBtn.setImage(#imageLiteral(resourceName: "icon_share").withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
-    override func configureCell(item: BlogPost, row: Int, selectable: Bool) {
+    override func configureCell(item: Blog, row: Int, selectable: Bool) {
         super.configureCell(item: item, row: row, selectable: selectable)
-        profileImageVw.image                    = item.createdBy?.profileImage
-        userNameLbl.text                        = item.createdBy?.username
-        timeAgoLbl.text                         = item.timeAgo
-        captionLbl.text                         = item.caption
-        postImageVw.image                       = item.image
-        postStatusLbl.text                      = "\(item.numberOfLikes!) Likes     \(item.numberOfComments!) Comments     \(item.numberOfShares!) Shares"
+        profileImageVw.image                    = UIImage(named: item.owner?.imageUrl ?? "")
+        userNameLbl.text                        = item.owner?.name
+        timeAgoLbl.text                         = item.createdDate?.displayText
+        captionLbl.text                         = item.title!
+        postImageVw.image                       = UIImage(named: item.content?.first ?? "")
+        postStatusLbl.text                      = "\(item.totalLikes!) Likes     \(item.totalComments!) Comments     \(item.totalShares!) Shares"
     }
     
 }

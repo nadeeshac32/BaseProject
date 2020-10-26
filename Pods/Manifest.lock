@@ -1,4 +1,5 @@
 PODS:
+  - AACarousel (1.1.1)
   - Alamofire (5.2.2)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
@@ -55,6 +56,7 @@ PODS:
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
+  - AACarousel
   - Alamofire
   - CalendarDateRangePickerViewController
   - CountryPickerView
@@ -74,6 +76,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AACarousel
     - Alamofire
     - AppAuth
     - CalendarDateRangePickerViewController
@@ -100,6 +103,7 @@ SPEC REPOS:
     - Toast-Swift
 
 SPEC CHECKSUMS:
+  AACarousel: e0dbd2d3153c56c36df8aa282553f20fc88e132b
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   CalendarDateRangePickerViewController: 9e82a36a21ad7338f4e21a314469bfabe1f738fb
@@ -125,6 +129,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 0c7c90f70b30db3ea150898c641f50eb9a5df262
+PODFILE CHECKSUM: b0934ee1f51bf3d66b956fbf2dc85f56b2c27284
 
 COCOAPODS: 1.8.4

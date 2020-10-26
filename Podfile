@@ -22,5 +22,6 @@ target 'Base Project' do
   pod 'RxDataSources', '~> 4.0'
   pod 'GoogleSignIn'
   pod 'FBSDKLoginKit'
+  pod 'AACarousel'
 
 end
