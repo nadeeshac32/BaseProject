@@ -15,7 +15,7 @@ class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     @IBOutlet weak var userNameLbl              : UILabel!
     @IBOutlet weak var timeAgoLbl               : UILabel!
     @IBOutlet weak var captionLbl               : UILabel!
-//    @IBOutlet weak var postImageVw              : UIImageView!
+    //  @IBOutlet weak var postImageVw          : UIImageView!
     @IBOutlet weak var carousel                 : AACarousel!
     @IBOutlet weak var postStatusLbl            : UILabel!
     @IBOutlet weak var likeBtn                  : UIButton!
@@ -54,7 +54,6 @@ class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         print("\(index)")
     }
     
-    //optional method (show first image faster during downloading of all images)
     func callBackFirstDisplayView(_ imageView: UIImageView, _ url: [String], _ index: Int) {
         imageView.setImageWith(imagePath: url.first ?? "", completion: nil)
     }

@@ -481,7 +481,7 @@
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2A-jS-BSC" customClass="AACarousel" customModule="AACarousel">
                                                     <rect key="frame" x="0.0" y="118" width="414" height="220"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="a2A-jS-BSC" secondAttribute="height" multiplier="207:110" id="p0B-g7-eZm"/>
                                                     </constraints>
