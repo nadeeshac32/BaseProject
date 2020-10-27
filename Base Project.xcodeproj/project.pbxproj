@@ -338,6 +338,7 @@
 				C95EF768252D9F6D0016CC80 /* Lists */,
 				C95EF769252D9F8D0016CC80 /* Grids */,
 				C9753F362545C30B002B149A /* Blog */,
+				C9E2AE7A250A3F9E001F3961 /* ProfileCoordinator */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -554,7 +555,7 @@
 				C9E2AE4D250A38E4001F3961 /* GuideCoordinator */,
 				C9E2AE4C250A38DA001F3961 /* SignupCoordinator */,
 				C9E2AE4B250A38D1001F3961 /* MainCoordinator */,
-				C9E2AE7A250A3F9E001F3961 /* ProfileCoordinator */,
+				C95EF75D252D69340016CC80 /* Examples */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -755,7 +756,6 @@
 				C9E2AE72250A3B06001F3961 /* PasswordReset_VC.swift */,
 				C9E2AE74250A3B1D001F3961 /* PasswordReset_VM.swift */,
 				C9E2AE70250A3AF0001F3961 /* AlertPopoverVC.swift */,
-				C95EF75D252D69340016CC80 /* Examples */,
 			);
 			path = MainCoordinator;
 			sourceTree = "<group>";
