@@ -15,8 +15,24 @@ class BlogFeedVM: BaseListVM<Blog> {
     override var loadFromAPI        : Bool { get { return false } set {} }
     override var loadAsDynemic      : Bool { get { return false } set {} }
     
+    // MARK: - Inputs
+    let addBlogHasTapped      : AnyObserver<Void>
+    
+    // MARK: - Outputs
+    let showBlogCreateEditVC             : Observable<Void>
+    
+    
     deinit {
         print("deinit BlogFeedVM")
+    }
+    
+    
+    override init() {
+        let _addBlogHasTapped       = PublishSubject<Void>()
+        self.addBlogHasTapped       = _addBlogHasTapped.asObserver()
+        self.showBlogCreateEditVC   = _addBlogHasTapped.asObservable()
+        
+        super.init()
     }
     
     override func viewDidLoad() {

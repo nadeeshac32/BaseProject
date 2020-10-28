@@ -18,14 +18,14 @@ protocol BaseCVCellDelegate: class {
 /// Generic base class for TableViewCells. You have to extend from this class in order to enables to use BaseListVC + BaseListVM
 class BaseCVCell<Model: BaseModel>: UICollectionViewCell, UIGestureRecognizerDelegate {
     
-    let disposeBag      = DisposeBag()
-    var item            : Model?
-    var section         : Int?
-    var row             : Int?
-    var selectable      : Bool?
+    let disposeBag          = DisposeBag()
+    var item                : Model?
+    var section             : Int?
+    var row                 : Int?
+    var selectable          : Bool?    
     
-    var tapGesture      : UITapGestureRecognizer?
-    weak var delegate   : BaseCVCellDelegate?
+    var tapGesture          : UITapGestureRecognizer?
+    weak var delegate       : BaseCVCellDelegate?
     
     
     /// Once your ViewController and ViewModel is extended from BaseCollectionVC + BaseCollectionVM it will automatically pass the data model into this method. You can override this method in your subclass and configure the cell as you want with your type cased data model.
@@ -34,10 +34,10 @@ class BaseCVCell<Model: BaseModel>: UICollectionViewCell, UIGestureRecognizerDel
     ///   - row: Row index
     ///   - selectable: Whether the cell is selectable or not
     func configureCell(item: Model, section: Int, row: Int, selectable: Bool) {
-        self.item       = item
-        self.section    = section
-        self.row        = row
-        self.selectable = selectable
+        self.item           = item
+        self.section        = section
+        self.row            = row
+        self.selectable     = selectable
         
         if let _ = tapGesture {
             self.removeGestureRecognizer(self.tapGesture!)
@@ -46,8 +46,8 @@ class BaseCVCell<Model: BaseModel>: UICollectionViewCell, UIGestureRecognizerDel
         
         self.setForMultiSelectMode(enableMultiSelect: selectable)
         if selectable {
-            self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-            self.tapGesture?.delegate = self
+            self.tapGesture             = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+            self.tapGesture?.delegate   = self
             self.addGestureRecognizer(tapGesture!)
             self.multiSelectHighlighted(highlighted: item.isSelected)
         }

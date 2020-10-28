@@ -12,8 +12,11 @@ import RxDataSources
 class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogPostTVCell> {
 
     @IBOutlet weak var _tableView   : UITableView!
-
     override var shouldSetRowHeight : Bool { get { return false } set {} }
+    
+    var customRightButton                                       = SwivelUIMaker.makeButtonWith(text: "Add", width: 100)
+    var customLeftButton                                        = SwivelUIMaker.makeButtonWith(text: "Logout", width: 100)
+    
     
     deinit { print("deinit BlogFeedVC") }
     
@@ -36,12 +39,23 @@ class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogPostTVCell> {
             disposeBag.insert([
                 // MARK: - Inputs
                 viewModel.setupTitleViewInViewDidAppear.subscribe(onNext: { [weak self] (_) in
-                    self?.navigationController?.navigationBar.topItem?.title        = "Blog Feed"
+                    guard let self = `self` else { return }
+                    self.navigationController?.navigationBar.topItem?.title                 = "Blog Feed"
+                    let rightButton                                                         = UIBarButtonItem(customView: self.customRightButton)
+                    self.navigationController?.navigationBar.topItem?.rightBarButtonItem    = rightButton
+                    
+                    let leftButton                                                         = UIBarButtonItem(customView: self.customLeftButton)
+                    self.navigationController?.navigationBar.topItem?.leftBarButtonItem    = leftButton
                 }),
                 viewModel.removeTitleViewInViewWillDisappear.subscribe(onNext: { [weak self] (_) in
-                    self?.navigationController?.navigationBar.topItem?.titleView    = nil
-                })
+                    self?.navigationController?.navigationBar.topItem?.titleView            = nil
+                    self?.navigationController?.navigationBar.topItem?.rightBarButtonItem   = nil
+                    self?.navigationController?.navigationBar.topItem?.leftBarButtonItem    = nil
+                }),
                 
+                // MARK: - Outputs
+                customRightButton.rx.tap.bind(to: viewModel.addBlogHasTapped),
+                customLeftButton.rx.tap.bind(onNext: viewModel.logoutUser)
             ])
         }
     }

@@ -11,13 +11,14 @@ import ObjectMapper
 import RxDataSources
 
 /// Base Model that will extended by all the Models.
-/// It will be used by the MVVM architecture.
+/// It will be used within the whole MVVM architecture.
 class BaseModel: Mappable, IdentifiableType, Equatable {
     typealias Identity  = String
     
     var id              : String!
     var identity        : Identity { return id }
     var isSelected      : Bool = false
+    
     static var arrayKey : String {
         return String(describing: self.self).lowercased()+"s"
     }

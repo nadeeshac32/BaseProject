@@ -10,7 +10,7 @@ import UIKit
 
 var screenWidth: CGFloat { return UIScreen.main.bounds.width }
 
-struct NCUIMaker {
+struct SwivelUIMaker {
     static func makeLabel(text: String? = nil,
                           font: UIFont = UIFont.systemFont(ofSize: 15),
                           color: UIColor = .black,
@@ -43,7 +43,7 @@ struct NCUIMaker {
         return line
     }
     
-    static func getButtonWith(imageName: String = "icon_back") -> UIButton {
+    static func makeButtonWith(imageName: String = "icon_back") -> UIButton {
         let button                                          = UIButton(type: .custom)
         button.frame                                        = CGRect(x: 0, y: 0, width: 44, height: 44)
         button.clipsToBounds                                = true
@@ -56,7 +56,7 @@ struct NCUIMaker {
         return button
     }
     
-    static func getButtonWith(text: String, width: CGFloat? = 120) -> UIButton {
+    static func makeButtonWith(text: String, width: CGFloat? = 120) -> UIButton {
         let button                                          = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints    = true
         button.frame                                        = CGRect(x: 0, y: 0, width: width!, height: 44)
@@ -67,7 +67,7 @@ struct NCUIMaker {
         return button
     }
     
-    static func getSwitch() -> UISwitch {
+    static func makeSwitch() -> UISwitch {
         let switchTemp                                      = UISwitch(frame:CGRect(x: 0, y: 0, width: 20, height: 20))
         switchTemp.onTintColor                              = UIColor(hexString: "000000")?.withAlphaComponent(0.3)
         switchTemp.setOn(false, animated: false)

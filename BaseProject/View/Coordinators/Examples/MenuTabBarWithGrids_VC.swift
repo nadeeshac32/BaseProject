@@ -14,7 +14,7 @@ class MenuTabBarWithGridsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Circle> {
     @IBOutlet weak var _menuBarView: UIView!
     
     var navBar                                                  : UINavigationBar?
-    var addCustomerBtn                                          = NCUIMaker.getButtonWith(imageName: "icon_addContact")
+    var addCustomerBtn                                          = SwivelUIMaker.makeButtonWith(imageName: "icon_addContact")
     var menuTabs                                                : [BaseMenuTabProtocol] = [NonDynemicListVC]()
     
     deinit {

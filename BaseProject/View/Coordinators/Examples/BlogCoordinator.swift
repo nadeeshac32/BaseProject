@@ -17,9 +17,9 @@ class BlogCoordinator: BaseTabItemCoordinator {
         if let feedVC = rootVC as? BlogFeedVC, let feedVM = feedVC.viewModel {
             disposeBag.insert([
                 feedVM.showSignInVC.bind(to: showSignInVC),
-//                homeVM.showExampleVC.subscribe(onNext: { [unowned self] (_) in
-//                    self.goToExampleVC()
-//                })
+                feedVM.showBlogCreateEditVC.subscribe(onNext: { [unowned self] (_) in
+                    self.goToBlogCreateEditVC()
+                })
             ])
         }
     }
@@ -28,15 +28,15 @@ class BlogCoordinator: BaseTabItemCoordinator {
         print("deinit BlogCoordinator")
     }
     
-    func goToExampleVC() {
-//        let exampleVM                   = exampleVM()
-//        // VM bindings
-//        disposeBag.insert([
-//            // MARK: Outputs
-//            exampleVM.showSignInVC.bind(to: showSignInVC),
-//            // MARK: Inputs
-//        ])
-//        let exampleVC                 = ExampleVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: exampleVM)
-//        superNC?.pushViewController(exampleVC, animated: true)
+    func goToBlogCreateEditVC() {
+        let blogCreatEditVM                   = BlogCreateEditVM(blog: Blog())
+        // VM bindings
+        disposeBag.insert([
+            // MARK: Outputs
+            blogCreatEditVM.showSignInVC.bind(to: showSignInVC),
+            // MARK: Inputs
+        ])
+        let blogCreateEditVC                 = BlogCreateEditVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogCreatEditVM)
+        superNC?.pushViewController(blogCreateEditVC, animated: true)
     }
 }

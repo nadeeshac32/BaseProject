@@ -19,13 +19,14 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
     var itemCountString                             : String?
     
     var searchBar                                   = UISearchBar()
-    var searchBtn                                   = NCUIMaker.getButtonWith(imageName: "icon_search")
+    var searchBtn                                   = SwivelUIMaker.makeButtonWith(imageName: "icon_search")
     var searchBarButtonItem                         : UIBarButtonItem?
     
     var multiSelectable                             : Bool = false
     
     /// If the CollectionViewCell UI is designed in xib file you can register it here.
-    var cellLoadFromNib: Bool = false
+    var cellLoadFromNib                             : Bool = false
+    var shouldSetCellSize                           : Bool = true
     
     /// Bind the actual UI Outlets with the Base class variables.
     /// - Note: Because from the subclass, IBOutlets cannot be made directly to Base class variables.
@@ -110,15 +111,21 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
         let layout                                  = UICollectionViewFlowLayout()
         layout.sectionInset                         = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         
-        let sideSize                                : CGFloat = AppConfig.si.screenSize.width / 3
-        layout.itemSize                             = CGSize(width: sideSize, height: sideSize)
+        if shouldSetCellSize {
+            layout.itemSize                         = getItemSize()
+        }
+        layout.estimatedItemSize                    = getItemSize()
         layout.headerReferenceSize                  = CGSize(width: AppConfig.si.screenSize.width, height: 30)
         layout.minimumLineSpacing                   = 8
         layout.minimumInteritemSpacing              = 0
         return layout
     }
     
-    // MARK: - setup cell for table view without headers
+    func getItemSize() -> CGSize {
+        let sideSize                                : CGFloat = AppConfig.si.screenSize.width / 3
+        return CGSize(width: sideSize, height: sideSize)
+    }
+    // MARK: - setup cell for collection view without headers
     func setupCell(section: Int, row: Int, element: Model, cell: CollectionViewCell) {
         cell.configureCell(item: element, section: section, row: row, selectable: viewModel?.multiSelectable ?? false)
         cell.delegate                           = self

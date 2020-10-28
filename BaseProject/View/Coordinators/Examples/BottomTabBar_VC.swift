@@ -55,8 +55,8 @@ class BottomTabBarVC: SwivelTabBarController, StoryboardInitializable {
         let gridTabBarItem                      = SwivelTabBarItem(icon: UIImage(named: "icon_grid")!, selectedIcon: UIImage(named: "icon_grid_active")!, title: "Grid", viewController: gridCoordinator.rootVC!)
 
 
-//        // MARK: - Sample Navigation between coordinators
-//        disposeBag.insert([
+        // MARK: - Sample Navigation between coordinators
+        disposeBag.insert([
 //            // MARK: - Coordinator to Coordinator communication
 //            manuTabBarWithListsVM.doWithSelectedItem.subscribe(onNext: { [weak self] (exampleModel) in
 //                self?.gridCoordinator.goToExampleVC(exampleModel: exampleModel)
@@ -69,15 +69,18 @@ class BottomTabBarVC: SwivelTabBarController, StoryboardInitializable {
 //                self?.navigationController?.popToRootViewController(animated: true)
 //                self?.moveToTab(withIndex: 2)
 //            }),
-//
-//            // MARK: - Logout user mapped by Coordinator
-//            listCoordinator.showSignInVC.subscribe(onNext: { [weak self] (_) in
-//                self?.viewModel?.gotoSignin.onNext(true)
-//            }),
-//            gridCoordinator.showSignInVC.subscribe(onNext: { [weak self] (_) in
-//                self?.viewModel?.gotoSignin.onNext(true)
-//            })
-//        ])
+
+            // MARK: - Logout user mapped by Coordinator
+            blogCoordinator.showSignInVC.subscribe(onNext: { [weak self] (_) in
+                self?.viewModel?.gotoSignin.onNext(true)
+            }),
+            listCoordinator.showSignInVC.subscribe(onNext: { [weak self] (_) in
+                self?.viewModel?.gotoSignin.onNext(true)
+            }),
+            gridCoordinator.showSignInVC.subscribe(onNext: { [weak self] (_) in
+                self?.viewModel?.gotoSignin.onNext(true)
+            })
+        ])
 
         var tabBarItems                         = [SwivelTabBarItem]()
         tabBarItems.append(blogFeedTabBarItem)

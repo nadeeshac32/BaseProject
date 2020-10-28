@@ -21,7 +21,7 @@ class BaseListVC<Model:BaseModel, ViewModel: BaseListVM<Model>, TableViewCell: B
     var shouldSetRowHeight                      : Bool = true
     
     var searchBar                               = UISearchBar()
-    var searchBtn                               = NCUIMaker.getButtonWith(imageName: "icon_search")
+    var searchBtn                               = SwivelUIMaker.makeButtonWith(imageName: "icon_search")
     var searchBarButtonItem                     : UIBarButtonItem?
     
     var multiSelectable                         : Bool = false

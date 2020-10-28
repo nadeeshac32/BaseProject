@@ -550,6 +550,101 @@
             </objects>
             <point key="canvasLocation" x="5576.811594202899" y="381.69642857142856"/>
         </scene>
+        <!--Blog Create EditVC-->
+        <scene sceneID="qA1-AB-lId">
+            <objects>
+                <viewController storyboardIdentifier="BlogCreateEditVC" id="63x-MU-Wyr" customClass="BlogCreateEditVC" customModule="Base_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M3n-Wc-yUx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMg-ge-1cc" customClass="BaseScrollView" customModule="Base_Project" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="40" width="414" height="822"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Caption" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mxF-kc-1om" customClass="SwivelNormalTextField" customModule="Base_Project" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="40" width="364" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="pSO-XC-FMS"/>
+                                        </constraints>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.299974829" green="0.24943858390000001" blue="0.51609438659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write something" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aqm-2r-iC7" customClass="SwivelNormalTextField" customModule="Base_Project" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="110" width="364" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="VmP-Uh-W0i"/>
+                                        </constraints>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.299974829" green="0.24943858390000001" blue="0.51609438659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-uP-UFk">
+                                        <rect key="frame" x="107" y="654" width="200" height="40"/>
+                                        <color key="backgroundColor" red="0.299974829" green="0.24943858390000001" blue="0.51609438659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="U3h-gq-Bcz"/>
+                                            <constraint firstAttribute="height" constant="40" id="at9-Ho-pAw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Post">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="mxF-kc-1om" firstAttribute="centerX" secondItem="XMg-ge-1cc" secondAttribute="centerX" id="0gK-xE-esZ"/>
+                                    <constraint firstItem="mxF-kc-1om" firstAttribute="trailing" secondItem="XMg-ge-1cc" secondAttribute="trailing" constant="-25" id="7Wc-bE-3F0"/>
+                                    <constraint firstItem="aqm-2r-iC7" firstAttribute="top" secondItem="mxF-kc-1om" secondAttribute="bottom" constant="10" id="FNr-cs-cY3"/>
+                                    <constraint firstItem="wYn-uP-UFk" firstAttribute="centerX" secondItem="XMg-ge-1cc" secondAttribute="centerX" id="GEN-co-ak0"/>
+                                    <constraint firstItem="aqm-2r-iC7" firstAttribute="leading" secondItem="mxF-kc-1om" secondAttribute="leading" id="GFO-XJ-lAJ"/>
+                                    <constraint firstItem="wYn-uP-UFk" firstAttribute="top" secondItem="aqm-2r-iC7" secondAttribute="bottom" constant="484" id="IoL-hK-nVK"/>
+                                    <constraint firstAttribute="bottom" secondItem="wYn-uP-UFk" secondAttribute="bottom" constant="40" id="KCL-sQ-qf1"/>
+                                    <constraint firstItem="aqm-2r-iC7" firstAttribute="trailing" secondItem="mxF-kc-1om" secondAttribute="trailing" id="P78-Mh-GzU"/>
+                                    <constraint firstItem="mxF-kc-1om" firstAttribute="leading" secondItem="XMg-ge-1cc" secondAttribute="leading" constant="25" id="pFH-gc-16c"/>
+                                    <constraint firstItem="mxF-kc-1om" firstAttribute="top" secondItem="XMg-ge-1cc" secondAttribute="top" constant="40" id="u4l-G8-Kds"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="mwl-Bi-OhM"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="er5-ud-1aT"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="XMg-ge-1cc" firstAttribute="trailing" secondItem="hKI-Kb-Ufe" secondAttribute="trailing" id="8V5-Kd-bzV"/>
+                            <constraint firstItem="XMg-ge-1cc" firstAttribute="top" secondItem="M3n-Wc-yUx" secondAttribute="top" constant="40" id="CHY-NU-QaD"/>
+                            <constraint firstItem="hKI-Kb-Ufe" firstAttribute="bottom" secondItem="XMg-ge-1cc" secondAttribute="bottom" id="eYg-k5-IKE"/>
+                            <constraint firstItem="XMg-ge-1cc" firstAttribute="leading" secondItem="hKI-Kb-Ufe" secondAttribute="leading" id="j3q-U5-y8I"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hKI-Kb-Ufe"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bv8-Xr-OgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6328.985507246377" y="381.69642857142856"/>
+        </scene>
         <!--Dynemic CollectionVC-->
         <scene sceneID="oaV-Zp-hsm">
             <objects>

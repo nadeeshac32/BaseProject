@@ -30,7 +30,7 @@ class SwivelTabBar: UITabBar {
     
     func setupView() {
         if tabItems.count == 0 { return }
-        let line                    = NCUIMaker.makeLine(color: .gray, height: 0.5)
+        let line                    = SwivelUIMaker.makeLine(color: .gray, height: 0.5)
         self.barTintColor           = #colorLiteral(red: 0.9725311399, green: 0.9695178866, blue: 0.9729015231, alpha: 1)
         addSubviews(views: line)
         line.horizontal(toView: self)

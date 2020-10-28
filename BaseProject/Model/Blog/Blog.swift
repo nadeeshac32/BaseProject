@@ -22,6 +22,9 @@ class Blog: BaseModel {
     var totalComments   : Int?
     var totalShares     : Int?
 
+    override init() {
+        super.init()
+    }
     required init?(map: Map) {
         super.init(map: map)
         self.id         = self.blogId

@@ -22,6 +22,9 @@ target 'Base Project' do
   pod 'RxDataSources', '~> 4.0'
   pod 'GoogleSignIn'
   pod 'FBSDKLoginKit'
+
+  # Need to add to MD file
   pod 'AACarousel'
+  pod 'Tagging'
 
 end

@@ -34,8 +34,8 @@ class SwivelTabBarItem: UIButton {
         }
     }
     
-    private let iconImageView           = NCUIMaker.makeImageView(contentMode: .scaleAspectFit)
-    private let textLabel               = NCUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11), color: .black, alignment: .center)
+    private let iconImageView           = SwivelUIMaker.makeImageView(contentMode: .scaleAspectFit)
+    private let textLabel               = SwivelUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11), color: .black, alignment: .center)
     private var imageUrl                = ""
     private var icon                    : UIImage!
     private var selectedIcon            : UIImage!
