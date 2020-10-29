@@ -9,18 +9,38 @@
 import UIKit
 import AACarousel
 
+protocol BlogDelegate: BaseTVCellDelegate {
+    func shareTappedFor(blog: Blog)
+    func likeError(restError: RestClientError)
+}
+
 class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     
     @IBOutlet weak var profileImageVw           : UIImageView!
     @IBOutlet weak var userNameLbl              : UILabel!
     @IBOutlet weak var timeAgoLbl               : UILabel!
     @IBOutlet weak var captionLbl               : UILabel!
-    //  @IBOutlet weak var postImageVw          : UIImageView!
     @IBOutlet weak var carousel                 : AACarousel!
     @IBOutlet weak var postStatusLbl            : UILabel!
     @IBOutlet weak var likeBtn                  : UIButton!
     @IBOutlet weak var commentBtn               : UIButton!
     @IBOutlet weak var shareBtn                 : UIButton!
+    
+    var blogDelegate: BlogDelegate?
+    override weak var delegate   : BaseTVCellDelegate? {
+        get {
+            return blogDelegate
+        }
+        set {
+            if let newViewModel = newValue as? BlogDelegate {
+                blogDelegate = newViewModel
+            } else {
+                print("incorrect BaseVM type for BaseVC")
+            }
+        }
+    }
+    
+    var isNetworkCallGoing                      = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,14 +59,15 @@ class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         userNameLbl.text                        = item.owner?.name
         timeAgoLbl.text                         = item.createdDate?.displayText
         captionLbl.text                         = item.title!
-        postStatusLbl.text                      = "\(item.totalLikes!) Likes     \(item.totalComments!) Comments     \(item.totalShares!) Shares"
+        postStatusLbl.text                      = "\(item.totalLikes!) Likes  •  \(item.totalComments!) Comments" //  •  \(item.totalShares!) Shares"
         
-        //  postImageVw.image                   = UIImage(named: item.content?.first ?? "")
         carousel.delegate                       = self
-        carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: "defaultImage")
+        carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: true, timer: 5.0, defaultImage: "defaultImage")
         //optional methods
         carousel.setCarouselOpaque(layer: true, describedTitle: false, pageIndicator: false)
         carousel.setCarouselLayout(displayStyle: 0, pageIndicatorPositon: 2, pageIndicatorColor: nil, describedTitleColor: nil, layerColor: nil)
+        
+        likeBtn.tintColor                       = item.isLiked == true ? AppConfig.si.colorPrimary : .darkGray
         
     }
     
@@ -59,13 +80,36 @@ class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     }
     
     func downloadImages(_ url: String, _ index: Int) {
-        let httpService = HTTPService()
+        let httpService                         = HTTPService()
         httpService.downloadImage(imagePath: url) { [weak self](image) in
             if let image = image {
-                self?.carousel.images[index] = image
+                self?.carousel.images[index]    = image
             } else {
                 print("nil image")
             }
         }
     }
+    
+    @IBAction func likeBtnTapped(_ sender: Any) {
+        guard !isNetworkCallGoing else { return }
+        isNetworkCallGoing                      = true
+        if let blog = self.item, let blogId = blog.blogId {
+            let httpService                     = HTTPService()
+            httpService.likeBlog(blogId: blogId, isLike: !(blog.isLiked ?? false), onSuccess: { [weak self] in
+                self?.item?.isLiked             = !(blog.isLiked ?? false)
+                self?.likeBtn.tintColor         = self?.item?.isLiked == true ? AppConfig.si.colorPrimary : .darkGray
+                self?.isNetworkCallGoing        = false
+            }) { [weak self] (error) in
+                (self?.delegate as? BlogDelegate)?.likeError(restError: error)
+                self?.isNetworkCallGoing        = false
+            }
+        }
+    }
+    
+    @IBAction func shareBtnTapped(_ sender: Any) {
+        if let item = self.item {
+            (delegate as? BlogDelegate)?.shareTappedFor(blog: item)
+        }
+    }
+    
 }

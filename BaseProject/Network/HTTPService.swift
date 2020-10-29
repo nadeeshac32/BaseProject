@@ -26,6 +26,9 @@ struct urls {
     static var imagePath: String {
         return "cc-image-uploader/\(apiVersion)"
     }
+    static var blogPath: String {
+        return "cc-blog-service/\(apiVersion)"
+    }
 }
 
 class HTTPService: NSObject {
@@ -56,7 +59,7 @@ class HTTPService: NSObject {
                                                  encoding: ParameterEncoding? = JSONEncoding.default,
                                                  onError: ErrorCallback? = nil,
                                                  completionHandler: ((T) -> Void)? = nil,
-                                                 completionHandlerForArray: (([T]) -> Void)? = nil,
+                                                 completionHandlerForArray: ((ArrayDataType<T>) -> Void)? = nil,
                                                  completionHandlerForNull: (() -> Void)? = nil
                                                 ) {
 
@@ -107,8 +110,8 @@ class HTTPService: NSObject {
                         // Convert to Objects array
                         } else if let serverResponse  = response.value as? Dictionary<String, AnyObject>,
                             let responseObject      = Mapper<GeneralArrayResponse<T>>().map(JSON: serverResponse),
-                            let responseItemsArray  = responseObject.data?.items {
-                            completionHandlerForArray?(responseItemsArray)
+                            let responseItemsArrayResponse  = responseObject.data {
+                            completionHandlerForArray?(responseItemsArrayResponse)
                             return
                         
                         // Convert to Object
@@ -531,4 +534,42 @@ extension HTTPService: ProfileAPIProtocol {
         })
     }
     
+}
+
+extension HTTPService: BlogAPIProtocol {
+    func getBlogSummary(method: HTTPMethod! = .get, page: Int, limit: Int, onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/summary/\(page)/\(limit)"
+        genericRequest(method: method!, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForArray: { (arrayResponse) in
+            onSuccess?(arrayResponse.items ?? [], arrayResponse.total ?? 0, arrayResponse.page ?? 0, limit)
+            return
+        })
+    }
+    
+    func createBlog(method: HTTPMethod! = .post, blog: Blog!, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog"
+        let parameters                  = blog.toJSON()
+        genericRequest(method: method!, parameters: parameters, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
+    
+    func updateBlog(method: HTTPMethod! = .put, blog: Blog!, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog"
+        let parameters                  = blog.toJSON()
+        genericRequest(method: method!, parameters: parameters, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
+    
+    func likeBlog(blogId: String!, isLike: Bool, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/like/\(blogId!)"
+        let method                      = isLike == true ? HTTPMethod.post : HTTPMethod.delete
+        
+        genericRequest(method: method, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
 }

@@ -12,6 +12,8 @@
 		C92CD0092547FBD600FA7F1F /* BlogCreateEdit_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */; };
 		C92CD00B2547FD0800FA7F1F /* BlogCreateImageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */; };
 		C92CD00D2547FEF600FA7F1F /* BlogContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD00C2547FEF600FA7F1F /* BlogContent.swift */; };
+		C92CD010254977B200FA7F1F /* SwivelNormalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD00F254977B200FA7F1F /* SwivelNormalTextView.swift */; };
+		C92CD0122549E16600FA7F1F /* BlogAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */; };
 		C94EF758254057040090A28A /* SocialSignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF757254057040090A28A /* SocialSignInVM.swift */; };
 		C94EF75A254057620090A28A /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF759254057620090A28A /* FacebookSignIn.swift */; };
 		C94EF75C254058260090A28A /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75B254058260090A28A /* BaseButton.swift */; };
@@ -169,6 +171,8 @@
 		C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateEdit_VM.swift; sourceTree = "<group>"; };
 		C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateImageCVCell.swift; sourceTree = "<group>"; };
 		C92CD00C2547FEF600FA7F1F /* BlogContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogContent.swift; sourceTree = "<group>"; };
+		C92CD00F254977B200FA7F1F /* SwivelNormalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelNormalTextView.swift; sourceTree = "<group>"; };
+		C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogAPIProtocol.swift; sourceTree = "<group>"; };
 		C94EF757254057040090A28A /* SocialSignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInVM.swift; sourceTree = "<group>"; };
 		C94EF759254057620090A28A /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
 		C94EF75B254058260090A28A /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -336,6 +340,14 @@
 				7E6B9E81A0CFE22B4ADECD82 /* Pods_Base_Project.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C92CD00E2549778300FA7F1F /* SwivelCustomTextView */ = {
+			isa = PBXGroup;
+			children = (
+				C92CD00F254977B200FA7F1F /* SwivelNormalTextView.swift */,
+			);
+			path = SwivelCustomTextView;
 			sourceTree = "<group>";
 		};
 		C95EF75D252D69340016CC80 /* Examples */ = {
@@ -554,6 +566,7 @@
 				C9A3956C250BB5F800FEE5DA /* SwivelDocumentViewer */,
 				C9A39570250BB66200FEE5DA /* SwivelImagePicker */,
 				C964B04C2507927A009E998C /* SwivelCustomTextFields */,
+				C92CD00E2549778300FA7F1F /* SwivelCustomTextView */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -601,6 +614,7 @@
 				C9E2AE402508EDEC001F3961 /* FileAPIProtocol.swift */,
 				C9E2AE452509F654001F3961 /* UserAPIProtocol.swift */,
 				C9E2AE84250A4061001F3961 /* ProfileAPIProtocol.swift */,
+				C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */,
 			);
 			path = APIProtocols;
 			sourceTree = "<group>";
@@ -1053,6 +1067,7 @@
 				C9E2AE75250A3B1D001F3961 /* PasswordReset_VM.swift in Sources */,
 				C9E2AE73250A3B07001F3961 /* PasswordReset_VC.swift in Sources */,
 				C9A7932F2521B2AF00430872 /* NonDynemicCollection_VC.swift in Sources */,
+				C92CD0122549E16600FA7F1F /* BlogAPIProtocol.swift in Sources */,
 				C9FA78AF25399998006222CB /* GeneralEmptyResponse.swift in Sources */,
 				C964B07A25079F19009E998C /* HTTPService.swift in Sources */,
 				C964B04E250792CB009E998C /* SwivelNormalTextField.swift in Sources */,
@@ -1094,6 +1109,7 @@
 				C95EF767252D70BF0016CC80 /* DynemicCollection_VC.swift in Sources */,
 				C964B06C25079C55009E998C /* CustomMessageMaker.swift in Sources */,
 				C964B02325064A66009E998C /* BaseListVC.swift in Sources */,
+				C92CD010254977B200FA7F1F /* SwivelNormalTextView.swift in Sources */,
 				C9753F3E2545EE68002B149A /* BlogPostTVCell.swift in Sources */,
 				C9A793372521B4CD00430872 /* BaseCVCell.swift in Sources */,
 				C9E2AE7D250A3FBD001F3961 /* UpdateUserEmail_VC.swift in Sources */,

@@ -19,6 +19,9 @@ class BlogCoordinator: BaseTabItemCoordinator {
                 feedVM.showSignInVC.bind(to: showSignInVC),
                 feedVM.showBlogCreateEditVC.subscribe(onNext: { [unowned self] (_) in
                     self.goToBlogCreateEditVC()
+                }),
+                feedVM.doWithSelectedItem.subscribe(onNext: { [unowned self](blog) in
+                    self.goToBlogDetailVC(blog: blog, previousTitle: "Feed")
                 })
             ])
         }
@@ -30,7 +33,6 @@ class BlogCoordinator: BaseTabItemCoordinator {
     
     func goToBlogCreateEditVC() {
         let blogCreatEditVM                   = BlogCreateEditVM(blog: Blog())
-        // VM bindings
         disposeBag.insert([
             // MARK: Outputs
             blogCreatEditVM.showSignInVC.bind(to: showSignInVC),
@@ -38,5 +40,9 @@ class BlogCoordinator: BaseTabItemCoordinator {
         ])
         let blogCreateEditVC                 = BlogCreateEditVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogCreatEditVM)
         superNC?.pushViewController(blogCreateEditVC, animated: true)
+    }
+    
+    func goToBlogDetailVC(blog: Blog, previousTitle: String) {
+        print("goToBlogDetailVC")
     }
 }

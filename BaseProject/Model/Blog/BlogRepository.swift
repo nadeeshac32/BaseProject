@@ -24,6 +24,7 @@ class BlogRepository {
                                 "https://www.irishtimes.com/polopoly_fs/1.1727586.1395008055!/image/image.jpg_gen/derivatives/box_620_330/image.jpg"
                                 ],
                               likes: 3400,
+                              isLiked: true,
                               comments: 230,
                               Shares: 189)
         
@@ -37,6 +38,7 @@ class BlogRepository {
                                 "https://www.azquotes.com/vangogh-image-quotes/62/65/Quotation-Will-Smith-Fear-is-not-real-It-is-a-product-of-thoughts-62-65-84.jpg"
                                 ],
                               likes: 53400,
+                              isLiked: false,
                               comments: 2330,
                               Shares: 3094)
         
@@ -50,6 +52,7 @@ class BlogRepository {
                                 "https://www.azquotes.com/vangogh-image-quotes/62/28/Quotation-Morgan-Freeman-Challenge-yourself-it-s-the-only-path-which-leads-to-62-28-27.jpg"
                                 ],
                               likes: 83400,
+                              isLiked: true,
                               comments: 9330,
                               Shares: 12094)
         
@@ -60,11 +63,11 @@ class BlogRepository {
         return posts
     }
     
-    static func getPost(ownerName: String, ownerImageName: String, blogId: String, displayTime: String, title: String, contentImages: [String]?, likes: Int, comments: Int, Shares: Int) -> Blog {
+    static func getPost(ownerName: String, ownerImageName: String, blogId: String, displayTime: String, title: String, contentImages: [String]?, likes: Int, isLiked: Bool, comments: Int, Shares: Int) -> Blog {
         let owner = Owner(id: "", name: ownerName, imageUrl: ownerImageName)
         let createdDate = SwivelDate(displayText: displayTime)
         let updatedDate = SwivelDate(displayText: displayTime)
-        let post = Blog(blogId: blogId, owner: owner, content: contentImages, title: title, description: nil, location: nil, createdDate: createdDate, updatedDate: updatedDate, totalLikes: likes, totalComments: comments, totalShares: Shares)
+        let post = Blog(blogId: blogId, owner: owner, content: contentImages, title: title, description: nil, location: nil, createdDate: createdDate, updatedDate: updatedDate, totalLikes: likes, isLiked: isLiked, totalComments: comments, totalShares: Shares)
         return post
     }
     

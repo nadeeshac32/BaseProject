@@ -10,6 +10,9 @@ import RxSwift
 import ObjectMapper
 
 class User : BaseModel {
+    
+    static let si                       = User()    //    shared instance
+    
     var fullName                        : String?
     var email                           : String?
     var image                           : UIImage?
@@ -24,9 +27,9 @@ class User : BaseModel {
     var _email                          = BehaviorSubject<String>(value: "")
 
     override init() {
-        self.fullName                   = ""
+        self.fullName                   = "Will Smith"
         self.email                      = ""
-        self.imageUrl                   = ""
+        self.imageUrl                   = "https://cdn.aarp.net/content/dam/aarp/entertainment/movies-for-grownups/2020/07/1140-will-smith.jpg"
         self.image                      = nil
         self.mobileNo                   = MobileNumber()
         self.language                   = ""

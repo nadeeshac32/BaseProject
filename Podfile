@@ -25,6 +25,5 @@ target 'Base Project' do
 
   # Need to add to MD file
   pod 'AACarousel'
-  pod 'Tagging'
 
 end

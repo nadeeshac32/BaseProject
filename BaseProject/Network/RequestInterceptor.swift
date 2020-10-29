@@ -52,8 +52,9 @@ final class RequestInterceptor: Alamofire.RequestInterceptor {
         var urlRequest = urlRequest
         
         
-        if urlRequest.url?.absoluteString.contains(urls.authPath) == true, let userId = storage.userId {
+        if (urlRequest.url?.absoluteString.contains(urls.authPath) == true || urlRequest.url?.absoluteString.contains(urls.blogPath) == true), let userId = storage.userId {
             urlRequest.setValue(userId, forHTTPHeaderField: "x-user-id")
+            urlRequest.setValue(TimeZone.current.identifier, forHTTPHeaderField: "X-Time-Zone")
         }
     
         if urlRequest.url?.absoluteString.contains(urls.otpPath) == true, let otpAppKey = storage.otpAppKey {
