@@ -31,7 +31,7 @@ class BaseListVC<Model:BaseModel, ViewModel: BaseListVM<Model>, TableViewCell: B
     
     /// Bind the actual UI Outlets with the Base class variables.
     /// - Note: Because from the subclass, IBOutlets cannot be made directly to Base class variables.
-    func customiseView(tableView: UITableView!, itemCountLabel: UILabel? = nil, itemCountString: String? = "Item".localized(), multiSelectable: Bool = false) {
+    func customiseView(tableView: UITableView!, itemCountLabel: UILabel? = nil, itemCountString: String? = "Item", multiSelectable: Bool = false) {
         self.tableView                          = tableView
         self.itemCountLabel                     = itemCountLabel
         self.itemCountString                    = itemCountString
@@ -107,10 +107,6 @@ class BaseListVC<Model:BaseModel, ViewModel: BaseListVM<Model>, TableViewCell: B
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 24
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return getCellHeight()
-//    }
     
     // MARK: - override in subclasses as needed
     func getItemsLoadingText() -> String {

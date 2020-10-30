@@ -23,25 +23,25 @@ class BaseVM: NSObject {
     let removeTitleViewInViewDidDisappear   : PublishSubject<Bool>                                  = PublishSubject()
     
     let adjustForKeyboardHeightChange       : Observable<CGFloat>
-    
     let hideKeyBoard                        : PublishSubject<Bool>                                  = PublishSubject()
     
+    let freezeForRequestLoading             : BehaviorSubject<Bool>                                 = BehaviorSubject(value: false)
+    let goToPreviousVC                      : PublishSubject<Bool>                                  = PublishSubject()
+    
+    // MARK: - This variables will be used in both ViewControllers and View; When used for Views bind them to thire parent ViewModel
     let errorMessage                        : PublishSubject<(message: String, blockScreen: Bool, completionHandler: () -> ()?)>   = PublishSubject()
     let successMessage                      : PublishSubject<(message: String, blockScreen: Bool, completionHandler: () -> ()?)>   = PublishSubject()
     let warningMessage                      : PublishSubject<(message: String, blockScreen: Bool, completionHandler: () -> ()?)>   = PublishSubject()
     let toastMessage                        : PublishSubject<String>                                = PublishSubject()
-
     let requestLoading                      : BehaviorSubject<Bool>                                 = BehaviorSubject(value: false)
-    let freezeForRequestLoading             : BehaviorSubject<Bool>                                 = BehaviorSubject(value: false)
-
     let showSignInVC                        : PublishSubject<Bool>                                  = PublishSubject()
-    let goToPreviousVC                      : PublishSubject<Bool>                                  = PublishSubject()
+    
     
     typealias alertType                     = (title: String?, message: String?,
                                             primaryBtnTitle: String?, primaryActionColor: UIColor?, primaryAction: (() -> ())?,
                                             secondaryBtnTitle: String?, secondaryActionColor: UIColor?, secondaryAction: (() -> ())?)
     let showAlert                           : PublishSubject<alertType> = PublishSubject()
-    
+    var childViewModels                     : [BaseVM] = []
     
     override init() {
         adjustForKeyboardHeightChange       = Observable
@@ -74,22 +74,43 @@ class BaseVM: NSObject {
     
     // MARK: - UIViewController Life cycle
     func viewDidLoad() {
+        for vm in childViewModels {
+            vm.viewDidLoad()
+        }
     }
     func viewWillLayoutSubviews() {
+        for vm in childViewModels {
+            vm.viewWillLayoutSubviews()
+        }
     }
     func viewDidLayoutSubviews() {
+        for vm in childViewModels {
+            vm.viewDidLayoutSubviews()
+        }
     }
     func viewWillAppear(animated: Bool) {
         self.setupTitleViewInViewWillAppear.onNext(true)
+        for vm in childViewModels {
+            vm.viewWillAppear(animated: animated)
+        }
     }
     func viewDidAppear(animated: Bool) {
         self.setupTitleViewInViewDidAppear.onNext(true)
+        for vm in childViewModels {
+            vm.viewDidAppear(animated: animated)
+        }
     }
     func viewWillDisappear(animated: Bool) {
         self.removeTitleViewInViewWillDisappear.onNext(true)
+        for vm in childViewModels {
+            vm.viewWillDisappear(animated: animated)
+        }
     }
     func viewDidDisappear(animated: Bool) {
         self.removeTitleViewInViewDidDisappear.onNext(true)
+        for vm in childViewModels {
+            vm.viewDidDisappear(animated: animated)
+        }
     }
     
     func backButtonTapped() {

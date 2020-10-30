@@ -12,14 +12,14 @@ import ObjectMapper
 
 
 //class BlogCreateEditVM: BaseCollectionVM<BlogContent> {
-class BlogCreateEditVM: BaseFormVM {
+class BlogCreateEditVM: BaseFormVM, BaseListVMDataSource {
 
     var blog                                            : Blog
+    var imageGridViewModel                              : BlogCreateEditGridVM?
     
     // MARK: - Inputs
     let addPhotosTapped                                 : AnyObserver<Void>
     let addLocationTapped                               : AnyObserver<Void>
-    
     
     // MARK: - Outputs
     let showImagePicker                                 : Observable<Void>
@@ -27,7 +27,7 @@ class BlogCreateEditVM: BaseFormVM {
     let updateWithLocation                              : Observable<(usernameString: NSAttributedString, isActiveLocationBtn: Bool)>
     
     deinit {
-        print("deinit BlogFeedVM")
+        print("deinit BlogCreateEditVM")
     }
     
     init(blog: Blog) {
@@ -35,14 +35,14 @@ class BlogCreateEditVM: BaseFormVM {
         
         updateWithLocation = blog._location.asObservable().map({ (location) -> (usernameString: NSAttributedString, isActiveLocationBtn: Bool) in
             if location == "" {
-                let username            = User.si.fullName ?? ""
-                let attributedString    = NSMutableAttributedString(string: username)
+                let username                            = User.si.fullName ?? ""
+                let attributedString                    = NSMutableAttributedString(string: username)
                 attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: 0, length: username.count))
                 return (usernameString: attributedString, isActiveLocationBtn: false)
             } else {
-                let username            = User.si.fullName ?? ""
-                let is_in_string        = " is in "
-                let attributedString    = NSMutableAttributedString(string: "\(username)\(is_in_string)\(location)")
+                let username                            = User.si.fullName ?? ""
+                let is_in_string                        = " is in "
+                let attributedString                    = NSMutableAttributedString(string: "\(username)\(is_in_string)\(location)")
                 
                 attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.darkGray, range: NSRange(location: username.count, length: is_in_string.count))
                 attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: 0, length: username.count))
@@ -60,6 +60,8 @@ class BlogCreateEditVM: BaseFormVM {
         showLocationPicker                              = _addLocationTapped.asObservable()
         
         super.init()
+        imageGridViewModel                              = BlogCreateEditGridVM(dataSource: self)
+        childViewModels.append(imageGridViewModel!)
     }
     
     func locationSelected(location: String?) {

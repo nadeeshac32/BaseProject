@@ -9,8 +9,7 @@
 import UIKit
 import RxDataSources
 
-//class BlogCreateEditVC: BaseGridWithoutHeadersVC<BlogContent, BlogCreateEditVM, BlogCreateImageCVCell> {
-class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresenting {
+class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresenting, BaseListDelagate {
 
     @IBOutlet weak var userImageVw                          : UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
@@ -20,6 +19,8 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     @IBOutlet weak var addPhotoBtn                          : UIButton!
     @IBOutlet weak var addLocationBtn                       : UIButton!
     
+    @IBOutlet public weak var _imagesCV                     : UITableView!
+    var imageGrid                                           : BaseListWithoutHeaders<Blog, BlogCreateEditGridVM, BlogTempTVCell>?
     
     @IBOutlet public weak var _scrollView                   : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!
@@ -46,6 +47,11 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
         titleTxtFld.validation                              = FormValidation.required
         
         postItemsContainer.addBoarder(width: 1, cornerRadius: 5, color: .lightGray)
+        
+        if let imageGridViewModel = viewModel?.imageGridViewModel {
+            self.imageGrid                                  = BaseListWithoutHeaders(viewModel: imageGridViewModel, tableView: _imagesCV, delegate: self)
+            imageGrid?.setupBindings()
+        }
     }
     
     override func setupBindings() {

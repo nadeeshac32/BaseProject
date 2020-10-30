@@ -9,14 +9,57 @@
 import Foundation
 import RxSwift
 
+typealias SuccessMessageDetailType = (message: String, blockScreen: Bool, completionHandler: () -> ()?)
+
+/// This is used to pass data from child to parent. See belof imlementation
+protocol BaseListVMDataSource:class {
+    func errorMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType)
+    func successMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType)
+    func warningMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType)
+    func toastMessage<Model: BaseModel>(listVM: BaseListVM<Model>, message: String)
+    func requestLoading<Model: BaseModel>(listVM: BaseListVM<Model>, isLoading: Bool)
+    func showSignInVC<Model: BaseModel>(listVM: BaseListVM<Model>)
+}
+
+/// This is used to pass data from child to parent. This methods are calling from child view
+extension BaseListVMDataSource where Self: BaseVM {
+    func errorMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType) {
+        self.errorMessage.onNext(detail)
+    }
+    func successMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType) {
+        self.successMessage.onNext(detail)
+    }
+    func warningMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType) {
+        self.warningMessage.onNext(detail)
+    }
+    func toastMessage<Model: BaseModel>(listVM: BaseListVM<Model>, message: String) {
+        self.toastMessage.onNext(message)
+    }
+    func requestLoading<Model: BaseModel>(listVM: BaseListVM<Model>, isLoading: Bool) {
+        self.requestLoading.onNext(isLoading)
+    }
+    func showSignInVC<Model: BaseModel>(listVM: BaseListVM<Model>) {
+        self.showSignInVC.onNext(true)
+    }
+}
+
+
 public enum DataLoadIn {
     case ViewDidLoad
     case ViewWillAppear
 }
 
-/// Base ViewModel that supports BaseListVC.
+/// Base ViewModel that supports BaseListVC & BaseList.
+/// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
 class BaseListVM<Model: BaseModel>: BaseVM {
  
+    
+    /**
+     Support data source when BaseListVM is used for a View. Not in a ViewController
+     Used to bind BaseVM Observers to superVM Observers. See the BaseListVMDelegate implementation
+     */
+    weak var dataSource     : BaseListVMDataSource?
+    
     /**
      This Variable is used to specify whether the data is loaded from API or not
      When this is set to true you have to override 'perfomrGetItemsRequest' in your subclass
@@ -69,8 +112,41 @@ class BaseListVM<Model: BaseModel>: BaseVM {
     let toSelectableMode    : PublishSubject<Bool>                              = PublishSubject()
     let refreshTableView    : PublishSubject<Bool>                              = PublishSubject()
     
+    
     override init() {
         super.init()
+    }
+    
+    /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
+    init(dataSource: BaseListVMDataSource?) {
+        super.init()
+        self.dataSource     = dataSource
+        DisposeBag().insert([
+            errorMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.errorMessage(listVM: self, detail: SuccessMessageDetailType)
+            }),
+            successMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.successMessage(listVM: self, detail: SuccessMessageDetailType)
+            }),
+            warningMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.warningMessage(listVM: self, detail: SuccessMessageDetailType)
+            }),
+            toastMessage.subscribe(onNext: { [weak self] (message) in
+                guard let `self` = self else { return }
+                self.dataSource?.toastMessage(listVM: self, message: message)
+            }),
+            requestLoading.subscribe(onNext: { [weak self] (isLoading) in
+                guard let `self` = self else { return }
+                self.dataSource?.requestLoading(listVM: self, isLoading: isLoading)
+            }),
+            showSignInVC.subscribe(onNext: { [weak self] (_) in
+                guard let `self` = self else { return }
+                self.dataSource?.showSignInVC(listVM: self)
+            })
+        ])
     }
     
     override func viewDidLoad() {

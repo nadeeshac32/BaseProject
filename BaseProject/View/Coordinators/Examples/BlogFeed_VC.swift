@@ -11,8 +11,8 @@ import RxDataSources
 
 class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogPostTVCell> {
 
-    @IBOutlet weak var _tableView   : UITableView!
-    override var shouldSetRowHeight : Bool { get { return false } set {} }
+    @IBOutlet weak var _tableView                               : UITableView!
+    override var shouldSetRowHeight                             : Bool { get { return false } set {} }
     
     var customRightButton                                       = SwivelUIMaker.makeButtonWith(text: "Add", width: 100)
     var customLeftButton                                        = SwivelUIMaker.makeButtonWith(text: "Logout", width: 100)
