@@ -8,16 +8,22 @@
 
 import UIKit
 
-class BlogCreateImageCVCell: BaseCVCell<BlogContent> {
+class BlogCreateImageCVCell: BaseCVCell<Blog> {
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var usernameLbl: UILabel!
     
     override func awakeFromNib() {
-            super.awakeFromNib()
-            self.backgroundColor                = .clear
-            self.addShadow()
-            
-        }
+        super.awakeFromNib()
+        self.backgroundColor                        = .clear
+        self.addShadow()
+        self.profileImageView.layer.cornerRadius    = self.profileImageView.frame.width / 2
+        self.usernameLbl.text                       = ""
+    }
         
-        override func configureCell(item: BlogContent, section: Int, row: Int, selectable: Bool) {
-            super.configureCell(item: item, section: section, row: row, selectable: selectable)
-        }
+    override func configureCell(item: Blog, section: Int, row: Int, selectable: Bool) {
+        super.configureCell(item: item, section: section, row: row, selectable: selectable)
+        profileImageView.image                      = UIImage(named: item.owner?.imageUrl ?? "")
+        usernameLbl.text                            = item.owner?.name
+    }
 }

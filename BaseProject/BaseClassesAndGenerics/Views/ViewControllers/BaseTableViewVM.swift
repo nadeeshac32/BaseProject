@@ -1,5 +1,5 @@
 //
-//  BaseListVM.swift
+//  BaseTableViewVM.swift
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
@@ -13,32 +13,32 @@ typealias SuccessMessageDetailType = (message: String, blockScreen: Bool, comple
 
 /// This is used to pass data from child to parent. See belof imlementation
 protocol BaseListVMDataSource:class {
-    func errorMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType)
-    func successMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType)
-    func warningMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType)
-    func toastMessage<Model: BaseModel>(listVM: BaseListVM<Model>, message: String)
-    func requestLoading<Model: BaseModel>(listVM: BaseListVM<Model>, isLoading: Bool)
-    func showSignInVC<Model: BaseModel>(listVM: BaseListVM<Model>)
+    func errorMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType)
+    func successMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType)
+    func warningMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType)
+    func toastMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, message: String)
+    func requestLoading<Model: BaseModel>(listVM: BaseTableViewVM<Model>, isLoading: Bool)
+    func showSignInVC<Model: BaseModel>(listVM: BaseTableViewVM<Model>)
 }
 
 /// This is used to pass data from child to parent. This methods are calling from child view
 extension BaseListVMDataSource where Self: BaseVM {
-    func errorMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType) {
+    func errorMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType) {
         self.errorMessage.onNext(detail)
     }
-    func successMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType) {
+    func successMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType) {
         self.successMessage.onNext(detail)
     }
-    func warningMessage<Model: BaseModel>(listVM: BaseListVM<Model>, detail: SuccessMessageDetailType) {
+    func warningMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType) {
         self.warningMessage.onNext(detail)
     }
-    func toastMessage<Model: BaseModel>(listVM: BaseListVM<Model>, message: String) {
+    func toastMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, message: String) {
         self.toastMessage.onNext(message)
     }
-    func requestLoading<Model: BaseModel>(listVM: BaseListVM<Model>, isLoading: Bool) {
+    func requestLoading<Model: BaseModel>(listVM: BaseTableViewVM<Model>, isLoading: Bool) {
         self.requestLoading.onNext(isLoading)
     }
-    func showSignInVC<Model: BaseModel>(listVM: BaseListVM<Model>) {
+    func showSignInVC<Model: BaseModel>(listVM: BaseTableViewVM<Model>) {
         self.showSignInVC.onNext(true)
     }
 }
@@ -51,12 +51,12 @@ public enum DataLoadIn {
 
 /// Base ViewModel that supports BaseListVC & BaseList.
 /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
-class BaseListVM<Model: BaseModel>: BaseVM {
+class BaseTableViewVM<Model: BaseModel>: BaseVM {
  
     
     /**
-     Support data source when BaseListVM is used for a View. Not in a ViewController
-     Used to bind BaseVM Observers to superVM Observers. See the BaseListVMDelegate implementation
+     Support data source when BaseListVM is used as a  SubView in a ViewController.
+     Used to bind BaseVM Observers to superVM Observers. See the BaseListVMDataSource implementation
      */
     weak var dataSource     : BaseListVMDataSource?
     
@@ -117,7 +117,7 @@ class BaseListVM<Model: BaseModel>: BaseVM {
         super.init()
     }
     
-    /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
+    /// If you initialise a instance of this class inside another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
     init(dataSource: BaseListVMDataSource?) {
         super.init()
         self.dataSource     = dataSource

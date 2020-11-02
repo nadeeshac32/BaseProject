@@ -9,9 +9,48 @@
 import Foundation
 import RxSwift
 
+
+/// This is used to pass data from child to parent. See belof imlementation
+protocol BaseCollectionVMDataSource:class {
+    func errorMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, detail: SuccessMessageDetailType)
+    func successMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, detail: SuccessMessageDetailType)
+    func warningMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, detail: SuccessMessageDetailType)
+    func toastMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, message: String)
+    func requestLoading<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, isLoading: Bool)
+    func showSignInVC<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>)
+}
+
+/// This is used to pass data from child to parent. This methods are calling from child view
+extension BaseCollectionVMDataSource where Self: BaseVM {
+    func errorMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, detail: SuccessMessageDetailType) {
+        self.errorMessage.onNext(detail)
+    }
+    func successMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, detail: SuccessMessageDetailType) {
+        self.successMessage.onNext(detail)
+    }
+    func warningMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, detail: SuccessMessageDetailType) {
+        self.warningMessage.onNext(detail)
+    }
+    func toastMessage<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, message: String) {
+        self.toastMessage.onNext(message)
+    }
+    func requestLoading<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>, isLoading: Bool) {
+        self.requestLoading.onNext(isLoading)
+    }
+    func showSignInVC<Model: BaseModel>(collectionVM: BaseCollectionVM<Model>) {
+        self.showSignInVC.onNext(true)
+    }
+}
+
 /// Base ViewModel that supports BaseCollectionVC.
 class BaseCollectionVM<Model: BaseModel>: BaseVM {
  
+    /**
+     Support data source when BaseListVM is used as a  SubView in a ViewController.
+     Used to bind BaseVM Observers to superVM Observers. See the BaseCollectionVMDataSource implementation
+     */
+    weak var dataSource     : BaseCollectionVMDataSource?
+    
     /**
      This Variable is used to specify whether the data is loaded from API or not
      When this is set to true you have to override 'perfomrGetItemsRequest' in your subclass
@@ -66,6 +105,38 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     
     override init() {
         super.init()
+    }
+    
+    /// If you initialise a instance of this class inside another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
+    init(dataSource: BaseCollectionVMDataSource?) {
+        super.init()
+        self.dataSource     = dataSource
+        DisposeBag().insert([
+            errorMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.errorMessage(collectionVM: self, detail: SuccessMessageDetailType)
+            }),
+            successMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.successMessage(collectionVM: self, detail: SuccessMessageDetailType)
+            }),
+            warningMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.warningMessage(collectionVM: self, detail: SuccessMessageDetailType)
+            }),
+            toastMessage.subscribe(onNext: { [weak self] (message) in
+                guard let `self` = self else { return }
+                self.dataSource?.toastMessage(collectionVM: self, message: message)
+            }),
+            requestLoading.subscribe(onNext: { [weak self] (isLoading) in
+                guard let `self` = self else { return }
+                self.dataSource?.requestLoading(collectionVM: self, isLoading: isLoading)
+            }),
+            showSignInVC.subscribe(onNext: { [weak self] (_) in
+                guard let `self` = self else { return }
+                self.dataSource?.showSignInVC(collectionVM: self)
+            })
+        ])
     }
     
     override func viewDidLoad() {

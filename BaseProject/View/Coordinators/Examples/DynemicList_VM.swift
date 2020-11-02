@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
-class DynemicListVM: BaseListVM<Customer> {
+class DynemicListVM: BaseTableViewVM<Customer> {
     
     override var dataLoadIn         : DataLoadIn? { get { return .ViewWillAppear } set {} }
     override var shouldSortFromKey  : Bool { get { return true } set {} }

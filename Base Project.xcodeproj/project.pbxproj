@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		825BE7BABA0D3FF3105B3648 /* Pods_Base_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6B9E81A0CFE22B4ADECD82 /* Pods_Base_Project.framework */; };
+		C927034E254FE1B60078E58D /* BaseGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C927034D254FE1B60078E58D /* BaseGrid.swift */; };
 		C92CD0072547FBC900FA7F1F /* BlogCreateEdit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */; };
 		C92CD0092547FBD600FA7F1F /* BlogCreateEdit_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */; };
 		C92CD00B2547FD0800FA7F1F /* BlogCreateImageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */; };
@@ -22,8 +23,6 @@
 		C94EF75E254058AB0090A28A /* SwivelFBLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75D254058AB0090A28A /* SwivelFBLoginButton.swift */; };
 		C94EF760254093A60090A28A /* SocialSignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75F254093A60090A28A /* SocialSignInVC.swift */; };
 		C95EF758252ACF640016CC80 /* CustomerContactCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF757252ACF640016CC80 /* CustomerContactCVCell.swift */; };
-		C95EF75A252AEA280016CC80 /* BaseGridWithoutHeadersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF759252AEA280016CC80 /* BaseGridWithoutHeadersVC.swift */; };
-		C95EF75C252AF1310016CC80 /* BaseGridWithHeadersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF75B252AF1310016CC80 /* BaseGridWithHeadersVC.swift */; };
 		C95EF75F252D6CCD0016CC80 /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF75E252D6CCD0016CC80 /* ListCoordinator.swift */; };
 		C95EF761252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF760252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift */; };
 		C95EF763252D6F2C0016CC80 /* GridCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF762252D6F2C0016CC80 /* GridCoordinator.swift */; };
@@ -42,14 +41,12 @@
 		C964B01125064939009E998C /* BaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B01025064939009E998C /* BaseVM.swift */; };
 		C964B01325064963009E998C /* BaseFormVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B01225064963009E998C /* BaseFormVM.swift */; };
 		C964B0152506499E009E998C /* BaseMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B0142506499E009E998C /* BaseMenuVM.swift */; };
-		C964B017250649B6009E998C /* BaseListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B016250649B6009E998C /* BaseListVM.swift */; };
+		C964B017250649B6009E998C /* BaseTableViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B016250649B6009E998C /* BaseTableViewVM.swift */; };
 		C964B019250649F1009E998C /* BaseSuperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B018250649F1009E998C /* BaseSuperVC.swift */; };
 		C964B01B25064A0F009E998C /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B01A25064A0F009E998C /* BaseVC.swift */; };
 		C964B01D25064A29009E998C /* BaseFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B01C25064A28009E998C /* BaseFormVC.swift */; };
 		C964B02125064A52009E998C /* BaseMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02025064A52009E998C /* BaseMenuVC.swift */; };
-		C964B02325064A66009E998C /* BaseListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02225064A66009E998C /* BaseListVC.swift */; };
-		C964B02525064A7D009E998C /* BaseListWithHeadersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02425064A7D009E998C /* BaseListWithHeadersVC.swift */; };
-		C964B02725064A94009E998C /* BaseListWithoutHeadersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02625064A94009E998C /* BaseListWithoutHeadersVC.swift */; };
+		C964B02325064A66009E998C /* BaseTableViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02225064A66009E998C /* BaseTableViewVC.swift */; };
 		C964B02A25064AF7009E998C /* BaseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02925064AF7009E998C /* BaseScrollView.swift */; };
 		C964B02C25064B12009E998C /* AnimateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02B25064B12009E998C /* AnimateTextField.swift */; };
 		C964B03025064B49009E998C /* GenericView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B02F25064B49009E998C /* GenericView.swift */; };
@@ -170,6 +167,7 @@
 		7E6B9E81A0CFE22B4ADECD82 /* Pods_Base_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Base_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9809C38B0DE1015F0F88B8B8 /* Pods-Base Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base Project.debug.xcconfig"; path = "Target Support Files/Pods-Base Project/Pods-Base Project.debug.xcconfig"; sourceTree = "<group>"; };
 		A12940F0274178272B99317C /* Pods-Base Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base Project.release.xcconfig"; path = "Target Support Files/Pods-Base Project/Pods-Base Project.release.xcconfig"; sourceTree = "<group>"; };
+		C927034D254FE1B60078E58D /* BaseGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGrid.swift; sourceTree = "<group>"; };
 		C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateEdit_VC.swift; sourceTree = "<group>"; };
 		C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateEdit_VM.swift; sourceTree = "<group>"; };
 		C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateImageCVCell.swift; sourceTree = "<group>"; };
@@ -184,8 +182,6 @@
 		C94EF75D254058AB0090A28A /* SwivelFBLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelFBLoginButton.swift; sourceTree = "<group>"; };
 		C94EF75F254093A60090A28A /* SocialSignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInVC.swift; sourceTree = "<group>"; };
 		C95EF757252ACF640016CC80 /* CustomerContactCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerContactCVCell.swift; sourceTree = "<group>"; };
-		C95EF759252AEA280016CC80 /* BaseGridWithoutHeadersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGridWithoutHeadersVC.swift; sourceTree = "<group>"; };
-		C95EF75B252AF1310016CC80 /* BaseGridWithHeadersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGridWithHeadersVC.swift; sourceTree = "<group>"; };
 		C95EF75E252D6CCD0016CC80 /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
 		C95EF760252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabBarWithGrids_VC.swift; sourceTree = "<group>"; };
 		C95EF762252D6F2C0016CC80 /* GridCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCoordinator.swift; sourceTree = "<group>"; };
@@ -206,14 +202,12 @@
 		C964B01025064939009E998C /* BaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVM.swift; sourceTree = "<group>"; };
 		C964B01225064963009E998C /* BaseFormVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormVM.swift; sourceTree = "<group>"; };
 		C964B0142506499E009E998C /* BaseMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMenuVM.swift; sourceTree = "<group>"; };
-		C964B016250649B6009E998C /* BaseListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListVM.swift; sourceTree = "<group>"; };
+		C964B016250649B6009E998C /* BaseTableViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewVM.swift; sourceTree = "<group>"; };
 		C964B018250649F1009E998C /* BaseSuperVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSuperVC.swift; sourceTree = "<group>"; };
 		C964B01A25064A0F009E998C /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		C964B01C25064A28009E998C /* BaseFormVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormVC.swift; sourceTree = "<group>"; };
 		C964B02025064A52009E998C /* BaseMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMenuVC.swift; sourceTree = "<group>"; };
-		C964B02225064A66009E998C /* BaseListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListVC.swift; sourceTree = "<group>"; };
-		C964B02425064A7D009E998C /* BaseListWithHeadersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListWithHeadersVC.swift; sourceTree = "<group>"; };
-		C964B02625064A94009E998C /* BaseListWithoutHeadersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListWithoutHeadersVC.swift; sourceTree = "<group>"; };
+		C964B02225064A66009E998C /* BaseTableViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewVC.swift; sourceTree = "<group>"; };
 		C964B02925064AF7009E998C /* BaseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollView.swift; sourceTree = "<group>"; };
 		C964B02B25064B12009E998C /* AnimateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTextField.swift; sourceTree = "<group>"; };
 		C964B02F25064B49009E998C /* GenericView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericView.swift; sourceTree = "<group>"; };
@@ -636,14 +630,10 @@
 				C964B01025064939009E998C /* BaseVM.swift */,
 				C964B01C25064A28009E998C /* BaseFormVC.swift */,
 				C964B01225064963009E998C /* BaseFormVM.swift */,
-				C964B02225064A66009E998C /* BaseListVC.swift */,
-				C964B016250649B6009E998C /* BaseListVM.swift */,
-				C964B02425064A7D009E998C /* BaseListWithHeadersVC.swift */,
-				C964B02625064A94009E998C /* BaseListWithoutHeadersVC.swift */,
+				C964B02225064A66009E998C /* BaseTableViewVC.swift */,
+				C964B016250649B6009E998C /* BaseTableViewVM.swift */,
 				C9A793322521B33400430872 /* BaseCollectionVC.swift */,
 				C9A793342521B33D00430872 /* BaseCollectionVM.swift */,
-				C95EF759252AEA280016CC80 /* BaseGridWithoutHeadersVC.swift */,
-				C95EF75B252AF1310016CC80 /* BaseGridWithHeadersVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -652,6 +642,8 @@
 			isa = PBXGroup;
 			children = (
 				C964B02925064AF7009E998C /* BaseScrollView.swift */,
+				C92CD013254B1EBE00FA7F1F /* BaseList.swift */,
+				C927034D254FE1B60078E58D /* BaseGrid.swift */,
 				C964B07B25089C75009E998C /* BaseTVCell.swift */,
 				C9A793362521B4CD00430872 /* BaseCVCell.swift */,
 				C94EF75B254058260090A28A /* BaseButton.swift */,
@@ -660,7 +652,6 @@
 				C964B03125064B61009E998C /* GenericViewController.swift */,
 				C964B03325064B7F009E998C /* GenericTableViewCell.swift */,
 				C964B03525064B94009E998C /* GenericCollectionViewCell.swift */,
-				C92CD013254B1EBE00FA7F1F /* BaseList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1023,7 +1014,6 @@
 				C964B01125064939009E998C /* BaseVM.swift in Sources */,
 				C9E2AE412508EDEC001F3961 /* FileAPIProtocol.swift in Sources */,
 				C9FA78A92538B00C006222CB /* ArrayDataType.swift in Sources */,
-				C964B02725064A94009E998C /* BaseListWithoutHeadersVC.swift in Sources */,
 				C9E2AE77250A3E4B001F3961 /* User.swift in Sources */,
 				C964B03A25064BDE009E998C /* BaseTabItemCoordinator.swift in Sources */,
 				C9EC704A251466D8007E183B /* NonDynemicList_VM.swift in Sources */,
@@ -1031,7 +1021,7 @@
 				C964B049250790B3009E998C /* SwivelManuTabCell.swift in Sources */,
 				C9753F3C2545D185002B149A /* BlogRepository.swift in Sources */,
 				C9EC7048251466CC007E183B /* NonDynemicList_VC.swift in Sources */,
-				C964B017250649B6009E998C /* BaseListVM.swift in Sources */,
+				C964B017250649B6009E998C /* BaseTableViewVM.swift in Sources */,
 				C9E2AE7F250A3FD0001F3961 /* UpdateUserEmail_VM.swift in Sources */,
 				C964B056250794A1009E998C /* SwivelUsernameTextField.swift in Sources */,
 				C964B06A25079C3B009E998C /* LoadingViewable.swift in Sources */,
@@ -1093,7 +1083,6 @@
 				C9E2AE57250A3984001F3961 /* OnboardingImage_VC.swift in Sources */,
 				C9E2AE55250A3968001F3961 /* Onboarding_PVC.swift in Sources */,
 				C9DB8F012537039B00351DAE /* RequestInterceptor.swift in Sources */,
-				C964B02525064A7D009E998C /* BaseListWithHeadersVC.swift in Sources */,
 				C964B05A25079B49009E998C /* Plist.swift in Sources */,
 				C9E2AE5F250A39F0001F3961 /* Signup_VC.swift in Sources */,
 				C964B06225079BB9009E998C /* PhoneContacts.swift in Sources */,
@@ -1106,13 +1095,11 @@
 				C9E2AE53250A3954001F3961 /* Onboarding_VM.swift in Sources */,
 				C964B04425079033009E998C /* SwivelTabBarController.swift in Sources */,
 				C9E2AE6D250A3AC4001F3961 /* BottomTabBar_VC.swift in Sources */,
-				C95EF75C252AF1310016CC80 /* BaseGridWithHeadersVC.swift in Sources */,
 				C9E2AE3D2508A66F001F3961 /* Setting.swift in Sources */,
 				C964B07225079DB3009E998C /* UserAuth.swift in Sources */,
 				C9753F382545C352002B149A /* BlogFeed_VC.swift in Sources */,
 				C9E2AE67250A3A7F001F3961 /* Main_Coordinator.swift in Sources */,
 				C964B05025079312009E998C /* SwivelRightButtonActionTextField.swift in Sources */,
-				C95EF75A252AEA280016CC80 /* BaseGridWithoutHeadersVC.swift in Sources */,
 				C971C1FB2535E85F002F4394 /* GeneralObjectResponse.swift in Sources */,
 				C964B02A25064AF7009E998C /* BaseScrollView.swift in Sources */,
 				C964B019250649F1009E998C /* BaseSuperVC.swift in Sources */,
@@ -1120,12 +1107,13 @@
 				C964B07825079EFA009E998C /* RestClientError.swift in Sources */,
 				C95EF767252D70BF0016CC80 /* DynemicCollection_VC.swift in Sources */,
 				C964B06C25079C55009E998C /* CustomMessageMaker.swift in Sources */,
-				C964B02325064A66009E998C /* BaseListVC.swift in Sources */,
+				C964B02325064A66009E998C /* BaseTableViewVC.swift in Sources */,
 				C92CD010254977B200FA7F1F /* SwivelNormalTextView.swift in Sources */,
 				C9753F3E2545EE68002B149A /* BlogPostTVCell.swift in Sources */,
 				C9A793372521B4CD00430872 /* BaseCVCell.swift in Sources */,
 				C9E2AE7D250A3FBD001F3961 /* UpdateUserEmail_VC.swift in Sources */,
 				C964B06E25079CA3009E998C /* AppConfig.swift in Sources */,
+				C927034E254FE1B60078E58D /* BaseGrid.swift in Sources */,
 				C94EF758254057040090A28A /* SocialSignInVM.swift in Sources */,
 				C9753F352545C2F4002B149A /* BlogCoordinator.swift in Sources */,
 				C94EF75A254057620090A28A /* FacebookSignIn.swift in Sources */,

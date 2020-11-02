@@ -12,7 +12,7 @@ import ObjectMapper
 
 
 //class BlogCreateEditVM: BaseCollectionVM<BlogContent> {
-class BlogCreateEditVM: BaseFormVM, BaseListVMDataSource {
+class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
 
     var blog                                            : Blog
     var imageGridViewModel                              : BlogCreateEditGridVM?

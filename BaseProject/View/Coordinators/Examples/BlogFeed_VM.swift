@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
-class BlogFeedVM: BaseListVM<Blog> {
+class BlogFeedVM: BaseTableViewVM<Blog> {
     
     // MARK: - Inputs
     let addBlogHasTapped            : AnyObserver<Void>

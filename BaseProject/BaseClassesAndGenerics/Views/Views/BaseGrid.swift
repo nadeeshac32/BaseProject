@@ -1,56 +1,106 @@
 //
-//  BaseCollectionVC.swift
+//  BaseGrid.swift
 //  Base Project
 //
-//  Created by Nadeesha Chandrapala on 9/28/20.
+//  Created by Nadeesha Chandrapala on 11/2/20.
 //  Copyright © 2020 Swivel Tech. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import RxSwift
 import RxDataSources
 
-/// Base List View Controller functionality.
-/// You have to give the inherited subclasses of BaseModel, BaseListVM, BaseTVCell types in the subclass which inherit this class
-/// Search functionality is also enabled here.
-class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>>: BaseVC<ViewModel>, UICollectionViewDelegate, UISearchBarDelegate, StoryboardInitializable, UIGestureRecognizerDelegate {
+protocol BaseGridDelagate: class {
+    func getItemsLoadingText(_ collectionView: UICollectionView) -> String
+    func getNoItemsText(_ collectionView: UICollectionView) -> String
+    func getNoItemsImageName(_ collectionView: UICollectionView) -> String?
+    func getCellLayout(shouldSetCellSize: Bool) -> UICollectionViewFlowLayout
+    func getItemSize() -> CGSize
+}
+
+extension BaseGridDelagate {
+    // MARK: - override in subclasses as needed
+    func getItemsLoadingText(_ collectionView: UICollectionView) -> String {
+        return "Items Loading"
+    }
+    func getNoItemsText(_ collectionView: UICollectionView) -> String {
+        return "No Items"
+    }
+    func getNoItemsImageName(_ collectionView: UICollectionView) -> String? {
+        return nil
+    }
+    func getCellLayout(shouldSetCellSize: Bool) -> UICollectionViewFlowLayout {
+        let layout                                  = UICollectionViewFlowLayout()
+        layout.sectionInset                         = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        
+        if shouldSetCellSize {
+            layout.itemSize                         = getItemSize()
+        } else {
+            layout.estimatedItemSize                = getItemSize()
+        }
+        layout.estimatedItemSize                    = getItemSize()
+        layout.headerReferenceSize                  = CGSize(width: AppConfig.si.screenSize.width, height: 30)
+        layout.minimumLineSpacing                   = 8
+        layout.minimumInteritemSpacing              = 0
+        return layout
+    }
+    func getItemSize() -> CGSize {
+        let sideSize                                : CGFloat = AppConfig.si.screenSize.width / 3
+        return CGSize(width: sideSize, height: sideSize)
+    }
+}
+
+
+/// Base Grid (CollectionView) functionality.
+/// You have to give the inherited subclasses of BaseModel, BaseGridVM, BaseCVCell types in the subclass which inherit this class or when you directly create an instance of this class.
+///
+/// The ViewModel you're gonna pass here should be a child of the ViewModel of the class you're initiating the instance of this class.
+///
+///
+/// Initiating should be like defined below
+/// let gridView1ViewModel: ExampleViewModel      = self.viewModel.gridView1ViewModel
+/// gridView1                                                              = BaseGridWithoutHeaders<ExampleModel, ExampleViewModel, ExampleCVCell>(viewModel: gridView1ViewModel, collectionView: _collectionView, delegate: self)
+/// gridView1?.customiseView(multiSelectable: true)                     <- This line is optional ->
+/// gridView1?.setupBindings()
+class BaseCollection<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>>: NSObject, UICollectionViewDelegate, UIGestureRecognizerDelegate {
     
     var collectionView                              : UICollectionView!
     var itemCountLabel                              : UILabel?
     var itemCountString                             : String?
     
-    var searchBar                                   = UISearchBar()
-    var searchBtn                                   = SwivelUIMaker.makeButtonWith(imageName: "icon_search")
-    var searchBarButtonItem                         : UIBarButtonItem?
-    
     var multiSelectable                             : Bool = false
     
     /// If the CollectionViewCell UI is designed in xib file you can register it here.
     var cellLoadFromNib                             : Bool = false
-    var shouldSetCellSize                           : Bool = true
+    var shouldSetCellSize                           : Bool = false
+    weak var delegate                               : BaseGridDelagate?
+       
+    let disposeBag                                  = DisposeBag()
+    weak var viewModel                              : ViewModel?
     
-    /// Bind the actual UI Outlets with the Base class variables.
-    /// - Note: Because from the subclass, IBOutlets cannot be made directly to Base class variables.
-    func customiseView(collectionView: UICollectionView!, itemCountLabel: UILabel? = nil, itemCountString: String? = "Item".localized(), multiSelectable: Bool = false) {
+    fileprivate init(viewModel: ViewModel, collectionView: UICollectionView!, delegate: BaseGridDelagate) {
+        self.viewModel                              = viewModel
+        self.delegate                               = delegate
         self.collectionView                         = collectionView
-        self.itemCountLabel                         = itemCountLabel
-        self.itemCountString                        = itemCountString
-        super.customiseView()
-        
         self.collectionView.backgroundColor         = UIColor.clear
         self.collectionView.bounces                 = false
-        self.collectionView.collectionViewLayout    = getCellLayout()
+        if let layout = self.delegate?.getCellLayout(shouldSetCellSize: shouldSetCellSize) {
+            self.collectionView.collectionViewLayout    = layout
+        }
+    }
         
+    /// Bind the actual UI Outlets with the Base class variables.
+    /// - Note: Because from the subclass, IBOutlets cannot be made directly to Base class variables.
+    func customiseView(itemCountLabel: UILabel? = nil, itemCountString: String? = "Item".localized(), multiSelectable: Bool = false) {
+        self.itemCountLabel                         = itemCountLabel
+        self.itemCountString                        = itemCountString
         self.multiSelectable                        = multiSelectable
         if self.multiSelectable {
             let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
             longPressGesture.delegate               = self
             self.collectionView.addGestureRecognizer(longPressGesture)
         }
-        
-        self.searchBar.delegate                     = self
-        self.searchBar.searchBarStyle               = .prominent
-        self.searchBar.showsCancelButton            = true
-        self.searchBtn.addTarget(self, action: #selector(searchButtonPressed(sender:)), for: .touchUpInside)
     }
     
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
@@ -59,8 +109,7 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
         }
     }
 
-    override func setupBindings() {
-        super.setupBindings()
+    func setupBindings() {
         if let viewModel = self.viewModel {
             
             if cellLoadFromNib {
@@ -88,53 +137,20 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
                     }
                 })
             ])
-            let isLoading = collectionView.rx.isLoading(loadingMessage: getItemsLoadingText(), noItemsMessage: getNoItemsText(), imageName: getNoItemsImageName())
+            let isLoading = collectionView.rx.isLoading(loadingMessage: delegate?.getItemsLoadingText(collectionView) ?? "", noItemsMessage: delegate?.getNoItemsText(collectionView) ?? "", imageName: delegate?.getNoItemsImageName(collectionView))
             viewModel.requestLoading.map ({ $0 }).bind(to: isLoading).disposed(by: disposeBag)
         }
     }
     
-    
-    // MARK: - override in subclasses as needed
-    func getItemsLoadingText() -> String {
-        return "Items Loading".localized()
-    }
-    
-    func getNoItemsText() -> String {
-        return "No Items".localized()
-    }
-    
-    func getNoItemsImageName() -> String? {
-        return nil
-    }
-    
-    func getCellLayout() -> UICollectionViewFlowLayout {
-        let layout                                  = UICollectionViewFlowLayout()
-        layout.sectionInset                         = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        
-        if shouldSetCellSize {
-            layout.itemSize                         = getItemSize()
-        } else {
-            layout.estimatedItemSize                = getItemSize()
-        }
-        layout.headerReferenceSize                  = CGSize(width: AppConfig.si.screenSize.width, height: 30)
-        layout.minimumLineSpacing                   = 8
-        layout.minimumInteritemSpacing              = 0
-        return layout
-    }
-    
-    func getItemSize() -> CGSize {
-        let sideSize                                : CGFloat = AppConfig.si.screenSize.width / 3
-        return CGSize(width: sideSize, height: sideSize)
-    }
     // MARK: - setup cell for collection view without headers
     func setupCell(section: Int, row: Int, element: Model, cell: CollectionViewCell) {
         cell.configureCell(item: element, section: section, row: row, selectable: viewModel?.multiSelectable ?? false)
-        cell.delegate                               = self
+        cell.delegate                           = self
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset: CGFloat                         = 100
-        let bottomEdge                              = scrollView.contentOffset.y + scrollView.frame.size.height;
+        let offset: CGFloat                     = 100
+        let bottomEdge                          = scrollView.contentOffset.y + scrollView.frame.size.height;
         if (bottomEdge + offset >= scrollView.contentSize.height) {
             viewModel?.paginateNext()
         }
@@ -144,25 +160,9 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
         self.collectionView.allowsMultipleSelection = multiSelectEnabled
         self.collectionView.reloadData()
     }
-    
-    //MARK: - Search bar methods
-    @objc func searchButtonPressed(sender: AnyObject) {
-        showSearchBar(searchBar: searchBar)
-    }
-    
-    //MARK: UISearchBarDelegate
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel?.searchText                       = ""
-        searchBar.text                              = ""
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel?.searchText                       = searchBar.text ?? ""
-        searchBar.resignFirstResponder()
-    }
 }
 
-extension BaseCollectionVC: BaseCVCellDelegate {
+extension BaseCollection: BaseCVCellDelegate {
     func itemSelected(model: BaseModel) -> Bool? {
         if let item = model as? Model {
             return viewModel?.itemSelected(model: item)
@@ -175,7 +175,13 @@ extension BaseCollectionVC: BaseCVCellDelegate {
 
 /// This class is used to Implement Table VIews when there is not sections. Inherited from BaseGridVC
 /// Basically this class is to bind proper configuration into collection view when there are no section headers.
-class BaseGridWithoutHeadersVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>>: BaseCollectionVC<Model, ViewModel, CollectionViewCell> {
+class BaseGridWithoutHeaders<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>>: BaseCollection<Model, ViewModel, CollectionViewCell> {
+    
+    deinit { print("deinit BaseGridWithoutHeaders") }
+    
+    override init(viewModel: ViewModel, collectionView: UICollectionView!, delegate: BaseGridDelagate) {
+        super.init(viewModel: viewModel, collectionView: collectionView, delegate: delegate)
+    }
     
     override func setupBindings() {
         super.setupBindings()
@@ -192,16 +198,16 @@ class BaseGridWithoutHeadersVC<Model:BaseModel, ViewModel: BaseCollectionVM<Mode
 }
 
 
-
-/// This class is used to Implement Table VIews with multiple Sections. Inherited from BaseGridVC
+/// This class is used to Implement Table VIews with multiple Sections. Extends from BaseGrid
 /// Basically this class is to bind proper datasource into collection view when there are section headers.
-class BaseGridWithHeadersVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>, CollectionViewSectionHeder: BaseCVSectionHeader>: BaseCollectionVC<Model, ViewModel, CollectionViewCell> {
+class BaseGridWithHeaders<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>, CollectionViewSectionHeder: BaseCVSectionHeader>: BaseCollection<Model, ViewModel, CollectionViewCell> {
+    
+    deinit { print("deinit BaseGridWithoutHeaders") }
     
     var dataSource                              : RxCollectionViewSectionedAnimatedDataSource<SectionOfCustomData<Model>>?
     
-    override func customiseView(collectionView: UICollectionView!, itemCountLabel: UILabel? = nil, itemCountString: String? = "Item".localized(), multiSelectable: Bool = false) {
-        super.customiseView(collectionView: collectionView, itemCountLabel: itemCountLabel, itemCountString: itemCountString, multiSelectable: multiSelectable)
-            
+    override init(viewModel: ViewModel, collectionView: UICollectionView!, delegate: BaseGridDelagate) {
+        super.init(viewModel: viewModel, collectionView: collectionView, delegate: delegate)
         let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfCustomData<Model>>(animationConfiguration: AnimationConfiguration(insertAnimation: .top,
                                                                                                                                            reloadAnimation: .none,
                                                                                                                                            deleteAnimation: .left),
@@ -232,7 +238,7 @@ class BaseGridWithHeadersVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>,
         
         if let collectionViewCell = cell as? CollectionViewCell {
             collectionViewCell.configureCell(item: dataModel, section: indexPath.section, row: indexPath.row, selectable: viewModel?.multiSelectable ?? false)
-            collectionViewCell.delegate              = self
+            collectionViewCell.delegate         = self
             return collectionViewCell
         }
 

@@ -12,14 +12,9 @@ import ObjectMapper
 
 class NonDynemicCollectionVM: BaseCollectionVM<Customer> {
     
-    var loadingMethod               : Customers? = .allContacts
-    let httpService                 = HTTPService()
     override var loadFromAPI        : Bool { get { return false } set {} }
     override var loadAsDynemic      : Bool { get { return false } set {} }
     override var shouldSortFromKey  : Bool { get { return true } set {} }
-    
-    // MARK: - Outputs
-    let enableSyncButton            : PublishSubject<Bool> = PublishSubject()
     
     deinit {
         print("deinit NonDynemicCollectionVM")
@@ -50,40 +45,4 @@ class NonDynemicCollectionVM: BaseCollectionVM<Customer> {
         requestLoading.onNext(false)
     }
     
-    // MARK: - Network request
-//    func performSync() {
-//        guard selectedItems.count > 0 else {
-//            let tupple = (message: "Please select contacts you want".localized(), blockScreen: false, completionHandler: { })
-//            warningMessage.onNext(tupple)
-//            return
-//        }
-//        let customerChunks          = selectedItems.chunked(into: 150)
-//        performSyncRequest(forChuncks: customerChunks)
-//    }
-    
-//    func performSyncRequest(forChuncks: [[Customer]]) {
-//        var chunks                  = forChuncks
-//        guard chunks.count > 0 else { return }
-//        if let nextChunck           = chunks.popLast() {
-//            let syncPostData = CustomersSyncPostData(customersChunck: nextChunck)
-//            requestLoading.onNext(true)
-//            enableSyncButton.onNext(false)
-//            httpService.syncCustomers(customersChunk: syncPostData, onSuccess: { [weak self] in
-//                if chunks.count > 0 {
-//                    self?.performSyncRequest(forChuncks: chunks)
-//                } else {
-//                    self?.requestLoading.onNext(false)
-//                    self?.enableSyncButton.onNext(true)
-//                    let tupple      = (message: "Sync Successful.".localized(), blockScreen: false, completionHandler: {
-//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "new.customers.syncked"), object: nil, userInfo: nil)
-//                    })
-//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "new.customer.added"), object: nil, userInfo: nil)
-//                    self?.cancelMultiSelection()
-//                    self?.successMessage.onNext(tupple)
-//                }
-//            }) { (error) in
-//                self.handleRestClientError(error: error)
-//            }
-//        }
-//    }
 }

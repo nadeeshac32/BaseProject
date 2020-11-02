@@ -9,7 +9,7 @@
 import UIKit
 import RxDataSources
 
-class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresenting, BaseListDelagate {
+class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresenting, BaseGridDelagate {
 
     @IBOutlet weak var userImageVw                          : UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
@@ -19,8 +19,8 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     @IBOutlet weak var addPhotoBtn                          : UIButton!
     @IBOutlet weak var addLocationBtn                       : UIButton!
     
-    @IBOutlet public weak var _imagesCV                     : UITableView!
-    var imageGrid                                           : BaseListWithoutHeaders<Blog, BlogCreateEditGridVM, BlogTempTVCell>?
+    @IBOutlet public weak var _imagesCV                     : UICollectionView!
+    var imageGrid                                           : BaseGridWithoutHeaders<Blog, BlogCreateEditGridVM, BlogCreateImageCVCell>?
     
     @IBOutlet public weak var _scrollView                   : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!
@@ -49,7 +49,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
         postItemsContainer.addBoarder(width: 1, cornerRadius: 5, color: .lightGray)
         
         if let imageGridViewModel = viewModel?.imageGridViewModel {
-            self.imageGrid                                  = BaseListWithoutHeaders(viewModel: imageGridViewModel, tableView: _imagesCV, delegate: self)
+            self.imageGrid                                  = BaseGridWithoutHeaders(viewModel: imageGridViewModel, collectionView: _imagesCV, delegate: self)
             imageGrid?.setupBindings()
         }
     }

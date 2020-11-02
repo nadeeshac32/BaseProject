@@ -1,5 +1,5 @@
 //
-//  BaseListVC.swift
+//  BaseTableViewVC.swift
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.

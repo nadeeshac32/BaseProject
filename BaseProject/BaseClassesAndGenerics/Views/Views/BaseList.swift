@@ -73,7 +73,7 @@ extension BaseListDelagate {
 /// listView1                                                           = BaseListWithoutHeaders<ExampleModel, ExampleViewModel, ExampleTVCell>(viewModel: listView1ViewModel, tableView: _tableView, delegate: self)
 /// listView1?.customiseView(multiSelectable: true)                     <- This line is optional ->
 /// listView1?.setupBindings()
-class BaseList<Model:BaseModel, ViewModel: BaseListVM<Model>, TableViewCell: BaseTVCell<Model>>: NSObject, UITableViewDelegate, UIGestureRecognizerDelegate {
+class BaseList<Model:BaseModel, ViewModel: BaseTableViewVM<Model>, TableViewCell: BaseTVCell<Model>>: NSObject, UITableViewDelegate, UIGestureRecognizerDelegate {
     
     var tableView                               : UITableView!
     var itemCountLabel                          : UILabel?
@@ -205,7 +205,9 @@ extension BaseList: BaseTVCellDelegate {
 }
 
 
-class BaseListWithoutHeaders<Model:BaseModel, ViewModel: BaseListVM<Model>, TableViewCell: BaseTVCell<Model>>: BaseList<Model, ViewModel, TableViewCell> {
+/// This class is used to Implement Table VIews when there is no sections. Inherited from BaseListVC
+/// Basically this class is to bind proper configuration into table view when there are no section headers.
+class BaseListWithoutHeaders<Model:BaseModel, ViewModel: BaseTableViewVM<Model>, TableViewCell: BaseTVCell<Model>>: BaseList<Model, ViewModel, TableViewCell> {
     
     deinit { print("deinit BaseListWithoutHeaders") }
     
@@ -228,9 +230,9 @@ class BaseListWithoutHeaders<Model:BaseModel, ViewModel: BaseListVM<Model>, Tabl
 }
 
 
-/// This class is used to Implement Table VIews with multiple Sections. Extends from BaseListVC
+/// This class is used to Implement Table VIews with multiple Sections. Inherited from BaseList
 /// Basically this class is to bind proper datasource into table view when there are section headers.
-class BaseListWithHeaders<Model:BaseModel, ViewModel: BaseListVM<Model>, TableViewCell: BaseTVCell<Model>>: BaseList<Model, ViewModel, TableViewCell> {
+class BaseListWithHeaders<Model:BaseModel, ViewModel: BaseTableViewVM<Model>, TableViewCell: BaseTVCell<Model>>: BaseList<Model, ViewModel, TableViewCell> {
     
     var dataSource                              : RxTableViewSectionedAnimatedDataSource<SectionOfCustomData<Model>>?
     

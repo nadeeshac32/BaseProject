@@ -11,7 +11,7 @@ import RxSwift
 import ObjectMapper
 
 /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
-class BlogCreateEditGridVM: BaseListVM<Blog> {
+class BlogCreateEditGridVM: BaseCollectionVM<Blog> {
     
     // TODO: - dataLoadIn will be ViewDidLoad once the push notifications are enabled
 //    override var dataLoadIn         : DataLoadIn? { get { return .ViewWillAppear } set {} }

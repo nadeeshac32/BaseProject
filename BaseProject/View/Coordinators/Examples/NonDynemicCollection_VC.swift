@@ -24,48 +24,8 @@ class NonDynemicCollectionVC: BaseGridWithHeadersVC<Customer, NonDynemicCollecti
     }
     
     override func customiseView() {
-        super.customiseView(collectionView: _collectionView, multiSelectable: true)
+        super.customiseView(collectionView: _collectionView, multiSelectable: false)
     }
     
-//    override func setupBindings() {
-//        super.setupBindings()
-//        if let viewModel = self.viewModel {
-//
-//            disposeBag.insert([
-//                // MARK: - Outputs
-//                syncBtn.rx.tap.bind(onNext: viewModel.performSync),
-//                syncCancelBtn.rx.tap.bind(onNext: viewModel.cancelMultiSelection),
-//
-//                // MARK: - Inputs
-//                viewModel.enableSyncButton.subscribe(onNext: { [weak self] (enable) in
-//                    self?.syncBtn.isEnabled     = enable
-//                })
-//            ])
-//        }
-//    }
-//
-//
-//    override func setMultiSelectableMode(multiSelectEnabled: Bool) {
-//        super.setMultiSelectableMode(multiSelectEnabled: multiSelectEnabled)
-//        if multiSelectEnabled {
-//            syncBtn.alpha                       = 0
-//            syncCancelBtn.alpha                 = 0
-//            syncBtn.isHidden                    = false
-//            syncCancelBtn.isHidden              = false
-//            UIView.animate(withDuration: 0.5) { [weak self] in
-//                self?.syncBtn.alpha             = 1
-//                self?.syncCancelBtn.alpha       = 1
-//            }
-//
-//        } else {
-//            UIView.animate(withDuration: 0.5, animations: { [weak self] in
-//                self?.syncBtn.alpha             = 0
-//                self?.syncCancelBtn.alpha       = 0
-//            }) { [weak self] (completed) in
-//                self?.syncBtn.isHidden          = true
-//                self?.syncCancelBtn.isHidden    = true
-//            }
-//        }
-//    }
     
 }

@@ -15,7 +15,7 @@ enum Customers {
     case tokobookContacts
 }
 
-class NonDynemicListVM: BaseListVM<Customer> {
+class NonDynemicListVM: BaseTableViewVM<Customer> {
     
     override var loadFromAPI        : Bool { get { return false } set {} }
     override var loadAsDynemic      : Bool { get { return false } set {} }
