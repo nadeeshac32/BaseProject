@@ -17,7 +17,7 @@ enum BlogCreateEditMode {
 class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
 
     var blog                                            : Blog
-    var imageGridViewModel                              : BlogCreateContentGridVM?
+    var contentGridViewModel                            : BlogCreateContentGridVM?
     var blogCreateEditMode                              : BlogCreateEditMode
     
     // MARK: - Inputs
@@ -65,10 +65,10 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         showLocationPicker                              = _addLocationTapped.asObservable()
         
         super.init()
-        imageGridViewModel                              = BlogCreateContentGridVM(dataSource: self)
-        childViewModels.append(imageGridViewModel!)
+        contentGridViewModel                              = BlogCreateContentGridVM(dataSource: self)
+        childViewModels.append(contentGridViewModel!)
         let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, image: nil) }) ?? []
-        imageGridViewModel?.contentAdd(items: contentArray)
+        contentGridViewModel?.contentAdd(items: contentArray)
         
         enableImagePicker.onNext(blogCreateEditMode == .create)
     }
@@ -80,7 +80,7 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
     func contentSelected(content: [UIImage]) {
         guard self.blogCreateEditMode == .create else { return }
         let contentArray = content.map({ BlogContent(editable: true, mediaUrl: nil, image: $0) })
-        imageGridViewModel?.contentAdd(items: contentArray)
+        contentGridViewModel?.contentAdd(items: contentArray)
     }
     
     // MARK: - Network request
@@ -92,14 +92,19 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         } catch let error { print("Fetal error: \(error)") }
         
         let httpService                                 = HTTPService()
-        if blog.blogId == "", blog.imageHasEdited(), let images = blog.editedValues()?.images {
-            print(images.count)
+        if blog.blogId == "", contentGridViewModel?.isContentAdded() == true, let content = contentGridViewModel?.getContent() {
+            print(content.count)
+            
 //            httpService.uploadImageRequest(image: image, imageName: "\(customer.customerId ?? "")-\(Date().millisecondsSince1970)", onError: { [weak self] (error) in
 //                self?.handleRestClientError(error: error)
 //            }) { [weak self] (imageResponse) in
 //                self?.customer._imageUrl.onNext(imageResponse.imageUrl ?? "")
 //                self?.createOrUpdateCustomerRequest(httpService: httpService)
 //            }
+            
+            // TODO: - Upload media files
+            // TODO: - Update blog.content with response.urls: [String]
+            // TODO: - Call createOrUpdateCustomerRequest(httpService: httpService)
         } else {
             createOrUpdateCustomerRequest(httpService: httpService)
         }

@@ -46,8 +46,8 @@ class Blog: BaseModel {
         self.title                      = title
         self.desc                       = desc
         self.location                   = location
-//        self.content                    = content
-        self.content                    = ["https://cdn.aarp.net/content/dam/aarp/entertainment/movies-for-grownups/2020/07/1140-will-smith.jpg"]
+        self.content                    = content
+//        self.content                    = ["https://cdn.aarp.net/content/dam/aarp/entertainment/movies-for-grownups/2020/07/1140-will-smith.jpg"]
         
         _title                          = BehaviorSubject<String>(value: title ?? "")
         _desc                           = BehaviorSubject<String>(value: desc ?? "")
@@ -116,7 +116,7 @@ class Blog: BaseModel {
 
     func copy(with zone: NSZone? = nil) -> Any {
         if let edit = editedValues() {
-            return Blog(blogId: blogId, owner: owner, title: edit.title, content: [], desc: edit.desc, location: edit.location)
+            return Blog(blogId: blogId, owner: owner, title: edit.title, content: content, desc: edit.desc, location: edit.location)
         }
         return Blog(blogId: blogId, owner: owner, title: title, content: content, desc: desc, location: location)
     }

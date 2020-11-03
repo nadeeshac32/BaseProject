@@ -764,8 +764,8 @@
                         <viewLayoutGuide key="safeArea" id="hKI-Kb-Ufe"/>
                     </view>
                     <connections>
+                        <outlet property="_contentCV" destination="Z0a-DU-vWp" id="tr1-MQ-ErW"/>
                         <outlet property="_dynemicGapCons" destination="JhH-en-zyh" id="NWg-y1-3Rj"/>
-                        <outlet property="_imagesCV" destination="Z0a-DU-vWp" id="qLm-KE-9R4"/>
                         <outlet property="_scrollView" destination="XMg-ge-1cc" id="O6Q-Zu-eB4"/>
                         <outlet property="_scrollViewBottomCons" destination="eYg-k5-IKE" id="z3e-hP-gN8"/>
                         <outlet property="_scrollViewBottomMargin" destination="KCL-sQ-qf1" id="td3-KS-2P0"/>

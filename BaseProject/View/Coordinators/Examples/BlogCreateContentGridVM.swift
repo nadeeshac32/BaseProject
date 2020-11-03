@@ -24,9 +24,16 @@ class BlogCreateContentGridVM: BaseCollectionVM<BlogContent> {
     }
     
     func contentRemove(item: BlogContent, section: Int, row: Int) {
-        // TODO: - Base Collection VM  removeItems(items: [String: [Items]])
         self.removeExistingItems(items: [item])
         requestLoading.onNext(false)
+    }
+    
+    func isContentAdded() -> Bool {
+        return false
+    }
+    
+    func getContent() -> [BlogContent]? {
+        return nil
     }
     
 }

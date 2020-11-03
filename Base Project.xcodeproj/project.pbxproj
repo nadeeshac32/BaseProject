@@ -490,10 +490,10 @@
 		C964B0022506322D009E998C /* Architectural */ = {
 			isa = PBXGroup;
 			children = (
-				C964B00B250637F7009E998C /* Coodinator */,
-				C964B00D250640CC009E998C /* ViewControllers */,
-				C964B02825064AEE009E998C /* Views */,
-				C964B00925063363009E998C /* Models */,
+				C964B00B250637F7009E998C /* BaseCoodinator */,
+				C964B00D250640CC009E998C /* BaseViewControllers */,
+				C964B02825064AEE009E998C /* BaseViews */,
+				C964B00925063363009E998C /* BaseModels */,
 			);
 			path = Architectural;
 			sourceTree = "<group>";
@@ -545,11 +545,11 @@
 		C964B006250632A1009E998C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C9E2AE392508A643001F3961 /* Settings */,
 				C964B06525079C09009E998C /* StringKeys.swift */,
 				C964B06725079C22009E998C /* SwivelUIMaker.swift */,
 				C964B06925079C3B009E998C /* LoadingViewable.swift */,
 				C964B06B25079C55009E998C /* CustomMessageMaker.swift */,
-				C9E2AE392508A643001F3961 /* Settings */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -578,21 +578,21 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		C964B00925063363009E998C /* Models */ = {
+		C964B00925063363009E998C /* BaseModels */ = {
 			isa = PBXGroup;
 			children = (
 				C964B00E250647FF009E998C /* BaseModel.swift */,
 			);
-			path = Models;
+			path = BaseModels;
 			sourceTree = "<group>";
 		};
-		C964B00B250637F7009E998C /* Coodinator */ = {
+		C964B00B250637F7009E998C /* BaseCoodinator */ = {
 			isa = PBXGroup;
 			children = (
 				C964B03725064BC7009E998C /* BaseCoordinator.swift */,
 				C964B03925064BDE009E998C /* BaseTabItemCoordinator.swift */,
 			);
-			path = Coodinator;
+			path = BaseCoodinator;
 			sourceTree = "<group>";
 		};
 		C964B00C25063804009E998C /* APIProtocols */ = {
@@ -606,7 +606,7 @@
 			path = APIProtocols;
 			sourceTree = "<group>";
 		};
-		C964B00D250640CC009E998C /* ViewControllers */ = {
+		C964B00D250640CC009E998C /* BaseViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				C964B0452507907F009E998C /* BaseManuTabBarController+ManuTabBar */,
@@ -621,10 +621,10 @@
 				C9A793322521B33400430872 /* BaseCollectionVC.swift */,
 				C9A793342521B33D00430872 /* BaseCollectionVM.swift */,
 			);
-			path = ViewControllers;
+			path = BaseViewControllers;
 			sourceTree = "<group>";
 		};
-		C964B02825064AEE009E998C /* Views */ = {
+		C964B02825064AEE009E998C /* BaseViews */ = {
 			isa = PBXGroup;
 			children = (
 				C92CD013254B1EBE00FA7F1F /* BaseList.swift */,
@@ -639,7 +639,7 @@
 				C964B03325064B7F009E998C /* GenericTableViewCell.swift */,
 				C964B03525064B94009E998C /* GenericCollectionViewCell.swift */,
 			);
-			path = Views;
+			path = BaseViews;
 			sourceTree = "<group>";
 		};
 		C964B03E25078F70009E998C /* BaseBottomTabBarController */ = {
@@ -747,18 +747,18 @@
 				C964B0072506330A009E998C /* Components */,
 				C964B0022506322D009E998C /* Architectural */,
 				C964B006250632A1009E998C /* Helpers */,
-				C9CC086A25516D9E00C86FE6 /* GeneralReusableModel */,
+				C9CC086A25516D9E00C86FE6 /* GeneralReusableModels */,
 				C964AFFF250631FF009E998C /* Utilities */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		C9CC086A25516D9E00C86FE6 /* GeneralReusableModel */ = {
+		C9CC086A25516D9E00C86FE6 /* GeneralReusableModels */ = {
 			isa = PBXGroup;
 			children = (
 				C9E2AE422508EE1B001F3961 /* Network */,
 			);
-			path = GeneralReusableModel;
+			path = GeneralReusableModels;
 			sourceTree = "<group>";
 		};
 		C9E2AE392508A643001F3961 /* Settings */ = {

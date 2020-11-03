@@ -53,6 +53,7 @@ PODS:
   - SnapKit (5.0.1)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - TLPhotoPicker (2.1.3)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - RxDataSources (~> 4.0)
   - SnapKit (~> 5.0.0)
   - SwiftEntryKit (= 1.2.3)
+  - TLPhotoPicker
   - Toast-Swift (~> 5.0.0)
 
 SPEC REPOS:
@@ -100,6 +102,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SwiftEntryKit
+    - TLPhotoPicker
     - Toast-Swift
 
 SPEC CHECKSUMS:
@@ -127,8 +130,9 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  TLPhotoPicker: 2c4a20d62952bd368edbf44d18476f663a718ada
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: b83884703871d0064015b6d16fffc820689c0121
+PODFILE CHECKSUM: 8968d3e027329cd16a753469c6a2e7b28a55ee2f
 
 COCOAPODS: 1.8.4

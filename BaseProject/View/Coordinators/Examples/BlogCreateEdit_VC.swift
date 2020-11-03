@@ -8,6 +8,7 @@
 
 import UIKit
 import RxDataSources
+import TLPhotoPicker
 
 class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresenting, BaseGridDelagate {
 
@@ -19,8 +20,8 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     @IBOutlet weak var addPhotoBtn                          : UIButton!
     @IBOutlet weak var addLocationBtn                       : UIButton!
     
-    @IBOutlet public weak var _imagesCV                     : UICollectionView!
-    var imageGrid                                           : BlogCreateContentGrid?
+    @IBOutlet public weak var _contentCV                    : UICollectionView!
+    var contentGrid                                         : BlogCreateContentGrid?
     
     @IBOutlet public weak var _scrollView                   : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!
@@ -47,9 +48,9 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
         
         postItemsContainer.addBoarder(width: 1, cornerRadius: 5, color: .lightGray)
         
-        if let imageGridViewModel = viewModel?.imageGridViewModel {
-            self.imageGrid                                  = BlogCreateContentGrid(viewModel: imageGridViewModel, collectionView: _imagesCV, delegate: self)
-            imageGrid?.setupBindings()
+        if let imageGridViewModel = viewModel?.contentGridViewModel {
+            self.contentGrid                                  = BlogCreateContentGrid(viewModel: imageGridViewModel, collectionView: _contentCV, delegate: self)
+            contentGrid?.setupBindings()
         }
     }
     
@@ -72,11 +73,28 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
                     self?.navigationController?.navigationBar.topItem?.titleView    = nil
                 }),
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
-                    self?.presentImagePicker { [weak self] (image) in
-                        if let image = image {
-                            self?.viewModel?.contentSelected(content: [image])
-                        }
+                    //  self?.viewModel?.contentSelected(content: [image])
+                    
+                    let viewController = TLPhotosPickerViewController(withTLPHAssets: { [weak self] (assets) in // TLAssets
+                        
+                        
+                        //  self?.selectedAssets = assets
+                        print("assets selected: \(assets.count)")
+                    }, didCancel: nil)
+                    viewController.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+                        print("exceed max selection")
                     }
+                    viewController.handleNoAlbumPermissions = { [weak self] (picker) in
+                        print("handle denied albums permissions case")
+                    }
+                    viewController.handleNoCameraPermissions = { [weak self] (picker) in
+                        print("handle denied camera permissions case")
+                    }
+                    //  viewController.selectedAssets = self.selectedAssets
+                    var configure = TLPhotosPickerConfigure()
+                    configure.maxSelectedAssets = 3
+                    viewController.configure = configure
+                    self?.present(viewController, animated: true, completion: nil)
                 }),
                 viewModel.showLocationPicker.subscribe(onNext: { [weak self] (_) in
                     self?.showLocationPicker()
