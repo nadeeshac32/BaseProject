@@ -14,18 +14,20 @@ class BlogContent: BaseModel {
     var image           : UIImage?
     var videoThumbUrl   : String?
     var videoFilePath   : String?
+    var isRemovable      : Bool = false
 
-    init(mediaUrl: String?, image: UIImage?, videoThumbUrl: String? = nil, videoFilePath: String? = nil) {
+    init(editable: Bool, mediaUrl: String?, image: UIImage?, videoThumbUrl: String? = nil, videoFilePath: String? = nil) {
         self.mediaUrl       = mediaUrl ?? UUID().uuidString
         self.image          = image
         self.videoThumbUrl  = videoThumbUrl
         self.videoFilePath  = videoFilePath
-        super.init(id: mediaUrl!)
+        self.isRemovable     = editable
+        super.init(id: self.mediaUrl!)
     }
 
     required init?(map: Map) {
         super.init(map: map)
-        self.id         = self.mediaUrl
+        self.id             = self.mediaUrl
     }
 
 }

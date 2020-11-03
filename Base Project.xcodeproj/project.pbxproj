@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		825BE7BABA0D3FF3105B3648 /* Pods_Base_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6B9E81A0CFE22B4ADECD82 /* Pods_Base_Project.framework */; };
 		C927034E254FE1B60078E58D /* BaseGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C927034D254FE1B60078E58D /* BaseGrid.swift */; };
+		C927035025503CAC0078E58D /* BlogCreateContentGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C927034F25503CAC0078E58D /* BlogCreateContentGrid.swift */; };
 		C92CD0072547FBC900FA7F1F /* BlogCreateEdit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */; };
 		C92CD0092547FBD600FA7F1F /* BlogCreateEdit_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */; };
 		C92CD00B2547FD0800FA7F1F /* BlogCreateImageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */; };
@@ -16,7 +17,7 @@
 		C92CD010254977B200FA7F1F /* SwivelNormalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD00F254977B200FA7F1F /* SwivelNormalTextView.swift */; };
 		C92CD0122549E16600FA7F1F /* BlogAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */; };
 		C92CD014254B1EBE00FA7F1F /* BaseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD013254B1EBE00FA7F1F /* BaseList.swift */; };
-		C92CD016254BEDB900FA7F1F /* BlogCreateEditGrid_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD015254BEDB900FA7F1F /* BlogCreateEditGrid_VM.swift */; };
+		C92CD016254BEDB900FA7F1F /* BlogCreateContentGridVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92CD015254BEDB900FA7F1F /* BlogCreateContentGridVM.swift */; };
 		C94EF758254057040090A28A /* SocialSignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF757254057040090A28A /* SocialSignInVM.swift */; };
 		C94EF75A254057620090A28A /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF759254057620090A28A /* FacebookSignIn.swift */; };
 		C94EF75C254058260090A28A /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75B254058260090A28A /* BaseButton.swift */; };
@@ -168,6 +169,7 @@
 		9809C38B0DE1015F0F88B8B8 /* Pods-Base Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base Project.debug.xcconfig"; path = "Target Support Files/Pods-Base Project/Pods-Base Project.debug.xcconfig"; sourceTree = "<group>"; };
 		A12940F0274178272B99317C /* Pods-Base Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base Project.release.xcconfig"; path = "Target Support Files/Pods-Base Project/Pods-Base Project.release.xcconfig"; sourceTree = "<group>"; };
 		C927034D254FE1B60078E58D /* BaseGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGrid.swift; sourceTree = "<group>"; };
+		C927034F25503CAC0078E58D /* BlogCreateContentGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateContentGrid.swift; sourceTree = "<group>"; };
 		C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateEdit_VC.swift; sourceTree = "<group>"; };
 		C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateEdit_VM.swift; sourceTree = "<group>"; };
 		C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateImageCVCell.swift; sourceTree = "<group>"; };
@@ -175,7 +177,7 @@
 		C92CD00F254977B200FA7F1F /* SwivelNormalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelNormalTextView.swift; sourceTree = "<group>"; };
 		C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogAPIProtocol.swift; sourceTree = "<group>"; };
 		C92CD013254B1EBE00FA7F1F /* BaseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseList.swift; sourceTree = "<group>"; };
-		C92CD015254BEDB900FA7F1F /* BlogCreateEditGrid_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateEditGrid_VM.swift; sourceTree = "<group>"; };
+		C92CD015254BEDB900FA7F1F /* BlogCreateContentGridVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCreateContentGridVM.swift; sourceTree = "<group>"; };
 		C94EF757254057040090A28A /* SocialSignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInVM.swift; sourceTree = "<group>"; };
 		C94EF759254057620090A28A /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
 		C94EF75B254058260090A28A /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -700,7 +702,8 @@
 				C9753F392545C3AA002B149A /* BlogFeed_VM.swift */,
 				C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */,
 				C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */,
-				C92CD015254BEDB900FA7F1F /* BlogCreateEditGrid_VM.swift */,
+				C92CD015254BEDB900FA7F1F /* BlogCreateContentGridVM.swift */,
+				C927034F25503CAC0078E58D /* BlogCreateContentGrid.swift */,
 			);
 			name = Blog;
 			sourceTree = "<group>";
@@ -1010,7 +1013,7 @@
 				C9E2AE5B250A39B4001F3961 /* LanguageSelection_VC.swift in Sources */,
 				C92CD0092547FBD600FA7F1F /* BlogCreateEdit_VM.swift in Sources */,
 				C964B07C25089C75009E998C /* BaseTVCell.swift in Sources */,
-				C92CD016254BEDB900FA7F1F /* BlogCreateEditGrid_VM.swift in Sources */,
+				C92CD016254BEDB900FA7F1F /* BlogCreateContentGridVM.swift in Sources */,
 				C964B01125064939009E998C /* BaseVM.swift in Sources */,
 				C9E2AE412508EDEC001F3961 /* FileAPIProtocol.swift in Sources */,
 				C9FA78A92538B00C006222CB /* ArrayDataType.swift in Sources */,
@@ -1115,6 +1118,7 @@
 				C964B06E25079CA3009E998C /* AppConfig.swift in Sources */,
 				C927034E254FE1B60078E58D /* BaseGrid.swift in Sources */,
 				C94EF758254057040090A28A /* SocialSignInVM.swift in Sources */,
+				C927035025503CAC0078E58D /* BlogCreateContentGrid.swift in Sources */,
 				C9753F352545C2F4002B149A /* BlogCoordinator.swift in Sources */,
 				C94EF75A254057620090A28A /* FacebookSignIn.swift in Sources */,
 				C95EF765252D70850016CC80 /* DynemicCollection_VM.swift in Sources */,

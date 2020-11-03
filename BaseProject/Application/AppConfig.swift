@@ -128,7 +128,8 @@ class AppConfig: NSObject, CLLocationManagerDelegate {
     }
     
     //MAEK: - Specific image names
-    let default_ImageName       = "icon_avatarPlaceHolder"
+    let defaultAvatar_ImageName = "icon_avatarPlaceHolder"
+    let default_ImageName       = "icon_defaultPlaceHolder"
     
     //MARK: - Colors
     //TODO: - Color palet should be properly implemented

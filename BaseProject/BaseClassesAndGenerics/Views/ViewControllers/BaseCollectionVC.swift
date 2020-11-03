@@ -109,22 +109,35 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
     
     func getCellLayout() -> UICollectionViewFlowLayout {
         let layout                                  = UICollectionViewFlowLayout()
-        layout.sectionInset                         = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        layout.headerReferenceSize                  = CGSize(width: collectionView.frame.width, height: getSectionHeaderHeight())
+        layout.sectionInset                         = getLayoutInsets().sides
+        layout.minimumLineSpacing                   = getLayoutInsets().lineSpacing
+        layout.minimumInteritemSpacing              = getLayoutInsets().interItemSpacing
         
         if shouldSetCellSize {
             layout.itemSize                         = getItemSize()
         } else {
             layout.estimatedItemSize                = getItemSize()
         }
-        layout.headerReferenceSize                  = CGSize(width: AppConfig.si.screenSize.width, height: 30)
-        layout.minimumLineSpacing                   = 8
-        layout.minimumInteritemSpacing              = 0
+        
         return layout
     }
-    
     func getItemSize() -> CGSize {
-        let sideSize                                : CGFloat = AppConfig.si.screenSize.width / 3
-        return CGSize(width: sideSize, height: sideSize)
+        let layoutGuide                             = getLayoutInsets()
+        let sides                                   = layoutGuide.sides.left + layoutGuide.sides.right
+        let totalInterItemSpacing                   = CGFloat(layoutGuide.columnsForRow - 1) * layoutGuide.interItemSpacing
+        let width                                   : CGFloat = (collectionView.frame.width - sides - totalInterItemSpacing) / CGFloat(layoutGuide.columnsForRow)
+        return CGSize(width: width, height: width * layoutGuide.widthToHeightPropotion)
+    }
+    func getLayoutInsets() -> (columnsForRow: Int, sides: UIEdgeInsets, lineSpacing: CGFloat, interItemSpacing: CGFloat, widthToHeightPropotion: CGFloat) {
+        return (columnsForRow: 3,
+                sides: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4),
+                lineSpacing: 8,
+                interItemSpacing: 8,
+                widthToHeightPropotion: 1)
+    }
+    func getSectionHeaderHeight() -> CGFloat {
+        return 0
     }
     // MARK: - setup cell for collection view without headers
     func setupCell(section: Int, row: Int, element: Model, cell: CollectionViewCell) {
@@ -227,6 +240,10 @@ class BaseGridWithHeadersVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>,
     }
     
     // MARK: - setup cell for table view with headers
+    override func getSectionHeaderHeight() -> CGFloat {
+        return 30
+    }
+    
     func setupCell(dataSource: CollectionViewSectionedDataSource<SectionOfCustomData<Model>>, collectionView: UICollectionView, indexPath: IndexPath, dataModel: Model) -> UICollectionViewCell {
         let cell                                = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CollectionViewCell.self), for: indexPath)
         

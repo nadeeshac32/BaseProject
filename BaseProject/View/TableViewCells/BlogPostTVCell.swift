@@ -100,7 +100,7 @@ class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
                 self?.likeBtn.tintColor         = self?.item?.isLiked == true ? AppConfig.si.colorPrimary : .darkGray
                 self?.isNetworkCallGoing        = false
             }) { [weak self] (error) in
-                (self?.delegate as? BlogDelegate)?.likeError(restError: error)
+                self?.blogDelegate?.likeError(restError: error)
                 self?.isNetworkCallGoing        = false
             }
         }
@@ -108,7 +108,7 @@ class BlogPostTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     
     @IBAction func shareBtnTapped(_ sender: Any) {
         if let item = self.item {
-            (delegate as? BlogDelegate)?.shareTappedFor(blog: item)
+            blogDelegate?.shareTappedFor(blog: item)
         }
     }
     

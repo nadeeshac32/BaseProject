@@ -15,8 +15,10 @@ protocol BaseGridDelagate: class {
     func getItemsLoadingText(_ collectionView: UICollectionView) -> String
     func getNoItemsText(_ collectionView: UICollectionView) -> String
     func getNoItemsImageName(_ collectionView: UICollectionView) -> String?
-    func getCellLayout(shouldSetCellSize: Bool) -> UICollectionViewFlowLayout
-    func getItemSize() -> CGSize
+    func getCellLayout(_ collectionView: UICollectionView, shouldSetCellSize: Bool) -> UICollectionViewFlowLayout
+    func getItemSize(_ collectionView: UICollectionView) -> CGSize
+    func getLayoutInsets() -> (columnsForRow: Int, sides: UIEdgeInsets, lineSpacing: CGFloat, interItemSpacing: CGFloat, widthToHeightPropotion: CGFloat)
+    func getSectionHeaderHeight() -> CGFloat
 }
 
 extension BaseGridDelagate {
@@ -30,24 +32,39 @@ extension BaseGridDelagate {
     func getNoItemsImageName(_ collectionView: UICollectionView) -> String? {
         return nil
     }
-    func getCellLayout(shouldSetCellSize: Bool) -> UICollectionViewFlowLayout {
+    func getCellLayout(_ collectionView: UICollectionView, shouldSetCellSize: Bool) -> UICollectionViewFlowLayout {
         let layout                                  = UICollectionViewFlowLayout()
-        layout.sectionInset                         = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        layout.headerReferenceSize                  = CGSize(width: collectionView.frame.width, height: getSectionHeaderHeight())
+        layout.sectionInset                         = getLayoutInsets().sides
+        layout.minimumLineSpacing                   = getLayoutInsets().lineSpacing
+        layout.minimumInteritemSpacing              = getLayoutInsets().interItemSpacing
         
         if shouldSetCellSize {
-            layout.itemSize                         = getItemSize()
+            layout.itemSize                         = getItemSize(collectionView)
         } else {
-            layout.estimatedItemSize                = getItemSize()
+            layout.estimatedItemSize                = getItemSize(collectionView)
         }
-        layout.estimatedItemSize                    = getItemSize()
-        layout.headerReferenceSize                  = CGSize(width: AppConfig.si.screenSize.width, height: 30)
-        layout.minimumLineSpacing                   = 8
-        layout.minimumInteritemSpacing              = 0
+        
         return layout
     }
-    func getItemSize() -> CGSize {
-        let sideSize                                : CGFloat = AppConfig.si.screenSize.width / 3
-        return CGSize(width: sideSize, height: sideSize)
+    func getItemSize(_ collectionView: UICollectionView) -> CGSize {
+        let layoutGuide                             = getLayoutInsets()
+        let sides                                   = layoutGuide.sides.left + layoutGuide.sides.right
+        let totalInterItemSpacing                   = CGFloat(layoutGuide.columnsForRow - 1) * layoutGuide.interItemSpacing
+        let width                                   : CGFloat = (collectionView.frame.width - sides - totalInterItemSpacing) / CGFloat(layoutGuide.columnsForRow)
+        return CGSize(width: width, height: width * layoutGuide.widthToHeightPropotion)
+    }
+    func getLayoutInsets() -> (columnsForRow: Int, sides: UIEdgeInsets, lineSpacing: CGFloat, interItemSpacing: CGFloat, widthToHeightPropotion: CGFloat) {
+        return (columnsForRow: 3,
+                sides: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4),
+                lineSpacing: 8,
+                interItemSpacing: 8,
+                widthToHeightPropotion: 1)
+    }
+    
+    /// Override this method if you're using section headers
+    func getSectionHeaderHeight() -> CGFloat {
+        return 0
     }
 }
 
@@ -73,7 +90,7 @@ class BaseCollection<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Collec
     
     /// If the CollectionViewCell UI is designed in xib file you can register it here.
     var cellLoadFromNib                             : Bool = false
-    var shouldSetCellSize                           : Bool = false
+    var shouldSetCellSize                           : Bool = true
     weak var delegate                               : BaseGridDelagate?
        
     let disposeBag                                  = DisposeBag()
@@ -85,7 +102,7 @@ class BaseCollection<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Collec
         self.collectionView                         = collectionView
         self.collectionView.backgroundColor         = UIColor.clear
         self.collectionView.bounces                 = false
-        if let layout = self.delegate?.getCellLayout(shouldSetCellSize: shouldSetCellSize) {
+        if let layout = self.delegate?.getCellLayout(collectionView, shouldSetCellSize: self.shouldSetCellSize) {
             self.collectionView.collectionViewLayout    = layout
         }
     }

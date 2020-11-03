@@ -20,7 +20,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     @IBOutlet weak var addLocationBtn                       : UIButton!
     
     @IBOutlet public weak var _imagesCV                     : UICollectionView!
-    var imageGrid                                           : BaseGridWithoutHeaders<Blog, BlogCreateEditGridVM, BlogCreateImageCVCell>?
+    var imageGrid                                           : BlogCreateContentGrid?
     
     @IBOutlet public weak var _scrollView                   : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!
@@ -29,8 +29,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     @IBOutlet public weak var _submitButton                 : UIButton!
     @IBOutlet public weak var _scrollViewBottomMargin       : NSLayoutConstraint!
     
-    override var scrollViewContentHeightWithouDynemicGap    : CGFloat { get { return 490 } set {} }
-
+    override var scrollViewContentHeightWithouDynemicGap    : CGFloat { get { return 660 } set {} }
     
     deinit { print("deinit BlogCreateEditVC") }
     
@@ -49,7 +48,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
         postItemsContainer.addBoarder(width: 1, cornerRadius: 5, color: .lightGray)
         
         if let imageGridViewModel = viewModel?.imageGridViewModel {
-            self.imageGrid                                  = BaseGridWithoutHeaders(viewModel: imageGridViewModel, collectionView: _imagesCV, delegate: self)
+            self.imageGrid                                  = BlogCreateContentGrid(viewModel: imageGridViewModel, collectionView: _imagesCV, delegate: self)
             imageGrid?.setupBindings()
         }
     }
@@ -75,12 +74,15 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
                     self?.presentImagePicker { [weak self] (image) in
                         if let image = image {
-                            self?.viewModel?.imagesSelected(image: [image])
+                            self?.viewModel?.contentSelected(content: [image])
                         }
                     }
                 }),
                 viewModel.showLocationPicker.subscribe(onNext: { [weak self] (_) in
                     self?.showLocationPicker()
+                }),
+                viewModel.enableImagePicker.subscribe(onNext: { (enable) in
+                    self.addPhotoBtn.isEnabled              = enable
                 }),
                 
                 // MARK: - Outputs
@@ -91,7 +93,6 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
             ])
         }
     }
-    
     
     func showLocationPicker() {
         let alertController         = UIAlertController(title: "Enter Location", message: "TODO: Add proper location picker", preferredStyle: .alert)
@@ -107,6 +108,10 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
-    
+}
+
+extension BlogCreateEditVC {
+    func getNoItemsText(_ collectionView: UICollectionView) -> String {
+        return "No content added"
+    }
 }

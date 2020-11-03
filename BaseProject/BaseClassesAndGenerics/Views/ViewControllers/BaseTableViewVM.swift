@@ -263,6 +263,39 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
         self.items.onNext(currentItems)
     }
     
+    /// Removing data from the data array
+    func removeExistingItems(items: [Model]) {
+        var currentItems: [Model]                   = []
+        do {
+            currentItems                            = try self.items.value()
+        } catch {
+            print("error: \(error)")
+        }
+        let updatedItems: [Model]                   = currentItems.filter { (existingItem) -> Bool in
+            return !items.contains(existingItem)
+        }
+        self.items.onNext(updatedItems)
+        
+        var currentSections                         : [SectionOfCustomData<Model>]   = []
+        do {
+            currentSections                         = try self.itemsWithHeaders.value()
+        } catch {
+            print("error: \(error)")
+        }
+        
+        var updatedSections                         : [SectionOfCustomData<Model>]   = []
+        for var currentSection in currentSections {
+            let updatedItems: [Model]               = currentSection.items.filter { (existingItem) -> Bool in
+                return !items.contains(existingItem)
+            }
+            currentSection.items                    = updatedItems
+            if updatedItems.count > 0 {
+                updatedSections.append(currentSection)
+            }
+        }
+        self.itemsWithHeaders.onNext(updatedSections)
+    }
+    
     /// Appending data to the data map in views with sections
     func addNewItems(items: [String: [Model]]) {
         let sections: [SectionOfCustomData<Model>]!

@@ -255,7 +255,7 @@ extension UIImage {
 }
 
 extension UIImageView {
-    func setImageWith(imagePath: String, defaultImage: UIImage? = nil, defaultImageName: String? = AppConfig.si.default_ImageName, ignoreCache: Bool? = false, completion: ((UIImage?) -> Void)?) {
+    func setImageWith(imagePath: String, defaultImage: UIImage? = nil, defaultImageName: String? = AppConfig.si.defaultAvatar_ImageName, ignoreCache: Bool? = false, completion: ((UIImage?) -> Void)?) {
         var image                               = defaultImage != nil ? defaultImage : UIImage(named: defaultImageName!)
         if let url = URL(string: imagePath), imagePath.range(of:"https") != nil {
             

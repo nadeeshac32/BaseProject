@@ -10,12 +10,15 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
+enum BlogCreateEditMode {
+    case edit, create
+}
 
-//class BlogCreateEditVM: BaseCollectionVM<BlogContent> {
 class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
 
     var blog                                            : Blog
-    var imageGridViewModel                              : BlogCreateEditGridVM?
+    var imageGridViewModel                              : BlogCreateContentGridVM?
+    var blogCreateEditMode                              : BlogCreateEditMode
     
     // MARK: - Inputs
     let addPhotosTapped                                 : AnyObserver<Void>
@@ -25,15 +28,17 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
     let showImagePicker                                 : Observable<Void>
     let showLocationPicker                              : Observable<Void>
     let updateWithLocation                              : Observable<(usernameString: NSAttributedString, isActiveLocationBtn: Bool)>
+    let enableImagePicker                               = BehaviorSubject<Bool>(value: false)
     
     deinit {
         print("deinit BlogCreateEditVM")
     }
     
-    init(blog: Blog) {
+    init(blog: Blog, blogCreateEditMode: BlogCreateEditMode = .create) {
         self.blog                                       = blog
+        self.blogCreateEditMode                         = blogCreateEditMode
         
-        updateWithLocation = blog._location.asObservable().map({ (location) -> (usernameString: NSAttributedString, isActiveLocationBtn: Bool) in
+        updateWithLocation                              = blog._location.asObservable().map({ (location) -> (usernameString: NSAttributedString, isActiveLocationBtn: Bool) in
             if location == "" {
                 let username                            = User.si.fullName ?? ""
                 let attributedString                    = NSMutableAttributedString(string: username)
@@ -60,18 +65,23 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         showLocationPicker                              = _addLocationTapped.asObservable()
         
         super.init()
-        imageGridViewModel                              = BlogCreateEditGridVM(dataSource: self)
+        imageGridViewModel                              = BlogCreateContentGridVM(dataSource: self)
         childViewModels.append(imageGridViewModel!)
+        let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, image: nil) }) ?? []
+        imageGridViewModel?.contentAdd(items: contentArray)
+        
+        enableImagePicker.onNext(blogCreateEditMode == .create)
     }
     
     func locationSelected(location: String?) {
         blog._location.onNext(location ?? "")
     }
     
-    func imagesSelected(image: [UIImage]) {
-        print("Images Selected")
+    func contentSelected(content: [UIImage]) {
+        guard self.blogCreateEditMode == .create else { return }
+        let contentArray = content.map({ BlogContent(editable: true, mediaUrl: nil, image: $0) })
+        imageGridViewModel?.contentAdd(items: contentArray)
     }
-    
     
     // MARK: - Network request
     override func performSubmitRequest() {

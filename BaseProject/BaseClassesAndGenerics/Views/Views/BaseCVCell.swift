@@ -83,7 +83,7 @@ class BaseCVSectionHeader: UICollectionReusableView {
         addSubview(label)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
+        label.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
         label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
         label.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
