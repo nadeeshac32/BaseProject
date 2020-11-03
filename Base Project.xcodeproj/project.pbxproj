@@ -414,10 +414,9 @@
 			children = (
 				C964AFFA25063171009E998C /* Application */,
 				C964B0032506323F009E998C /* Network */,
-				C964B0022506322D009E998C /* BaseClassesAndGenerics */,
 				C964B0012506321D009E998C /* View */,
 				C964B0002506320C009E998C /* Model */,
-				C964AFFF250631FF009E998C /* Utilities */,
+				C9CC086925516A6B00C86FE6 /* Common */,
 				C964AFFC250631D8009E998C /* Resources */,
 				C964AFFB250631CA009E998C /* SupportingFiles */,
 			);
@@ -472,14 +471,8 @@
 			isa = PBXGroup;
 			children = (
 				C9753F3F2546F508002B149A /* Blog */,
-				C9E2AE422508EE1B001F3961 /* Network */,
-				C9E2AE392508A643001F3961 /* Settings */,
-				C964B07125079DB3009E998C /* UserAuth.swift */,
-				C9E2AE76250A3E4B001F3961 /* User.swift */,
 				C964B07325079DDD009E998C /* PhoneContact.swift */,
-				C9E2AE472509F808001F3961 /* MobileNumber.swift */,
 				C9EC704B25146728007E183B /* Customer.swift */,
-				C9753F402546F614002B149A /* SwivelDate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -488,36 +481,35 @@
 			isa = PBXGroup;
 			children = (
 				C964B00825063316009E998C /* Coordinators */,
-				C964B0072506330A009E998C /* Common */,
-				C964B006250632A1009E998C /* Helpers */,
 				C964B00525063296009E998C /* TableViewCells */,
 				C964B00425063285009E998C /* StoryBoards */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		C964B0022506322D009E998C /* BaseClassesAndGenerics */ = {
+		C964B0022506322D009E998C /* Architectural */ = {
 			isa = PBXGroup;
 			children = (
 				C964B00B250637F7009E998C /* Coodinator */,
-				C964B00A250637EB009E998C /* Views */,
+				C964B00D250640CC009E998C /* ViewControllers */,
+				C964B02825064AEE009E998C /* Views */,
 				C964B00925063363009E998C /* Models */,
 			);
-			path = BaseClassesAndGenerics;
+			path = Architectural;
 			sourceTree = "<group>";
 		};
 		C964B0032506323F009E998C /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				C964B00C25063804009E998C /* APIProtocols */,
+				C9DB8F002537039B00351DAE /* RequestInterceptor.swift */,
 				C964B07725079EFA009E998C /* RestClientError.swift */,
+				C964B07925079F19009E998C /* HTTPService.swift */,
 				C9FA78AE25399998006222CB /* GeneralEmptyResponse.swift */,
 				C971C1FA2535E85F002F4394 /* GeneralObjectResponse.swift */,
 				C9FA78AA2538B2E6006222CB /* GeneralAuthResponse.swift */,
 				C9FA78A6253855A9006222CB /* GeneralArrayResponse.swift */,
 				C9FA78A82538B00C006222CB /* ArrayDataType.swift */,
-				C9DB8F002537039B00351DAE /* RequestInterceptor.swift */,
-				C964B07925079F19009E998C /* HTTPService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -557,11 +549,12 @@
 				C964B06725079C22009E998C /* SwivelUIMaker.swift */,
 				C964B06925079C3B009E998C /* LoadingViewable.swift */,
 				C964B06B25079C55009E998C /* CustomMessageMaker.swift */,
+				C9E2AE392508A643001F3961 /* Settings */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		C964B0072506330A009E998C /* Common */ = {
+		C964B0072506330A009E998C /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				C97E25C5253D751100E95C69 /* SocialSignIn */,
@@ -571,7 +564,7 @@
 				C964B04C2507927A009E998C /* SwivelCustomTextFields */,
 				C92CD00E2549778300FA7F1F /* SwivelCustomTextView */,
 			);
-			path = Common;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C964B00825063316009E998C /* Coordinators */ = {
@@ -591,15 +584,6 @@
 				C964B00E250647FF009E998C /* BaseModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		C964B00A250637EB009E998C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C964B02825064AEE009E998C /* Views */,
-				C964B00D250640CC009E998C /* ViewControllers */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		C964B00B250637F7009E998C /* Coodinator */ = {
@@ -625,8 +609,8 @@
 		C964B00D250640CC009E998C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C964B0452507907F009E998C /* ManuTabBar+ManuTabBarController */,
-				C964B03E25078F70009E998C /* BottomTabBarController */,
+				C964B0452507907F009E998C /* BaseManuTabBarController+ManuTabBar */,
+				C964B03E25078F70009E998C /* BaseBottomTabBarController */,
 				C964B018250649F1009E998C /* BaseSuperVC.swift */,
 				C964B01A25064A0F009E998C /* BaseVC.swift */,
 				C964B01025064939009E998C /* BaseVM.swift */,
@@ -643,11 +627,11 @@
 		C964B02825064AEE009E998C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C964B02925064AF7009E998C /* BaseScrollView.swift */,
 				C92CD013254B1EBE00FA7F1F /* BaseList.swift */,
-				C927034D254FE1B60078E58D /* BaseGrid.swift */,
 				C964B07B25089C75009E998C /* BaseTVCell.swift */,
+				C927034D254FE1B60078E58D /* BaseGrid.swift */,
 				C9A793362521B4CD00430872 /* BaseCVCell.swift */,
+				C964B02925064AF7009E998C /* BaseScrollView.swift */,
 				C94EF75B254058260090A28A /* BaseButton.swift */,
 				C964B02B25064B12009E998C /* AnimateTextField.swift */,
 				C964B02F25064B49009E998C /* GenericView.swift */,
@@ -658,17 +642,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C964B03E25078F70009E998C /* BottomTabBarController */ = {
+		C964B03E25078F70009E998C /* BaseBottomTabBarController */ = {
 			isa = PBXGroup;
 			children = (
 				C964B03F25078FF7009E998C /* SwivelTabBarItem.swift */,
 				C964B04125079016009E998C /* SwivelTabBar.swift */,
 				C964B04325079033009E998C /* SwivelTabBarController.swift */,
 			);
-			path = BottomTabBarController;
+			path = BaseBottomTabBarController;
 			sourceTree = "<group>";
 		};
-		C964B0452507907F009E998C /* ManuTabBar+ManuTabBarController */ = {
+		C964B0452507907F009E998C /* BaseManuTabBarController+ManuTabBar */ = {
 			isa = PBXGroup;
 			children = (
 				C964B04A25079104009E998C /* SwivelPageViewController.swift */,
@@ -679,7 +663,7 @@
 				C9EC703F251376A6007E183B /* SwivelManuTabCell_Underline.swift */,
 				C9EC704125138833007E183B /* SwivelManuTabCell_Circle.swift */,
 			);
-			path = "ManuTabBar+ManuTabBarController";
+			path = "BaseManuTabBarController+ManuTabBar";
 			sourceTree = "<group>";
 		};
 		C964B04C2507927A009E998C /* SwivelCustomTextFields */ = {
@@ -757,6 +741,26 @@
 			path = SwivelDocumentPicker;
 			sourceTree = "<group>";
 		};
+		C9CC086925516A6B00C86FE6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C964B0072506330A009E998C /* Components */,
+				C964B0022506322D009E998C /* Architectural */,
+				C964B006250632A1009E998C /* Helpers */,
+				C9CC086A25516D9E00C86FE6 /* GeneralReusableModel */,
+				C964AFFF250631FF009E998C /* Utilities */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C9CC086A25516D9E00C86FE6 /* GeneralReusableModel */ = {
+			isa = PBXGroup;
+			children = (
+				C9E2AE422508EE1B001F3961 /* Network */,
+			);
+			path = GeneralReusableModel;
+			sourceTree = "<group>";
+		};
 		C9E2AE392508A643001F3961 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +774,10 @@
 		C9E2AE422508EE1B001F3961 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C9E2AE472509F808001F3961 /* MobileNumber.swift */,
+				C9753F402546F614002B149A /* SwivelDate.swift */,
+				C9E2AE76250A3E4B001F3961 /* User.swift */,
+				C964B07125079DB3009E998C /* UserAuth.swift */,
 				C9E2AE432508EE25001F3961 /* ImagePostData.swift */,
 				C9E2AE78250A3E70001F3961 /* UserPostData.swift */,
 			);

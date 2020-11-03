@@ -17,7 +17,7 @@ final class SwivelImagePickerController: UIImagePickerController {
     weak var imagePickerDelegate: SwivelImagePickerControllerDelegate?
     
     deinit {
-        print("deinit NCImagePickerController")
+        print("deinit SwivelImagePickerController")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
