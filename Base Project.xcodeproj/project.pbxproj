@@ -87,17 +87,17 @@
 		C964B07A25079F19009E998C /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B07925079F19009E998C /* HTTPService.swift */; };
 		C964B07C25089C75009E998C /* BaseTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C964B07B25089C75009E998C /* BaseTVCell.swift */; };
 		C971C1FB2535E85F002F4394 /* GeneralObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C971C1FA2535E85F002F4394 /* GeneralObjectResponse.swift */; };
+		C97490E825519CD000EE607E /* BlogTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490E625519CD000EE607E /* BlogTVCell.swift */; };
+		C97490E925519CD000EE607E /* BlogTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C97490E725519CD000EE607E /* BlogTVCell.xib */; };
 		C9753F352545C2F4002B149A /* BlogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F342545C2F4002B149A /* BlogCoordinator.swift */; };
 		C9753F382545C352002B149A /* BlogFeed_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F372545C352002B149A /* BlogFeed_VC.swift */; };
 		C9753F3A2545C3AA002B149A /* BlogFeed_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F392545C3AA002B149A /* BlogFeed_VM.swift */; };
 		C9753F3C2545D185002B149A /* BlogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F3B2545D185002B149A /* BlogRepository.swift */; };
-		C9753F3E2545EE68002B149A /* BlogPostTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F3D2545EE68002B149A /* BlogPostTVCell.swift */; };
 		C9753F412546F614002B149A /* SwivelDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F402546F614002B149A /* SwivelDate.swift */; };
 		C9753F432546F678002B149A /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F422546F678002B149A /* Owner.swift */; };
 		C9753F452546F700002B149A /* Blog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F442546F700002B149A /* Blog.swift */; };
 		C97E25C7253D752E00E95C69 /* GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97E25C6253D752E00E95C69 /* GoogleSignIn.swift */; };
 		C97E25C9253D927600E95C69 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = C97E25C8253D927600E95C69 /* credentials.plist */; };
-		C97EFB49254C060900CAC361 /* BlogTempTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97EFB48254C060900CAC361 /* BlogTempTVCell.swift */; };
 		C9A3956E250BB61700FEE5DA /* SwivelDocumentViewerPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A3956D250BB61700FEE5DA /* SwivelDocumentViewerPresenting.swift */; };
 		C9A39573250BB69300FEE5DA /* SwivelDocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A39572250BB69300FEE5DA /* SwivelDocumentPicker.swift */; };
 		C9A39575250BB6A300FEE5DA /* SwivelDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A39574250BB6A300FEE5DA /* SwivelDocument.swift */; };
@@ -249,17 +249,17 @@
 		C964B07925079F19009E998C /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		C964B07B25089C75009E998C /* BaseTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTVCell.swift; sourceTree = "<group>"; };
 		C971C1FA2535E85F002F4394 /* GeneralObjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralObjectResponse.swift; sourceTree = "<group>"; };
+		C97490E625519CD000EE607E /* BlogTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogTVCell.swift; sourceTree = "<group>"; };
+		C97490E725519CD000EE607E /* BlogTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlogTVCell.xib; sourceTree = "<group>"; };
 		C9753F342545C2F4002B149A /* BlogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCoordinator.swift; sourceTree = "<group>"; };
 		C9753F372545C352002B149A /* BlogFeed_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogFeed_VC.swift; sourceTree = "<group>"; };
 		C9753F392545C3AA002B149A /* BlogFeed_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogFeed_VM.swift; sourceTree = "<group>"; };
 		C9753F3B2545D185002B149A /* BlogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogRepository.swift; sourceTree = "<group>"; };
-		C9753F3D2545EE68002B149A /* BlogPostTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostTVCell.swift; sourceTree = "<group>"; };
 		C9753F402546F614002B149A /* SwivelDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelDate.swift; sourceTree = "<group>"; };
 		C9753F422546F678002B149A /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		C9753F442546F700002B149A /* Blog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blog.swift; sourceTree = "<group>"; };
 		C97E25C6253D752E00E95C69 /* GoogleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignIn.swift; sourceTree = "<group>"; };
 		C97E25C8253D927600E95C69 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
-		C97EFB48254C060900CAC361 /* BlogTempTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogTempTVCell.swift; sourceTree = "<group>"; };
 		C9A3956D250BB61700FEE5DA /* SwivelDocumentViewerPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelDocumentViewerPresenting.swift; sourceTree = "<group>"; };
 		C9A39572250BB69300FEE5DA /* SwivelDocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelDocumentPicker.swift; sourceTree = "<group>"; };
 		C9A39574250BB6A300FEE5DA /* SwivelDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelDocument.swift; sourceTree = "<group>"; };
@@ -535,9 +535,9 @@
 				C95EF76B252DA2690016CC80 /* ContactTVCell.xib */,
 				C95EF76E252DA2F00016CC80 /* ContactCVCell.swift */,
 				C95EF76F252DA2F00016CC80 /* ContactCVCell.xib */,
-				C9753F3D2545EE68002B149A /* BlogPostTVCell.swift */,
+				C97490E625519CD000EE607E /* BlogTVCell.swift */,
+				C97490E725519CD000EE607E /* BlogTVCell.xib */,
 				C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */,
-				C97EFB48254C060900CAC361 /* BlogTempTVCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -919,6 +919,7 @@
 				C964AFF325061395009E998C /* LaunchScreen.storyboard in Resources */,
 				C9EC705425148CA0007E183B /* Example.storyboard in Resources */,
 				C9EC703E25132DC8007E183B /* Common.storyboard in Resources */,
+				C97490E925519CD000EE607E /* BlogTVCell.xib in Resources */,
 				C9E2AE4A2509FAAA001F3961 /* Configuration.plist in Resources */,
 				C964AFF025061395009E998C /* Assets.xcassets in Resources */,
 				C97E25C9253D927600E95C69 /* credentials.plist in Resources */,
@@ -996,7 +997,6 @@
 				C9E2AE69250A3A99001F3961 /* Signin_VC.swift in Sources */,
 				C9EC704C25146728007E183B /* Customer.swift in Sources */,
 				C9EC704225138833007E183B /* SwivelManuTabCell_Circle.swift in Sources */,
-				C97EFB49254C060900CAC361 /* BlogTempTVCell.swift in Sources */,
 				C9E2AE59250A3997001F3961 /* LanguageSelection_VM.swift in Sources */,
 				C9E2AE61250A3A02001F3961 /* Signup_VM.swift in Sources */,
 				C964B03025064B49009E998C /* GenericView.swift in Sources */,
@@ -1117,10 +1117,10 @@
 				C9EC7040251376A6007E183B /* SwivelManuTabCell_Underline.swift in Sources */,
 				C964B07825079EFA009E998C /* RestClientError.swift in Sources */,
 				C95EF767252D70BF0016CC80 /* DynemicCollection_VC.swift in Sources */,
+				C97490E825519CD000EE607E /* BlogTVCell.swift in Sources */,
 				C964B06C25079C55009E998C /* CustomMessageMaker.swift in Sources */,
 				C964B02325064A66009E998C /* BaseTableViewVC.swift in Sources */,
 				C92CD010254977B200FA7F1F /* SwivelNormalTextView.swift in Sources */,
-				C9753F3E2545EE68002B149A /* BlogPostTVCell.swift in Sources */,
 				C9A793372521B4CD00430872 /* BaseCVCell.swift in Sources */,
 				C9E2AE7D250A3FBD001F3961 /* UpdateUserEmail_VC.swift in Sources */,
 				C964B06E25079CA3009E998C /* AppConfig.swift in Sources */,

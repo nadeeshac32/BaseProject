@@ -19,7 +19,6 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     @IBOutlet weak var postItemsContainer                   : UIView!
     @IBOutlet weak var addPhotoBtn                          : UIButton!
     @IBOutlet weak var addLocationBtn                       : UIButton!
-    
     @IBOutlet public weak var _contentCV                    : UICollectionView!
     var contentGrid                                         : BlogCreateContentGrid?
     
@@ -73,26 +72,22 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
                     self?.navigationController?.navigationBar.topItem?.titleView    = nil
                 }),
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
-                    //  self?.viewModel?.contentSelected(content: [image])
-                    
                     let viewController = TLPhotosPickerViewController(withTLPHAssets: { [weak self] (assets) in // TLAssets
-                        
-                        
-                        //  self?.selectedAssets = assets
+                        //  self?.viewModel?.contentSelected(content: [image])
                         print("assets selected: \(assets.count)")
                     }, didCancel: nil)
-                    viewController.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-                        print("exceed max selection")
-                    }
-                    viewController.handleNoAlbumPermissions = { [weak self] (picker) in
-                        print("handle denied albums permissions case")
-                    }
-                    viewController.handleNoCameraPermissions = { [weak self] (picker) in
-                        print("handle denied camera permissions case")
-                    }
+                    //  viewController.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+                    //    print("exceed max selection")
+                    //  }
+                    //  viewController.handleNoAlbumPermissions = { [weak self] (picker) in
+                    //    print("handle denied albums permissions case")
+                    //  }
+                    //  viewController.handleNoCameraPermissions = { [weak self] (picker) in
+                    //    print("handle denied camera permissions case")
+                    //  }
                     //  viewController.selectedAssets = self.selectedAssets
                     var configure = TLPhotosPickerConfigure()
-                    configure.maxSelectedAssets = 3
+                    configure.maxSelectedAssets = 10
                     viewController.configure = configure
                     self?.present(viewController, animated: true, completion: nil)
                 }),

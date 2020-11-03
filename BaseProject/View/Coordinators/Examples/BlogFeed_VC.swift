@@ -9,10 +9,11 @@
 import UIKit
 import RxDataSources
 
-class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogPostTVCell> {
+class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogTVCell> {
 
     @IBOutlet weak var _tableView                               : UITableView!
     override var shouldSetRowHeight                             : Bool { get { return false } set {} }
+    override var cellLoadFromNib                                : Bool { get { return true } set {} }
     
     var customRightButton                                       = SwivelUIMaker.makeButtonWith(text: "Add", width: 100)
     var customLeftButton                                        = SwivelUIMaker.makeButtonWith(text: "Logout", width: 100)
@@ -28,7 +29,7 @@ class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogPostTVCell> {
     }
     
     override func getCellHeight() -> CGFloat {
-        return 435
+        return 458
     }
     
     override func setupBindings() {
@@ -72,5 +73,9 @@ extension BlogFeedVC: BlogDelegate {
     
     func shareTappedFor(blog: Blog) {
         viewModel?.shareBlogHasTapped.onNext(blog)
+    }
+    
+    func commentTappedFor(blog: Blog) {
+        viewModel?.doWithSelectedItem.onNext(blog)
     }
 }

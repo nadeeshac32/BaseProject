@@ -27,7 +27,7 @@ class BaseTableViewVC<Model:BaseModel, ViewModel: BaseTableViewVM<Model>, TableV
     var multiSelectable                         : Bool = false
     
     /// If the TableViewCell UI is designed in xib file you can register it here.
-    var cellLoadFromNib: Bool = false
+    var cellLoadFromNib                         : Bool = false
     
     /// Bind the actual UI Outlets with the Base class variables.
     /// - Note: Because from the subclass, IBOutlets cannot be made directly to Base class variables.
