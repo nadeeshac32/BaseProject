@@ -6,9 +6,10 @@ This project can be used as a Base Project which can be extended and implement o
 
 
 ## Architectural components
-- [x] Base MVVM-Coodinator architecture
-- [x] Base List view & Base Grid view that adopts to Base MVVM architecture
-- [x] Both Base Grid view & Base Grid view supports,
+- [x] Base MVVM-Coodinator architecture.
+- [x] Base Table view controller & Base Collection view controller that adopts to Base MVVM architecture.
+- [x] Base Grid & Base List - Allow us to have multiple Table views / Collections views in one View Controller.
+- [x] All the Base Grid view, Base List view, Base Table View Controller and Base Collection View Controller supports,
   - API Pagination,
   - Static data loading,
   - Search,
@@ -41,9 +42,9 @@ This project can be used as a Base Project which can be extended and implement o
 
 
  ## Running Xcode Project and General changes
- - Open the project(.xcworkspace file) in Xcode
- - Select Environment: Go to Project(Tokobook) -> Tokobook -> Application -> AppConfig.swift (line 45) -> Change environment which you want to run (.prod / .dev / .qa)
- - Now you can simply run the project in simulator
+ - Open the project(.xcworkspace file) in Xcode.
+ - Select Environment: Go to Project(Tokobook) -> Tokobook -> Application -> AppConfig.swift (line 45) -> Change environment which you want to run (.prod / .dev / .qa).
+ - Now you can simply run the project in simulator.
   
   
 ## Project Architecture and Related details
@@ -52,8 +53,8 @@ Specifics                 | Details
 --------------------------|------------------------------------------------------------------------
 | Architecture - MVVM-C   | Used RxSwift to bind View and ViewModel. Coodinator are responsible for navigation flow
 | Networking - Alamofire  | `Network` folder -<br/>- `Network\HTTPService.swift` <br/>- `Network\APIProtocols` folder - All the protocols are implemented in `HTTPService.swift` <br/>
-| Base classes            | `BaseClassesAndGenerics` folder - All the base & generic classes reside within this folder. All the other classes are inherited from the classes which are within this folder.
-| Models                  | `Models` folder - All the models used by the app reside within this folder. Almost all the models which are consumed by the Network Services are extending `BaseModel` class.
+| Base classes            | `Common/Components`, `Common/Architectural` folders - All the base & generic classes & Common components reside within this folder. All the other classes are inherited from the classes which are within this folders
+| Models                  | `Models` folder - All the models used by the app reside within this folder. Almost all the models which are consumed by the Network Services are extending `BaseModel` class
 | Views                   | `Views` folder - All the UI elements reside within this folder. (Storyboards, ViewControllers, ViewModels, Common Reusable components, TableView Cells)
 | App Config         	    | Used a simple Singleton class to keep the configuration parameters. All the values that are used by AppConfig are stored in `Configuration.plist`
 
