@@ -1,5 +1,5 @@
 //
-//  ManuTabBar_VC.swift
+//  ManuTabBarWithListsGrids_VC.swift
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/18/20.
@@ -9,20 +9,21 @@
 import UIKit
 import RxSwift
 
-class ManuTabBarWithListsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Underline> {
+class ManuTabBarWithListsGridsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Underline> {
     
     @IBOutlet weak var _menuBarView                             : UIView!
     
     var navBar                                                  : UINavigationBar?
-    var addCustomerBtn                                          = SwivelUIMaker.makeButtonWith(imageName: "icon_addContact")
     var menuTabs                                                : [BaseMenuTabProtocol] = [NonDynemicListVC]()
     
     deinit {
-        print("deinit ManuTabBarWithListsVC")
+        print("deinit ManuTabBarWithListsGridsVC")
     }
     
     var nonDynemicListVM                                        : NonDynemicListVM?
     var dynemicListVM                                           : DynemicListVM?
+    var nonDynemicGridVM                                        : NonDynemicCollectionVM?
+    var dynemicGridVM                                           : DynemicCollectionVM?
     
     // MARK: - Overrides
     override func customiseView() {
@@ -40,6 +41,14 @@ class ManuTabBarWithListsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Underline>
             print("pass to the `ManuTabBarVM` viewmodel")
         }).disposed(by: disposeBag)
         menuTabs.append(dynemicListVC)
+        
+        nonDynemicGridVM                                        = NonDynemicCollectionVM()
+        let nonDynemicGridVC                                    = NonDynemicCollectionVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: nonDynemicGridVM!)
+        menuTabs.append(nonDynemicGridVC)
+        
+        dynemicGridVM                                           = DynemicCollectionVM()
+        let dynemicGridVC                                       = DynemicCollectionVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: dynemicGridVM!)
+        menuTabs.append(dynemicGridVC)
                 
         super.customiseView(menuBarView: _menuBarView)
     }
@@ -64,8 +73,12 @@ class ManuTabBarWithListsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Underline>
     }
     
     override func getTabNames() -> [MenuTabCellAttributes] {
-        return [MenuTabCellAttributes(title: "List Static", titleColor: AppConfig.si.colorPrimary, highLighter: AppConfig.si.colorPrimary),
-                MenuTabCellAttributes(title: "List Dynemic", titleColor: AppConfig.si.colorPrimary, highLighter: AppConfig.si.colorPrimary)]
+        return [
+            MenuTabCellAttributes(title: "List Static", titleColor: AppConfig.si.colorPrimary, highLighter: AppConfig.si.colorPrimary),
+            MenuTabCellAttributes(title: "List Dynemic", titleColor: AppConfig.si.colorPrimary, highLighter: AppConfig.si.colorPrimary),
+            MenuTabCellAttributes(title: "Non Dynemic Grid", titleColor: AppConfig.si.colorPrimary, highLighter: AppConfig.si.colorPrimary),
+            MenuTabCellAttributes(title: "Dynemic Grid", titleColor: AppConfig.si.colorPrimary, highLighter: AppConfig.si.colorPrimary)
+        ]
     }
     
     override func getMenuTabViewControllerFor(index: Int) -> BaseMenuTabProtocol? {
@@ -77,8 +90,8 @@ class ManuTabBarWithListsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Underline>
     func setupTitleView() {
         self.navBar                                             = self.navigationController?.navigationBar
         self.navBar?.topItem?.titleView                         = nil
-        self.navBar?.topItem?.title                             = "List Views"
-        self.navBar?.topItem?.rightBarButtonItem                = UIBarButtonItem(customView: addCustomerBtn)
+        self.navBar?.topItem?.title                             = "List & Grids"
+        self.removeRightButton()
         self.removeLeftButton()
     }
     

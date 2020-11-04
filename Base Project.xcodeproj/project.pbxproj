@@ -24,9 +24,7 @@
 		C94EF75E254058AB0090A28A /* SwivelFBLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75D254058AB0090A28A /* SwivelFBLoginButton.swift */; };
 		C94EF760254093A60090A28A /* SocialSignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75F254093A60090A28A /* SocialSignInVC.swift */; };
 		C95EF758252ACF640016CC80 /* CustomerContactCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF757252ACF640016CC80 /* CustomerContactCVCell.swift */; };
-		C95EF75F252D6CCD0016CC80 /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF75E252D6CCD0016CC80 /* ListCoordinator.swift */; };
-		C95EF761252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF760252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift */; };
-		C95EF763252D6F2C0016CC80 /* GridCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF762252D6F2C0016CC80 /* GridCoordinator.swift */; };
+		C95EF75F252D6CCD0016CC80 /* ListGridCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF75E252D6CCD0016CC80 /* ListGridCoordinator.swift */; };
 		C95EF765252D70850016CC80 /* DynemicCollection_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF764252D70850016CC80 /* DynemicCollection_VM.swift */; };
 		C95EF767252D70BF0016CC80 /* DynemicCollection_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF766252D70BF0016CC80 /* DynemicCollection_VC.swift */; };
 		C95EF76C252DA2690016CC80 /* ContactTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95EF76A252DA2690016CC80 /* ContactTVCell.swift */; };
@@ -148,7 +146,7 @@
 		C9EC703E25132DC8007E183B /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9EC703D25132DC8007E183B /* Common.storyboard */; };
 		C9EC7040251376A6007E183B /* SwivelManuTabCell_Underline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC703F251376A6007E183B /* SwivelManuTabCell_Underline.swift */; };
 		C9EC704225138833007E183B /* SwivelManuTabCell_Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC704125138833007E183B /* SwivelManuTabCell_Circle.swift */; };
-		C9EC70442514622F007E183B /* ManuTabBarWithLists_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC70432514622F007E183B /* ManuTabBarWithLists_VC.swift */; };
+		C9EC70442514622F007E183B /* ManuTabBarWithListsGrids_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC70432514622F007E183B /* ManuTabBarWithListsGrids_VC.swift */; };
 		C9EC7048251466CC007E183B /* NonDynemicList_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC7047251466CC007E183B /* NonDynemicList_VC.swift */; };
 		C9EC704A251466D8007E183B /* NonDynemicList_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC7049251466D8007E183B /* NonDynemicList_VM.swift */; };
 		C9EC704C25146728007E183B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC704B25146728007E183B /* Customer.swift */; };
@@ -184,9 +182,7 @@
 		C94EF75D254058AB0090A28A /* SwivelFBLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelFBLoginButton.swift; sourceTree = "<group>"; };
 		C94EF75F254093A60090A28A /* SocialSignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInVC.swift; sourceTree = "<group>"; };
 		C95EF757252ACF640016CC80 /* CustomerContactCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerContactCVCell.swift; sourceTree = "<group>"; };
-		C95EF75E252D6CCD0016CC80 /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
-		C95EF760252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabBarWithGrids_VC.swift; sourceTree = "<group>"; };
-		C95EF762252D6F2C0016CC80 /* GridCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCoordinator.swift; sourceTree = "<group>"; };
+		C95EF75E252D6CCD0016CC80 /* ListGridCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGridCoordinator.swift; sourceTree = "<group>"; };
 		C95EF764252D70850016CC80 /* DynemicCollection_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynemicCollection_VM.swift; sourceTree = "<group>"; };
 		C95EF766252D70BF0016CC80 /* DynemicCollection_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynemicCollection_VC.swift; sourceTree = "<group>"; };
 		C95EF76A252DA2690016CC80 /* ContactTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTVCell.swift; sourceTree = "<group>"; };
@@ -310,7 +306,7 @@
 		C9EC703D25132DC8007E183B /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		C9EC703F251376A6007E183B /* SwivelManuTabCell_Underline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelManuTabCell_Underline.swift; sourceTree = "<group>"; };
 		C9EC704125138833007E183B /* SwivelManuTabCell_Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelManuTabCell_Circle.swift; sourceTree = "<group>"; };
-		C9EC70432514622F007E183B /* ManuTabBarWithLists_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManuTabBarWithLists_VC.swift; sourceTree = "<group>"; };
+		C9EC70432514622F007E183B /* ManuTabBarWithListsGrids_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManuTabBarWithListsGrids_VC.swift; sourceTree = "<group>"; };
 		C9EC7047251466CC007E183B /* NonDynemicList_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDynemicList_VC.swift; sourceTree = "<group>"; };
 		C9EC7049251466D8007E183B /* NonDynemicList_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDynemicList_VM.swift; sourceTree = "<group>"; };
 		C9EC704B25146728007E183B /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -357,38 +353,28 @@
 			children = (
 				C9E2AE6C250A3AC3001F3961 /* BottomTabBar_VC.swift */,
 				C9E2AE6E250A3ADD001F3961 /* BottomTabBar_VM.swift */,
-				C95EF768252D9F6D0016CC80 /* Lists */,
-				C95EF769252D9F8D0016CC80 /* Grids */,
+				C95EF768252D9F6D0016CC80 /* Lists&Grids */,
 				C9753F362545C30B002B149A /* Blog */,
 				C9E2AE7A250A3F9E001F3961 /* ProfileCoordinator */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
 		};
-		C95EF768252D9F6D0016CC80 /* Lists */ = {
+		C95EF768252D9F6D0016CC80 /* Lists&Grids */ = {
 			isa = PBXGroup;
 			children = (
-				C95EF75E252D6CCD0016CC80 /* ListCoordinator.swift */,
-				C9EC70432514622F007E183B /* ManuTabBarWithLists_VC.swift */,
+				C95EF75E252D6CCD0016CC80 /* ListGridCoordinator.swift */,
+				C9EC70432514622F007E183B /* ManuTabBarWithListsGrids_VC.swift */,
 				C9EC7047251466CC007E183B /* NonDynemicList_VC.swift */,
 				C9EC7049251466D8007E183B /* NonDynemicList_VM.swift */,
 				C9EC705125147146007E183B /* DynemicList_VC.swift */,
 				C9EC704F25147135007E183B /* DynemicList_VM.swift */,
-			);
-			name = Lists;
-			sourceTree = "<group>";
-		};
-		C95EF769252D9F8D0016CC80 /* Grids */ = {
-			isa = PBXGroup;
-			children = (
-				C95EF762252D6F2C0016CC80 /* GridCoordinator.swift */,
-				C95EF760252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift */,
 				C9A7932E2521B2AF00430872 /* NonDynemicCollection_VC.swift */,
 				C9A793302521B2BD00430872 /* NonDynemicCollection_VM.swift */,
 				C95EF766252D70BF0016CC80 /* DynemicCollection_VC.swift */,
 				C95EF764252D70850016CC80 /* DynemicCollection_VM.swift */,
 			);
-			name = Grids;
+			name = "Lists&Grids";
 			sourceTree = "<group>";
 		};
 		C964AFDA25061394009E998C = {
@@ -1004,7 +990,6 @@
 				C964B06825079C22009E998C /* SwivelUIMaker.swift in Sources */,
 				C9A39573250BB69300FEE5DA /* SwivelDocumentPicker.swift in Sources */,
 				C9A793332521B33400430872 /* BaseCollectionVC.swift in Sources */,
-				C95EF763252D6F2C0016CC80 /* GridCoordinator.swift in Sources */,
 				C9E2AE71250A3AF0001F3961 /* AlertPopoverVC.swift in Sources */,
 				C9A793312521B2BD00430872 /* NonDynemicCollection_VM.swift in Sources */,
 				C964B03C25064BFD009E998C /* StoryboardInitializable.swift in Sources */,
@@ -1013,7 +998,7 @@
 				C9EC705225147146007E183B /* DynemicList_VC.swift in Sources */,
 				C9E2AE79250A3E70001F3961 /* UserPostData.swift in Sources */,
 				C9E2AE83250A401E001F3961 /* UpdateUserMobile_VM.swift in Sources */,
-				C95EF75F252D6CCD0016CC80 /* ListCoordinator.swift in Sources */,
+				C95EF75F252D6CCD0016CC80 /* ListGridCoordinator.swift in Sources */,
 				C94EF760254093A60090A28A /* SocialSignInVC.swift in Sources */,
 				C964B01325064963009E998C /* BaseFormVM.swift in Sources */,
 				C9A3956E250BB61700FEE5DA /* SwivelDocumentViewerPresenting.swift in Sources */,
@@ -1059,7 +1044,6 @@
 				C97E25C7253D752E00E95C69 /* GoogleSignIn.swift in Sources */,
 				C9E2AE63250A3A16001F3961 /* OTPVerification_VC.swift in Sources */,
 				C9753F412546F614002B149A /* SwivelDate.swift in Sources */,
-				C95EF761252D6EE40016CC80 /* MenuTabBarWithGrids_VC.swift in Sources */,
 				C964B05C25079B68009E998C /* ReactiveExtensiones.swift in Sources */,
 				C964B05425079489009E998C /* SwivelMaxCharachtersTextField.swift in Sources */,
 				C94EF75C254058260090A28A /* BaseButton.swift in Sources */,
@@ -1071,7 +1055,7 @@
 				C92CD0072547FBC900FA7F1F /* BlogCreateEdit_VC.swift in Sources */,
 				C92CD00B2547FD0800FA7F1F /* BlogCreateImageCVCell.swift in Sources */,
 				C9E2AE51250A3940001F3961 /* Onboarding_VC.swift in Sources */,
-				C9EC70442514622F007E183B /* ManuTabBarWithLists_VC.swift in Sources */,
+				C9EC70442514622F007E183B /* ManuTabBarWithListsGrids_VC.swift in Sources */,
 				C9A39575250BB6A300FEE5DA /* SwivelDocument.swift in Sources */,
 				C964B01B25064A0F009E998C /* BaseVC.swift in Sources */,
 				C964B04225079016009E998C /* SwivelTabBar.swift in Sources */,

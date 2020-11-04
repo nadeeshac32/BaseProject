@@ -38,7 +38,7 @@ class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<
         super.customiseView()
         self.tabs                                           = getTabNames()
         self.menuBarView.dataArray                          = self.tabs
-        self.menuBarView.isSizeToFitCellsNeeded             = false
+        self.menuBarView.isSizeToFitCellsNeeded             = true
         self.menuBarView.collView.backgroundColor           = UIColor.init(white: 1, alpha: 1)
         
         self.presentPageVCOnView()
