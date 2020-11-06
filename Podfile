@@ -23,6 +23,8 @@ target 'Base Project' do
   pod 'GoogleSignIn'
   pod 'FBSDKLoginKit'
   pod "TLPhotoPicker"
+  pod "Agrume"
+  pod 'ActiveLabel'
 
   # Need to add to MD file
   pod 'AACarousel'

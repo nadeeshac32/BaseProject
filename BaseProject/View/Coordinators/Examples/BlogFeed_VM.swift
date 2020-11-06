@@ -10,7 +10,14 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
+enum BlogFeedType {
+    case home, mySpace
+}
+
+
 class BlogFeedVM: BaseTableViewVM<Blog> {
+    
+    let blogFeedType                : BlogFeedType
     
     // MARK: - Inputs
     let addBlogHasTapped            : AnyObserver<Void>
@@ -20,16 +27,17 @@ class BlogFeedVM: BaseTableViewVM<Blog> {
     let showBlogCreateEditVC        : Observable<Void>
     var showShareBlogOptions        : Observable<[Any]>
     
-    // TODO: - dataLoadIn will be ViewDidLoad once the push notifications are enabled
-//    override var dataLoadIn         : DataLoadIn? { get { return .ViewWillAppear } set {} }
-    override var loadFromAPI        : Bool { get { return false } set {} }
-    override var loadAsDynemic      : Bool { get { return false } set {} }
+    override var dataLoadIn         : DataLoadIn? { get { return blogFeedType == .mySpace ? .ViewWillAppear : .ViewDidLoad } set {} }
+    override var loadFromAPI        : Bool { get { return blogFeedType == .mySpace ? true : false } set {} }
+    override var loadAsDynemic      : Bool { get { return blogFeedType == .mySpace ? true : false } set {} }
     
     deinit {
         print("deinit BlogFeedVM")
     }
     
-    override init() {
+    init(blogFeedType: BlogFeedType) {
+        self.blogFeedType           = blogFeedType
+        
         let _addBlogHasTapped       = PublishSubject<Void>()
         self.addBlogHasTapped       = _addBlogHasTapped.asObserver()
         self.showBlogCreateEditVC   = _addBlogHasTapped.asObservable()
@@ -46,8 +54,10 @@ class BlogFeedVM: BaseTableViewVM<Blog> {
     }
     
     override func viewDidLoad() {
-        fetchFeed()
         super.viewDidLoad()
+        if blogFeedType == .home {
+            fetchFeed()
+        }
     }
     
     // Class Methods
@@ -61,11 +71,20 @@ class BlogFeedVM: BaseTableViewVM<Blog> {
     override func perfomrGetItemsRequest(loadPage: Int, limit: Int) {
         let httpService                             = HTTPService()
         showSpiner()
-        httpService.getBlogSummary(page: loadPage, limit: limit, onSuccess: { [weak self] (blogs, total, page, limit) in
-            self?.requestLoading.onNext(false)
-            self?.handleResponse(items: blogs, total: total, page: page)
-        }) { [weak self] (error) in
-            self?.handleRestClientError(error: error)
+        if blogFeedType == .home {
+            httpService.getBlogFeed(page: loadPage, limit: limit, onSuccess: { [weak self] (blogs, total, page, limit) in
+                self?.requestLoading.onNext(false)
+                self?.handleResponse(items: blogs, total: total, page: page)
+            }) { [weak self] (error) in
+                self?.handleRestClientError(error: error)
+            }
+        } else {
+            httpService.getBlogsByUser(user: User.si, page: loadPage, limit: limit, onSuccess: { [weak self] (blogs, total, page, limit) in
+                self?.requestLoading.onNext(false)
+                self?.handleResponse(items: blogs, total: total, page: page)
+            }) { [weak self] (error) in
+                self?.handleRestClientError(error: error)
+            }
         }
     }
     

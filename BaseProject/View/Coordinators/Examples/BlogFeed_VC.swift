@@ -8,6 +8,7 @@
 
 import UIKit
 import RxDataSources
+import Agrume
 
 class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogTVCell> {
 
@@ -40,12 +41,12 @@ class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogTVCell> {
                 // MARK: - Inputs
                 viewModel.setupTitleViewInViewDidAppear.subscribe(onNext: { [weak self] (_) in
                     guard let self = `self` else { return }
-                    self.navigationController?.navigationBar.topItem?.title                 = "Blog Feed"
+                    self.navigationController?.navigationBar.topItem?.title                 = viewModel.blogFeedType == .home ? "Blog Feed" : "My Space"
                     let rightButton                                                         = UIBarButtonItem(customView: self.customRightButton)
                     self.navigationController?.navigationBar.topItem?.rightBarButtonItem    = rightButton
                     
                     let leftButton                                                          = UIBarButtonItem(customView: self.customLeftButton)
-                    self.navigationController?.navigationBar.topItem?.leftBarButtonItem     = leftButton
+                    self.navigationController?.navigationBar.topItem?.leftBarButtonItem     = viewModel.blogFeedType == .home ? leftButton : nil
                 }),
                 viewModel.removeTitleViewInViewWillDisappear.subscribe(onNext: { [weak self] (_) in
                     self?.navigationController?.navigationBar.topItem?.titleView            = nil
@@ -66,7 +67,7 @@ class BlogFeedVC: BaseListWithoutHeadersVC<Blog, BlogFeedVM, BlogTVCell> {
     
 }
 
-extension BlogFeedVC: BlogDelegate {
+extension BlogFeedVC: BlogTVCellDelegate {
     func likeError(restError: RestClientError) {
         viewModel?.handleRestClientError(error: restError)
     }
@@ -77,5 +78,17 @@ extension BlogFeedVC: BlogDelegate {
     
     func commentTappedFor(blog: Blog) {
         viewModel?.doWithSelectedItem.onNext(blog)
+    }
+    
+    func tappedOnContentWith(url: String) {
+        let agrume = Agrume(url: URL(string: url)!)
+        agrume.download = { url, completion in
+            let httpService = HTTPService()
+            httpService.downloadImage(imagePath: url.absoluteString) { (image) in
+                guard let image = image else { return }
+                completion(image)
+            }
+        }
+        agrume.show(from: self)
     }
 }

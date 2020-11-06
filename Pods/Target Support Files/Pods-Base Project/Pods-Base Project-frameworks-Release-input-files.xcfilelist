@@ -1,5 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-Base Project/Pods-Base Project-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AACarousel/AACarousel.framework
+${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework
+${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework
 ${BUILT_PRODUCTS_DIR}/CalendarDateRangePickerViewController/CalendarDateRangePickerViewController.framework
@@ -22,5 +24,6 @@ ${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework
 ${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework
+${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework
 ${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework
 ${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework

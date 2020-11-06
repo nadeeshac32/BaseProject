@@ -497,7 +497,7 @@
                                         <rect key="frame" x="25" y="380" width="344" height="200"/>
                                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="dgf-g6-rIk"/>
+                                            <constraint firstAttribute="height" priority="999" constant="200" id="dgf-g6-rIk"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="edn-Ut-E8z">
                                             <size key="itemSize" width="96" height="96"/>

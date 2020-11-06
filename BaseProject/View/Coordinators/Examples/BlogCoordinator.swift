@@ -18,10 +18,10 @@ class BlogCoordinator: BaseTabItemCoordinator {
             disposeBag.insert([
                 feedVM.showSignInVC.bind(to: showSignInVC),
                 feedVM.showBlogCreateEditVC.subscribe(onNext: { [unowned self] (_) in
-                    self.goToBlogCreateEditVC()
+                    self.goToBlogCreateEditVC(previousTitle: feedVM.blogFeedType == .home ? "Home" : "My Space")
                 }),
                 feedVM.doWithSelectedItem.subscribe(onNext: { [unowned self](blog) in
-                    self.goToBlogDetailVC(blog: blog, previousTitle: "Feed")
+                    self.goToBlogDetailVC(blog: blog, previousTitle: feedVM.blogFeedType == .home ? "Home" : "My Space")
                 })
             ])
         }
@@ -31,8 +31,8 @@ class BlogCoordinator: BaseTabItemCoordinator {
         print("deinit BlogCoordinator")
     }
     
-    func goToBlogCreateEditVC() {
-        let blogCreatEditVM                   = BlogCreateEditVM(blog: Blog())
+    func goToBlogCreateEditVC(blog: Blog? = nil, previousTitle: String) {
+        let blogCreatEditVM                   = BlogCreateEditVM(blog: blog ?? Blog())
         disposeBag.insert([
             // MARK: Outputs
             blogCreatEditVM.showSignInVC.bind(to: showSignInVC),

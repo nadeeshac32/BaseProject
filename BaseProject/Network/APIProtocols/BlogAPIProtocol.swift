@@ -9,7 +9,7 @@
 import Alamofire
 
 protocol BlogAPIProtocol {
-    func getBlogSummary(method: HTTPMethod!,
+    func getBlogFeed(method: HTTPMethod!,
                         page: Int, limit: Int,
                         onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?,
                         onError: ErrorCallback?)
@@ -28,4 +28,10 @@ protocol BlogAPIProtocol {
                   isLike: Bool,
                   onSuccess: SuccessEmptyDataCallback?,
                   onError: ErrorCallback?)
+    
+    func getBlogsByUser(method: HTTPMethod!,
+                        user: User,
+                        page: Int, limit: Int,
+                        onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?,
+                        onError: ErrorCallback?)
 }

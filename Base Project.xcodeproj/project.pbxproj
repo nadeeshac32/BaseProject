@@ -87,6 +87,10 @@
 		C971C1FB2535E85F002F4394 /* GeneralObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C971C1FA2535E85F002F4394 /* GeneralObjectResponse.swift */; };
 		C97490E825519CD000EE607E /* BlogTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490E625519CD000EE607E /* BlogTVCell.swift */; };
 		C97490E925519CD000EE607E /* BlogTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C97490E725519CD000EE607E /* BlogTVCell.xib */; };
+		C97490EB2553EA6600EE607E /* BlogDetail_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490EA2553EA6600EE607E /* BlogDetail_VM.swift */; };
+		C97490ED2553EA7200EE607E /* BlogDetail_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */; };
+		C97490EF25548FE000EE607E /* AdvancedBaseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490EE25548FE000EE607E /* AdvancedBaseList.swift */; };
+		C97490F1255587E200EE607E /* AdvancedBaseListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490F0255587E200EE607E /* AdvancedBaseListVM.swift */; };
 		C9753F352545C2F4002B149A /* BlogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F342545C2F4002B149A /* BlogCoordinator.swift */; };
 		C9753F382545C352002B149A /* BlogFeed_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F372545C352002B149A /* BlogFeed_VC.swift */; };
 		C9753F3A2545C3AA002B149A /* BlogFeed_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F392545C3AA002B149A /* BlogFeed_VM.swift */; };
@@ -247,6 +251,10 @@
 		C971C1FA2535E85F002F4394 /* GeneralObjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralObjectResponse.swift; sourceTree = "<group>"; };
 		C97490E625519CD000EE607E /* BlogTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogTVCell.swift; sourceTree = "<group>"; };
 		C97490E725519CD000EE607E /* BlogTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlogTVCell.xib; sourceTree = "<group>"; };
+		C97490EA2553EA6600EE607E /* BlogDetail_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogDetail_VM.swift; sourceTree = "<group>"; };
+		C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogDetail_VC.swift; sourceTree = "<group>"; };
+		C97490EE25548FE000EE607E /* AdvancedBaseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBaseList.swift; sourceTree = "<group>"; };
+		C97490F0255587E200EE607E /* AdvancedBaseListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBaseListVM.swift; sourceTree = "<group>"; };
 		C9753F342545C2F4002B149A /* BlogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCoordinator.swift; sourceTree = "<group>"; };
 		C9753F372545C352002B149A /* BlogFeed_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogFeed_VC.swift; sourceTree = "<group>"; };
 		C9753F392545C3AA002B149A /* BlogFeed_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogFeed_VM.swift; sourceTree = "<group>"; };
@@ -400,9 +408,9 @@
 			children = (
 				C964AFFA25063171009E998C /* Application */,
 				C964B0032506323F009E998C /* Network */,
+				C9CC086925516A6B00C86FE6 /* Common */,
 				C964B0012506321D009E998C /* View */,
 				C964B0002506320C009E998C /* Model */,
-				C9CC086925516A6B00C86FE6 /* Common */,
 				C964AFFC250631D8009E998C /* Resources */,
 				C964AFFB250631CA009E998C /* SupportingFiles */,
 			);
@@ -613,6 +621,8 @@
 		C964B02825064AEE009E998C /* BaseViews */ = {
 			isa = PBXGroup;
 			children = (
+				C97490EE25548FE000EE607E /* AdvancedBaseList.swift */,
+				C97490F0255587E200EE607E /* AdvancedBaseListVM.swift */,
 				C92CD013254B1EBE00FA7F1F /* BaseList.swift */,
 				C964B07B25089C75009E998C /* BaseTVCell.swift */,
 				C927034D254FE1B60078E58D /* BaseGrid.swift */,
@@ -674,6 +684,8 @@
 				C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */,
 				C92CD015254BEDB900FA7F1F /* BlogCreateContentGridVM.swift */,
 				C927034F25503CAC0078E58D /* BlogCreateContentGrid.swift */,
+				C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */,
+				C97490EA2553EA6600EE607E /* BlogDetail_VM.swift */,
 			);
 			name = Blog;
 			sourceTree = "<group>";
@@ -995,6 +1007,7 @@
 				C964B03C25064BFD009E998C /* StoryboardInitializable.swift in Sources */,
 				C9E2AE65250A3A2C001F3961 /* OTPVerification_VM.swift in Sources */,
 				C9E2AE5D250A39DC001F3961 /* Signup_Coordinator.swift in Sources */,
+				C97490EB2553EA6600EE607E /* BlogDetail_VM.swift in Sources */,
 				C9EC705225147146007E183B /* DynemicList_VC.swift in Sources */,
 				C9E2AE79250A3E70001F3961 /* UserPostData.swift in Sources */,
 				C9E2AE83250A401E001F3961 /* UpdateUserMobile_VM.swift in Sources */,
@@ -1012,6 +1025,7 @@
 				C9FA78A92538B00C006222CB /* ArrayDataType.swift in Sources */,
 				C9E2AE77250A3E4B001F3961 /* User.swift in Sources */,
 				C964B03A25064BDE009E998C /* BaseTabItemCoordinator.swift in Sources */,
+				C97490ED2553EA7200EE607E /* BlogDetail_VC.swift in Sources */,
 				C9EC704A251466D8007E183B /* NonDynemicList_VM.swift in Sources */,
 				C964B04725079096009E998C /* SwivelManuTab.swift in Sources */,
 				C964B049250790B3009E998C /* SwivelManuTabCell.swift in Sources */,
@@ -1034,6 +1048,7 @@
 				C964B07425079DDD009E998C /* PhoneContact.swift in Sources */,
 				C9E2AE4F250A38F2001F3961 /* Onboarding_Coordinator.swift in Sources */,
 				C964B02125064A52009E998C /* BaseMenuVC.swift in Sources */,
+				C97490EF25548FE000EE607E /* AdvancedBaseList.swift in Sources */,
 				C92CD00D2547FEF600FA7F1F /* BlogContent.swift in Sources */,
 				C964B03825064BC7009E998C /* BaseCoordinator.swift in Sources */,
 				C9EC705025147135007E183B /* DynemicList_VM.swift in Sources */,
@@ -1095,6 +1110,7 @@
 				C9753F382545C352002B149A /* BlogFeed_VC.swift in Sources */,
 				C9E2AE67250A3A7F001F3961 /* Main_Coordinator.swift in Sources */,
 				C964B05025079312009E998C /* SwivelRightButtonActionTextField.swift in Sources */,
+				C97490F1255587E200EE607E /* AdvancedBaseListVM.swift in Sources */,
 				C971C1FB2535E85F002F4394 /* GeneralObjectResponse.swift in Sources */,
 				C964B02A25064AF7009E998C /* BaseScrollView.swift in Sources */,
 				C964B019250649F1009E998C /* BaseSuperVC.swift in Sources */,

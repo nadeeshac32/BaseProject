@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ManuTabBarWithListsGridsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Underline> {
+class ManuTabBarWithListsGridsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Circle> {
     
     @IBOutlet weak var _menuBarView                             : UIView!
     

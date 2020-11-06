@@ -41,7 +41,7 @@
                             <constraint firstAttribute="height" constant="10" id="baq-SU-xus"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Death does not wait for you to be ready! Death is not considerate, or fair! And make no mistake—here, you face death." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK1-Pn-fUn">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Death does not wait for you to be ready! Death is not considerate, or fair! And make no mistake—here, you face death." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK1-Pn-fUn" customClass="ActiveLabel" customModule="ActiveLabel">
                         <rect key="frame" x="12" y="80" width="390" height="54"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -161,7 +161,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="captionLbl" destination="oK1-Pn-fUn" id="Yix-Mh-uKY"/>
+                <outlet property="captionLbl" destination="oK1-Pn-fUn" id="4Gi-kk-yvS"/>
                 <outlet property="carousel" destination="dvX-p3-uM7" id="8Lx-Gd-nXX"/>
                 <outlet property="commentBtn" destination="SjY-fS-sT4" id="qsn-Kz-9PV"/>
                 <outlet property="likeBtn" destination="c2S-QW-6Ik" id="i3M-Fq-C4O"/>

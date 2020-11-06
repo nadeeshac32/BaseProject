@@ -8,11 +8,13 @@
 
 import UIKit
 import AACarousel
+import ActiveLabel
 
-protocol BlogDelegate: BaseTVCellDelegate {
+protocol BlogTVCellDelegate: BaseTVCellDelegate {
     func shareTappedFor(blog: Blog)
     func commentTappedFor(blog: Blog)
     func likeError(restError: RestClientError)
+    func tappedOnContentWith(url: String)
 }
 
 class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
@@ -21,7 +23,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     @IBOutlet weak var userNameLbl              : UILabel!
     @IBOutlet weak var timeAgoLbl               : UILabel!
     @IBOutlet weak var titleLbl                 : UILabel!
-    @IBOutlet weak var captionLbl               : UILabel!
+    @IBOutlet weak var captionLbl               : ActiveLabel!
     @IBOutlet weak var carousel                 : AACarousel!
     @IBOutlet weak var postStatusLbl            : UILabel!
     @IBOutlet weak var likeBtn                  : UIButton!
@@ -29,13 +31,13 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     @IBOutlet weak var shareBtn                 : UIButton!
     
     
-    var blogDelegate: BlogDelegate?
+    var blogDelegate: BlogTVCellDelegate?
     override weak var delegate   : BaseTVCellDelegate? {
         get {
             return blogDelegate
         }
         set {
-            if let newViewModel = newValue as? BlogDelegate {
+            if let newViewModel = newValue as? BlogTVCellDelegate {
                 blogDelegate = newViewModel
             } else {
                 print("incorrect BaseVM type for BaseVC")
@@ -54,7 +56,10 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         userNameLbl.text                        = ""
         timeAgoLbl.text                         = ""
         titleLbl.text                           = ""
+        
         captionLbl.text                         = ""
+        captionLbl.hashtagColor                 = AppConfig.si.colorPrimary
+        
         postStatusLbl.text                      = ""
         
         likeBtn.setImage(#imageLiteral(resourceName: "icon_like").withRenderingMode(.alwaysTemplate), for: .normal)
@@ -76,15 +81,15 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     override func configureCell(item: Blog, row: Int, selectable: Bool) {
         super.configureCell(item: item, row: row, selectable: selectable)
         profileImageVw.image                    = UIImage(named: item.owner?.imageUrl ?? "")
-        userNameLbl.text                        = item.owner?.name ?? ""
+        userNameLbl.attributedText              = getUsername(username: item.owner?.name ?? "", location: item.location ?? "")
         timeAgoLbl.text                         = item.createdDate?.displayText ?? ""
         titleLbl.text                           = item.title
         captionLbl.text                         = item.desc
-        postStatusLbl.text                      = "\(item.totalLikes!) Likes  •  \(item.totalComments!) Comments" //  •  \(item.totalShares!) Shares"
+        postStatusLbl.text                      = "\(item.totalLikes!) Likes  •  \(item.totalComments!) Comments"
         
         carousel.delegate                       = self
         carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: true, timer: 5.0, defaultImage: "defaultImage")
-        //optional methods
+        //  optional methods
         carousel.setCarouselOpaque(layer: true, describedTitle: false, pageIndicator: false)
         carousel.setCarouselLayout(displayStyle: 0, pageIndicatorPositon: 2, pageIndicatorColor: nil, describedTitleColor: nil, layerColor: nil)
         
@@ -92,8 +97,26 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         
     }
     
+    func getUsername(username: String, location: String) -> NSAttributedString {
+        if location == "" {
+            let attributedString                    = NSMutableAttributedString(string: username)
+            attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: 0, length: username.count))
+            return attributedString
+        } else {
+            let is_in_string                        = " is in "
+            let attributedString                    = NSMutableAttributedString(string: "\(username)\(is_in_string)\(location)")
+            
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.darkGray, range: NSRange(location: username.count, length: is_in_string.count))
+            attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: 0, length: username.count))
+            attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: username.count + is_in_string.count, length: location.count))
+            return attributedString
+        }
+    }
+    
     func didSelectCarouselView(_ view: AACarousel, _ index: Int) {
-        print("\(index)")
+        if let contentUrl = item?.content?[index] {
+            blogDelegate?.tappedOnContentWith(url: contentUrl)
+        }
     }
     
     func callBackFirstDisplayView(_ imageView: UIImageView, _ url: [String], _ index: Int) {
@@ -110,6 +133,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
             }
         }
     }
+    
     @IBAction func likeBtnTapped(_ sender: Any) {
         guard !isNetworkCallGoing else { return }
         isNetworkCallGoing                      = true

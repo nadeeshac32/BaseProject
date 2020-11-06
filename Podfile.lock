@@ -1,5 +1,8 @@
 PODS:
   - AACarousel (1.1.1)
+  - ActiveLabel (1.1.0)
+  - Agrume (5.6.9):
+    - SwiftyGif
   - Alamofire (5.2.2)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
@@ -53,11 +56,14 @@ PODS:
   - SnapKit (5.0.1)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - SwiftyGif (5.3.0)
   - TLPhotoPicker (2.1.3)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - AACarousel
+  - ActiveLabel
+  - Agrume
   - Alamofire
   - CalendarDateRangePickerViewController
   - CountryPickerView
@@ -79,6 +85,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AACarousel
+    - ActiveLabel
+    - Agrume
     - Alamofire
     - AppAuth
     - CalendarDateRangePickerViewController
@@ -102,11 +110,14 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SwiftEntryKit
+    - SwiftyGif
     - TLPhotoPicker
     - Toast-Swift
 
 SPEC CHECKSUMS:
   AACarousel: e0dbd2d3153c56c36df8aa282553f20fc88e132b
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  Agrume: 4c6fc502f4a4aa8b3dd69c8c2e22bcb282be1032
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   CalendarDateRangePickerViewController: 9e82a36a21ad7338f4e21a314469bfabe1f738fb
@@ -130,9 +141,10 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   TLPhotoPicker: 2c4a20d62952bd368edbf44d18476f663a718ada
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 8968d3e027329cd16a753469c6a2e7b28a55ee2f
+PODFILE CHECKSUM: e2b2a3a60b8257047ee5beb8ebb38e6004cbaecd
 
 COCOAPODS: 1.8.4

@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import RxDataSources
 import TLPhotoPicker
 
-class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresenting, BaseGridDelagate {
+class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPresenting {
 
     @IBOutlet weak var userImageVw                          : UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
@@ -48,7 +47,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
         postItemsContainer.addBoarder(width: 1, cornerRadius: 5, color: .lightGray)
         
         if let imageGridViewModel = viewModel?.contentGridViewModel {
-            self.contentGrid                                  = BlogCreateContentGrid(viewModel: imageGridViewModel, collectionView: _contentCV, delegate: self)
+            self.contentGrid                                = BlogCreateContentGrid(viewModel: imageGridViewModel, collectionView: _contentCV, delegate: self)
             contentGrid?.setupBindings()
         }
     }
@@ -72,6 +71,12 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
                     self?.navigationController?.navigationBar.topItem?.titleView    = nil
                 }),
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
+//                    self?.presentImagePicker { [weak self] (image) in
+//                        if let image = image {
+//                            self?.viewModel?.contentSelected(content: [image])
+//                        }
+//                    }
+                    
                     let viewController = TLPhotosPickerViewController(withTLPHAssets: { [weak self] (assets) in // TLAssets
                         //  self?.viewModel?.contentSelected(content: [image])
                         print("assets selected: \(assets.count)")
@@ -123,7 +128,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM>, SwivelImagePickerPresentin
     
 }
 
-extension BlogCreateEditVC {
+extension BlogCreateEditVC: BaseGridDelagate {
     func getNoItemsText(_ collectionView: UICollectionView) -> String {
         return "No content added"
     }

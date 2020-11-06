@@ -537,7 +537,7 @@ extension HTTPService: ProfileAPIProtocol {
 }
 
 extension HTTPService: BlogAPIProtocol {
-    func getBlogSummary(method: HTTPMethod! = .get, page: Int, limit: Int, onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?, onError: ErrorCallback?) {
+    func getBlogFeed(method: HTTPMethod! = .get, page: Int, limit: Int, onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?, onError: ErrorCallback?) {
         let contextPath                 = "\(urls.blogPath)/blog/summary/\(page)/\(limit)"
         genericRequest(method: method!, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForArray: { (arrayResponse) in
             onSuccess?(arrayResponse.items ?? [], arrayResponse.total ?? 0, arrayResponse.page ?? 0, limit)
@@ -569,6 +569,19 @@ extension HTTPService: BlogAPIProtocol {
         
         genericRequest(method: method, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
             onSuccess?()
+            return
+        })
+    }
+    
+    func getBlogsByUser(method: HTTPMethod! = .get, user: User, page: Int, limit: Int, onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/user/summary/\(page)/\(limit)"
+        genericRequest(method: method!, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForArray: { (arrayResponse) in
+            let owner                   = Owner(id: user.id, name: user.fullName ?? "", imageUrl: user.imageUrl)
+            let updatedBlogs            = (arrayResponse.items ?? []).map { (blog) -> Blog in
+                blog.owner              = owner
+                return blog
+            }
+            onSuccess?(updatedBlogs, arrayResponse.total ?? 0, arrayResponse.page ?? 0, limit)
             return
         })
     }
