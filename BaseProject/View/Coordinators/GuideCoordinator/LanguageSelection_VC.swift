@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LanguageSelectionVC: BaseVC<LanguageSelectionVM>, StoryboardInitializable {
+class LanguageSelectionVC: BaseVC<LanguageSelectionVM> {
     
     @IBOutlet weak var englishContainerVw                   : UIView!
     @IBOutlet weak var englishLbl                           : UILabel!

@@ -32,17 +32,24 @@ class BlogCoordinator: BaseTabItemCoordinator {
     }
     
     func goToBlogCreateEditVC(blog: Blog? = nil, previousTitle: String) {
-        let blogCreatEditVM                   = BlogCreateEditVM(blog: blog ?? Blog())
+        let blogCreatEditVM     = BlogCreateEditVM(blog: blog ?? Blog())
         disposeBag.insert([
             // MARK: Outputs
             blogCreatEditVM.showSignInVC.bind(to: showSignInVC),
             // MARK: Inputs
         ])
-        let blogCreateEditVC                 = BlogCreateEditVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogCreatEditVM)
+        let blogCreateEditVC    = BlogCreateEditVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogCreatEditVM)
         superNC?.pushViewController(blogCreateEditVC, animated: true)
     }
     
     func goToBlogDetailVC(blog: Blog, previousTitle: String) {
-        print("goToBlogDetailVC")
+        let blogDetailVM        = BlogDetailVM(blog: blog)
+        disposeBag.insert([
+            // MARK: Outputs
+            blogDetailVM.showSignInVC.bind(to: showSignInVC),
+            // MARK: Inputs
+        ])
+        let blogDetailVC        = BlogDetailVC.initFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogDetailVM)
+        superNC?.pushViewController(blogDetailVC, animated: true)
     }
 }

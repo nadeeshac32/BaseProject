@@ -12,7 +12,7 @@ import RxSwift
 
 /// This is the Root class of all the ViewControllers
 /// All the classes that inherit this class will be Generic classes. Since this is not a generic class we can add extensions using this class.
-class BaseSuperVC: UIViewController, SearchViewAnimateble {
+class BaseSuperVC: UIViewController, StoryboardInitializable, SearchViewAnimateble {
 
     weak var baseViewModel          : BaseVM?
     let disposeBag                  = DisposeBag()

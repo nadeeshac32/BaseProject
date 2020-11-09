@@ -16,7 +16,7 @@ import Toast_Swift
 /// Handles scrolling functionality and dynemic adjustments in UI.
 /// - Note: You always have to override `scrollViewContentHeightWithouDynemicGap` variable in the subclass.
 ///     - `scrollViewContentHeightWithouDynemicGap` is the height of the `ScrollView.ContentView` without dynemically adjusting height.
-class BaseFormVC<ViewModel: BaseFormVM>: BaseVC<ViewModel>, StoryboardInitializable {
+class BaseFormVC<ViewModel: BaseFormVM>: BaseVC<ViewModel> {
     
     var scrollView                                          : UIScrollView!
     var dynemicGapCons                                      : NSLayoutConstraint!

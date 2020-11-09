@@ -12,7 +12,7 @@ import RxDataSources
 /// Base List View Controller functionality.
 /// You have to give the inherited subclasses of BaseModel, BaseListVM, BaseTVCell types in the subclass which inherit this class
 /// Search functionality is also enabled here.
-class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>>: BaseVC<ViewModel>, UICollectionViewDelegate, UISearchBarDelegate, StoryboardInitializable, UIGestureRecognizerDelegate {
+class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, CollectionViewCell: BaseCVCell<Model>>: BaseVC<ViewModel>, UICollectionViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     var collectionView                              : UICollectionView!
     var itemCountLabel                              : UILabel?

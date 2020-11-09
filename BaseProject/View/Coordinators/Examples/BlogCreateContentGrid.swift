@@ -24,3 +24,6 @@ extension BlogCreateContentGrid: BlogCreateImageCVCellDelegate {
         self.viewModel?.contentRemove(item: item, section: section, row: row)
     }
 }
+
+
+

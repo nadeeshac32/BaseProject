@@ -10,15 +10,20 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-protocol CellIdentifiable { func getConfiguredTableCellType(cell: UITableViewCell, row: Int, selectable: Bool) -> BaseTVCell<BaseModel> }
-
-protocol AdvancedAnimatableSectionModelTypeSupportedItem: IdentifiableType, CellIdentifiable, Equatable {
-    init(model: BaseModel)
+protocol CellIdentifiable {
+    func getConfiguredTableCellType(cell: UITableViewCell, row: Int, selectable: Bool, cellDelegate: BaseTVCellDelegate)
+    func getCellIdentifier() -> String
 }
 
-protocol AdvancedAnimatableSectionModelType: AnimatableSectionModelType where Item: CellIdentifiable, Item: BaseModel {
-    var header: String { get }
-    var items: [Item] { get set }
+protocol AdvancedAnimatableSectionModelTypeSupportedItem: IdentifiableType, CellIdentifiable, Equatable {
+    init?(model: BaseModel)
+    func setSelected(isSelected: Bool)
+    static func getCellIdentifiers() -> [String]
+}
+
+protocol AdvancedAnimatableSectionModelType: AnimatableSectionModelType where Item: CellIdentifiable {
+    var header  : String { get }
+    var items   : [Item] { get set }
     init(header: String, items: [Item])
 }
 
@@ -49,7 +54,7 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionType>?
     
-    fileprivate init(viewModel: ViewModel, tableView: UITableView!, delegate: BaseListDelagate) {
+    init(viewModel: ViewModel, tableView: UITableView!, delegate: BaseListDelagate) {
         super.init()
         self.viewModel                          = viewModel
         self.delegate                           = delegate
@@ -91,10 +96,9 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     }
     
     func setupCell(dataSource: TableViewSectionedDataSource<SectionType>, tableView: UITableView, indexPath: IndexPath, dataModel: SectionType.Item) -> UITableViewCell? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
-        let configuredCell                      = dataModel.getConfiguredTableCellType(cell: cell, row: indexPath.row, selectable: viewModel?.multiSelectable ?? false)
-        configuredCell.delegate                 = self
-        return configuredCell
+        let cell                                = tableView.dequeueReusableCell(withIdentifier: dataModel.getCellIdentifier(), for: indexPath)
+        dataModel.getConfiguredTableCellType(cell: cell, row: indexPath.row, selectable: viewModel?.multiSelectable ?? false, cellDelegate: self)
+        return cell
     }
     
     /// Bind the actual UI Outlets with the Base class variables.
@@ -122,6 +126,10 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.dataSource?[section].header.lowercased() == viewModel?.sectionHeaderWhenStaticDataComesAsArray.lowercased()
+            || self.dataSource?[section].header.lowercased() == viewModel?.sectionHeaderWhenDataComesAsArray.lowercased() {
+            return 0
+        }
         return delegate?.heightForHeaderInSection(tableView, section: section) ?? 24
     }
 
@@ -141,7 +149,10 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     func setupBindings() {
         if let viewModel = self.viewModel {
             if cellLoadFromNib {
-                //  tableView.register(UINib(nibName: String(describing: TableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TableViewCell.self))
+                let identifiers = Model.getCellIdentifiers()
+                for identifire in identifiers {
+                    tableView.register(UINib(nibName: identifire, bundle: nil), forCellReuseIdentifier: identifire)
+                }
             }
             disposeBag.insert([
                 // MARK: - Outputs
@@ -180,6 +191,8 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
 
 extension AdvancedBaseList: BaseTVCellDelegate {
     func itemSelected(model: BaseModel) -> Bool? {
-        return viewModel?.itemSelected(model: Model(model: model))
+        if let model = Model(model: model) {
+            return viewModel?.itemSelected(model: model)
+        } else { return false }
     }
 }

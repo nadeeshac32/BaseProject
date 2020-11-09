@@ -9,60 +9,49 @@
 import Foundation
 import RxSwift
 
-//typealias SuccessMessageDetailType = (message: String, blockScreen: Bool, completionHandler: () -> ()?)
-//
-///// This is used to pass data from child to parent. See belof imlementation
-//protocol BaseListVMDataSource:class {
-//    func errorMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType)
-//    func successMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType)
-//    func warningMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType)
-//    func toastMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, message: String)
-//    func requestLoading<Model: BaseModel>(listVM: BaseTableViewVM<Model>, isLoading: Bool)
-//    func showSignInVC<Model: BaseModel>(listVM: BaseTableViewVM<Model>)
-//}
-//
-///// This is used to pass data from child to parent. This methods are calling from child view
-//extension BaseListVMDataSource where Self: BaseVM {
-//    func errorMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType) {
-//        self.errorMessage.onNext(detail)
-//    }
-//    func successMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType) {
-//        self.successMessage.onNext(detail)
-//    }
-//    func warningMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, detail: SuccessMessageDetailType) {
-//        self.warningMessage.onNext(detail)
-//    }
-//    func toastMessage<Model: BaseModel>(listVM: BaseTableViewVM<Model>, message: String) {
-//        self.toastMessage.onNext(message)
-//    }
-//    func requestLoading<Model: BaseModel>(listVM: BaseTableViewVM<Model>, isLoading: Bool) {
-//        self.requestLoading.onNext(isLoading)
-//    }
-//    func showSignInVC<Model: BaseModel>(listVM: BaseTableViewVM<Model>) {
-//        self.showSignInVC.onNext(true)
-//    }
-//}
-//
-//
-//public enum DataLoadIn {
-//    case ViewDidLoad
-//    case ViewWillAppear
-//}
+/// This is used to pass data from child to parent. See belof imlementation
+protocol AdvancedBaseListVMDataSource:class {
+    typealias ModelTypeAlias = AdvancedAnimatableSectionModelTypeSupportedItem
+    typealias SectionTypeAlias = AdvancedAnimatableSectionModelType
+    func errorMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, detail: SuccessMessageDetailType)
+    func successMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, detail: SuccessMessageDetailType)
+    func warningMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, detail: SuccessMessageDetailType)
+    func toastMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, message: String)
+    func requestLoading<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, isLoading: Bool)
+    func showSignInVC<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>)
+}
 
-/// Base ViewModel that supports BaseListVC & BaseList.
+///// This is used to pass data from child to parent. This methods are calling from child view
+extension AdvancedBaseListVMDataSource where Self: BaseVM {
+    func errorMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, detail: SuccessMessageDetailType) {
+        self.errorMessage.onNext(detail)
+    }
+    func successMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, detail: SuccessMessageDetailType) {
+        self.successMessage.onNext(detail)
+    }
+    func warningMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, detail: SuccessMessageDetailType) {
+        self.warningMessage.onNext(detail)
+    }
+    func toastMessage<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, message: String) {
+        self.toastMessage.onNext(message)
+    }
+    func requestLoading<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>, isLoading: Bool) {
+        self.requestLoading.onNext(isLoading)
+    }
+    func showSignInVC<Model: ModelTypeAlias, SectionType: SectionTypeAlias>(listVM: AdvancedBaseListVM<Model, SectionType>) {
+        self.showSignInVC.onNext(true)
+    }
+}
+
+/// Base AdvancedBaseListVM that supports AdvancedBaseList
 /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
 class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem, SectionType: AdvancedAnimatableSectionModelType>: BaseVM where Model == SectionType.Item {
- 
-    // TODO: - Add static sections
-    // TODO: - reloadList
-    // TODO: - Child to parent binding
-    // TODO: - Advance Base List  register cell when load from nib
     
     /**
-     Support data source when BaseListVM is used as a  SubView in a ViewController.
-     Used to bind BaseVM Observers to superVM Observers. See the BaseListVMDataSource implementation
+     Support data source when AdvancedBaseListVM is used as a  VM of SubView in a ViewController.
+     Used to bind BaseVM Observers to superVM Observers. See the AdvancedBaseListVMDataSource implementation
      */
-    weak var dataSource     : BaseListVMDataSource?
+    weak var dataSource     : AdvancedBaseListVMDataSource?
     
     /**
      This Variable is used to specify whether the data is loaded from API or not
@@ -79,6 +68,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     var loadAsDynemic       : Bool                  = true
     
     var staticSectionCount  : Int                   = 0
+    var sectionHeaderWhenStaticDataComesAsArray     = "Section_Header_When_Static_Data_Comes_As_Array"
     var sectionHeaderWhenDataComesAsArray           = "Section_Header_When_Data_Comes_As_Array"
     var apiDataDownloadedCount  : Int               = 0
     var apiDataTotalCount   : Int                   = 1
@@ -122,35 +112,35 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     }
     
     /// If you initialise a instance of this class inside another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
-    init(dataSource: BaseListVMDataSource?) {
+    init(dataSource: AdvancedBaseListVMDataSource?) {
         super.init()
         self.dataSource     = dataSource
-//        DisposeBag().insert([
-//            errorMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
-//                guard let `self` = self else { return }
-//                self.dataSource?.errorMessage(listVM: self, detail: SuccessMessageDetailType)
-//            }),
-//            successMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
-//                guard let `self` = self else { return }
-//                self.dataSource?.successMessage(listVM: self, detail: SuccessMessageDetailType)
-//            }),
-//            warningMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
-//                guard let `self` = self else { return }
-//                self.dataSource?.warningMessage(listVM: self, detail: SuccessMessageDetailType)
-//            }),
-//            toastMessage.subscribe(onNext: { [weak self] (message) in
-//                guard let `self` = self else { return }
-//                self.dataSource?.toastMessage(listVM: self, message: message)
-//            }),
-//            requestLoading.subscribe(onNext: { [weak self] (isLoading) in
-//                guard let `self` = self else { return }
-//                self.dataSource?.requestLoading(listVM: self, isLoading: isLoading)
-//            }),
-//            showSignInVC.subscribe(onNext: { [weak self] (_) in
-//                guard let `self` = self else { return }
-//                self.dataSource?.showSignInVC(listVM: self)
-//            })
-//        ])
+        DisposeBag().insert([
+            errorMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.errorMessage(listVM: self, detail: SuccessMessageDetailType)
+            }),
+            successMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.successMessage(listVM: self, detail: SuccessMessageDetailType)
+            }),
+            warningMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
+                guard let `self` = self else { return }
+                self.dataSource?.warningMessage(listVM: self, detail: SuccessMessageDetailType)
+            }),
+            toastMessage.subscribe(onNext: { [weak self] (message) in
+                guard let `self` = self else { return }
+                self.dataSource?.toastMessage(listVM: self, message: message)
+            }),
+            requestLoading.subscribe(onNext: { [weak self] (isLoading) in
+                guard let `self` = self else { return }
+                self.dataSource?.requestLoading(listVM: self, isLoading: isLoading)
+            }),
+            showSignInVC.subscribe(onNext: { [weak self] (_) in
+                guard let `self` = self else { return }
+                self.dataSource?.showSignInVC(listVM: self)
+            })
+        ])
     }
     
     override func viewDidLoad() {
@@ -173,7 +163,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     }
     
     /// Get item for index path
-    func getItemForIndexPath(indexPath: IndexPath) -> BaseModel? {
+    func getItemForIndexPath(indexPath: IndexPath) -> Model? {
         do {
             let sections                        = try itemsWithHeaders.value()
             if sections.count > 0, sections.count > indexPath.section {
@@ -195,14 +185,6 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     /// Get items count
     func getCalculatedItemsCount() -> Int {
         return apiDataDownloadedCount
-//        var itemsCount                              = 0
-//        do {
-//            itemsCount                              = try itemsWithHeaders.value().map({ $0.items.count }).reduce(0, { (result, nextValue) in result + nextValue })
-//            return itemsCount
-//        } catch {
-//            print("error: \(error)")
-//            return 0
-//        }
     }
     
     /// Network request to fetch data from the Rest API.
@@ -221,9 +203,8 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     func reloadList() {
         apiDataTotalCount                           = 1
         requestPage                                 = 0
-        
-        // TODO: - Here remove only api data
-        itemsWithHeaders.onNext([])
+    
+        removeAllAPIItems()                         //replaced emptying table itemsWithHeaders.onNext([])
         apiDataDownloadedCount                      = 0
         paginateNext()
     }
@@ -308,6 +289,11 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
         }
     }
     
+    /// Appending static data to the data array
+    func addNewStaticItems(items: [BaseModel]) {
+        addNewItems(items: [sectionHeaderWhenStaticDataComesAsArray : items])
+    }
+    
     /// Appending data to the data array
     func addNewItems(items: [BaseModel]) {
         addNewItems(items: [sectionHeaderWhenDataComesAsArray : items])
@@ -319,12 +305,12 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
         if shouldSortFromKey {
             sections = items.sorted(by: { $0.0 < $1.0 }).map { (key, value) -> SectionType in
                 let sortedItems = value.sorted(by: { $0.getSortKey().lowercased() < $1.getSortKey().lowercased() })
-                let cellItems   = sortedItems.map { Model(model: $0) }
+                let cellItems   = sortedItems.map { Model(model: $0) }.filter { $0 != nil } as! [Model]
                 return SectionType(header: key.uppercased(), items: cellItems)
             }
         } else {
             sections = items.map { (key, value) -> SectionType in
-                let cellItems   = value.map { Model(model: $0) }
+                let cellItems   = value.map { Model(model: $0) }.filter { $0 != nil } as! [Model]
                 return SectionType(header: key.uppercased(), items: cellItems)
             }
         }
@@ -336,20 +322,12 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
             print("error: \(error)")
         }
 
-        for var section in sections {
+        for section in sections {
             if let index = currentSections.firstIndex(where: { (currentSection) -> Bool in
                 currentSection.header == section.header
             }) {
                 currentSections[index].items.append(contentsOf: section.items)
-                if shouldSortFromKey {
-                    currentSections[index].items    = currentSections[index].items.sorted(by: { $0.getSortKey().lowercased() < $1.getSortKey().lowercased() })
-                }else {
-                    currentSections[index].items    = currentSections[index].items
-                }
             } else {
-                if shouldSortFromKey {
-                    section.items                   = section.items.sorted(by: { $0.getSortKey().lowercased() < $1.getSortKey().lowercased() })
-                }
                 currentSections.append(section)
             }
         }
@@ -379,13 +357,27 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
         self.itemsWithHeaders.onNext(updatedSections)
     }
     
+    /// Removing data from the data array
+    func removeAllAPIItems() {
+        var currentSections                         : [SectionType]   = []
+        do {
+            currentSections                         = try self.itemsWithHeaders.value()
+        } catch {
+            print("error: \(error)")
+        }
+
+        let updatedSections: [SectionType]          = currentSections.filter { (existingSection) -> Bool in
+            return existingSection.header == sectionHeaderWhenStaticDataComesAsArray
+        }
+        self.itemsWithHeaders.onNext(updatedSections)
+    }
     
     //MARK: - Cell Selection
     /// Cancel multi selection mode
     func cancelMultiSelection() {
         multiSelectable                             = false
         for item in selectedItems {
-            item.isSelected                         = false
+            item.setSelected(isSelected: false)
         }
         selectedItems.removeAll()
         refreshTableView.onNext(true)
@@ -395,15 +387,15 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     func itemSelected(model: Model) -> Bool? {
         if multiSelectable {
             if let index = selectedItems.firstIndex(of: model) {
-                model.isSelected                    = false
+                model.setSelected(isSelected: false)
                 selectedItems.remove(at: index)
                 return false
             } else if multiSelectMax > selectedItems.count {
-                model.isSelected                    = true
+                model.setSelected(isSelected: true)
                 selectedItems.append(model)
                 return true
             } else {
-                model.isSelected                    = false
+                model.setSelected(isSelected: false)
                 let tupple                          = (message: getMaxSelectedItemsCountWarning(), blockScreen: false, completionHandler: { })
                 warningMessage.onNext(tupple)
                 return false

@@ -91,6 +91,11 @@
 		C97490ED2553EA7200EE607E /* BlogDetail_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */; };
 		C97490EF25548FE000EE607E /* AdvancedBaseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490EE25548FE000EE607E /* AdvancedBaseList.swift */; };
 		C97490F1255587E200EE607E /* AdvancedBaseListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490F0255587E200EE607E /* AdvancedBaseListVM.swift */; };
+		C97490F3255925E400EE607E /* BlogComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490F2255925E400EE607E /* BlogComment.swift */; };
+		C97490F62559356900EE607E /* BlogCommentTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490F42559356900EE607E /* BlogCommentTVCell.swift */; };
+		C97490F72559356900EE607E /* BlogCommentTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C97490F52559356900EE607E /* BlogCommentTVCell.xib */; };
+		C97490FB2559893700EE607E /* BlogDetailTV_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490FA2559893700EE607E /* BlogDetailTV_VM.swift */; };
+		C97490FD2559896B00EE607E /* BlogDetailTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97490FC2559896B00EE607E /* BlogDetailTV.swift */; };
 		C9753F352545C2F4002B149A /* BlogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F342545C2F4002B149A /* BlogCoordinator.swift */; };
 		C9753F382545C352002B149A /* BlogFeed_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F372545C352002B149A /* BlogFeed_VC.swift */; };
 		C9753F3A2545C3AA002B149A /* BlogFeed_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9753F392545C3AA002B149A /* BlogFeed_VM.swift */; };
@@ -255,6 +260,11 @@
 		C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogDetail_VC.swift; sourceTree = "<group>"; };
 		C97490EE25548FE000EE607E /* AdvancedBaseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBaseList.swift; sourceTree = "<group>"; };
 		C97490F0255587E200EE607E /* AdvancedBaseListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBaseListVM.swift; sourceTree = "<group>"; };
+		C97490F2255925E400EE607E /* BlogComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogComment.swift; sourceTree = "<group>"; };
+		C97490F42559356900EE607E /* BlogCommentTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCommentTVCell.swift; sourceTree = "<group>"; };
+		C97490F52559356900EE607E /* BlogCommentTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlogCommentTVCell.xib; sourceTree = "<group>"; };
+		C97490FA2559893700EE607E /* BlogDetailTV_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogDetailTV_VM.swift; sourceTree = "<group>"; };
+		C97490FC2559896B00EE607E /* BlogDetailTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogDetailTV.swift; sourceTree = "<group>"; };
 		C9753F342545C2F4002B149A /* BlogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCoordinator.swift; sourceTree = "<group>"; };
 		C9753F372545C352002B149A /* BlogFeed_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogFeed_VC.swift; sourceTree = "<group>"; };
 		C9753F392545C3AA002B149A /* BlogFeed_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogFeed_VM.swift; sourceTree = "<group>"; };
@@ -532,6 +542,8 @@
 				C97490E625519CD000EE607E /* BlogTVCell.swift */,
 				C97490E725519CD000EE607E /* BlogTVCell.xib */,
 				C92CD00A2547FD0800FA7F1F /* BlogCreateImageCVCell.swift */,
+				C97490F42559356900EE607E /* BlogCommentTVCell.swift */,
+				C97490F52559356900EE607E /* BlogCommentTVCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -674,18 +686,36 @@
 			path = SwivelCustomTextFields;
 			sourceTree = "<group>";
 		};
+		C97490F8255988F700EE607E /* BlogCreateEdit */ = {
+			isa = PBXGroup;
+			children = (
+				C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */,
+				C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */,
+				C927034F25503CAC0078E58D /* BlogCreateContentGrid.swift */,
+				C92CD015254BEDB900FA7F1F /* BlogCreateContentGridVM.swift */,
+			);
+			name = BlogCreateEdit;
+			sourceTree = "<group>";
+		};
+		C97490F92559891B00EE607E /* BlogDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */,
+				C97490EA2553EA6600EE607E /* BlogDetail_VM.swift */,
+				C97490FC2559896B00EE607E /* BlogDetailTV.swift */,
+				C97490FA2559893700EE607E /* BlogDetailTV_VM.swift */,
+			);
+			name = BlogDetail;
+			sourceTree = "<group>";
+		};
 		C9753F362545C30B002B149A /* Blog */ = {
 			isa = PBXGroup;
 			children = (
 				C9753F342545C2F4002B149A /* BlogCoordinator.swift */,
 				C9753F372545C352002B149A /* BlogFeed_VC.swift */,
 				C9753F392545C3AA002B149A /* BlogFeed_VM.swift */,
-				C92CD0062547FBC900FA7F1F /* BlogCreateEdit_VC.swift */,
-				C92CD0082547FBD600FA7F1F /* BlogCreateEdit_VM.swift */,
-				C92CD015254BEDB900FA7F1F /* BlogCreateContentGridVM.swift */,
-				C927034F25503CAC0078E58D /* BlogCreateContentGrid.swift */,
-				C97490EC2553EA7200EE607E /* BlogDetail_VC.swift */,
-				C97490EA2553EA6600EE607E /* BlogDetail_VM.swift */,
+				C97490F8255988F700EE607E /* BlogCreateEdit */,
+				C97490F92559891B00EE607E /* BlogDetail */,
 			);
 			name = Blog;
 			sourceTree = "<group>";
@@ -697,6 +727,7 @@
 				C9753F422546F678002B149A /* Owner.swift */,
 				C9753F442546F700002B149A /* Blog.swift */,
 				C92CD00C2547FEF600FA7F1F /* BlogContent.swift */,
+				C97490F2255925E400EE607E /* BlogComment.swift */,
 			);
 			path = Blog;
 			sourceTree = "<group>";
@@ -919,6 +950,7 @@
 				C9EC703E25132DC8007E183B /* Common.storyboard in Resources */,
 				C97490E925519CD000EE607E /* BlogTVCell.xib in Resources */,
 				C9E2AE4A2509FAAA001F3961 /* Configuration.plist in Resources */,
+				C97490F72559356900EE607E /* BlogCommentTVCell.xib in Resources */,
 				C964AFF025061395009E998C /* Assets.xcassets in Resources */,
 				C97E25C9253D927600E95C69 /* credentials.plist in Resources */,
 				C9E2AE87250B3FC5001F3961 /* Signup.storyboard in Resources */,
@@ -1000,6 +1032,7 @@
 				C964B03025064B49009E998C /* GenericView.swift in Sources */,
 				C964B03425064B7F009E998C /* GenericTableViewCell.swift in Sources */,
 				C964B06825079C22009E998C /* SwivelUIMaker.swift in Sources */,
+				C97490FB2559893700EE607E /* BlogDetailTV_VM.swift in Sources */,
 				C9A39573250BB69300FEE5DA /* SwivelDocumentPicker.swift in Sources */,
 				C9A793332521B33400430872 /* BaseCollectionVC.swift in Sources */,
 				C9E2AE71250A3AF0001F3961 /* AlertPopoverVC.swift in Sources */,
@@ -1059,9 +1092,11 @@
 				C97E25C7253D752E00E95C69 /* GoogleSignIn.swift in Sources */,
 				C9E2AE63250A3A16001F3961 /* OTPVerification_VC.swift in Sources */,
 				C9753F412546F614002B149A /* SwivelDate.swift in Sources */,
+				C97490F3255925E400EE607E /* BlogComment.swift in Sources */,
 				C964B05C25079B68009E998C /* ReactiveExtensiones.swift in Sources */,
 				C964B05425079489009E998C /* SwivelMaxCharachtersTextField.swift in Sources */,
 				C94EF75C254058260090A28A /* BaseButton.swift in Sources */,
+				C97490FD2559896B00EE607E /* BlogDetailTV.swift in Sources */,
 				C9E2AE3B2508A652001F3961 /* SettingValue.swift in Sources */,
 				C964B05E25079B85009E998C /* Font.swift in Sources */,
 				C9A39577250BB6DF00FEE5DA /* SwivelImagePickerController.swift in Sources */,
@@ -1122,6 +1157,7 @@
 				C964B02325064A66009E998C /* BaseTableViewVC.swift in Sources */,
 				C92CD010254977B200FA7F1F /* SwivelNormalTextView.swift in Sources */,
 				C9A793372521B4CD00430872 /* BaseCVCell.swift in Sources */,
+				C97490F62559356900EE607E /* BlogCommentTVCell.swift in Sources */,
 				C9E2AE7D250A3FBD001F3961 /* UpdateUserEmail_VC.swift in Sources */,
 				C964B06E25079CA3009E998C /* AppConfig.swift in Sources */,
 				C927034E254FE1B60078E58D /* BaseGrid.swift in Sources */,

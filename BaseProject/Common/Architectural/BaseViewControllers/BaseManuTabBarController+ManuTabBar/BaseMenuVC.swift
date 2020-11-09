@@ -20,7 +20,7 @@ protocol BaseMenuTabProtocol: class {
 
 /// Base tab bar controller functionality.
 /// You only have to override `getTabNames` and `getMenuTabViewControllerFor` functions.
-class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<ViewModel>, UIPageViewControllerDataSource, UIPageViewControllerDelegate, StoryboardInitializable {
+class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<ViewModel>, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     
     /// Actual tab bar showing the tabs are changing.

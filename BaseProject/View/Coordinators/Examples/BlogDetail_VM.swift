@@ -9,30 +9,31 @@
 import Foundation
 import RxSwift
 
-class BlogDetailVM: BaseFormVM { //}, BaseCollectionVMDataSource {
+class BlogDetailVM: BaseVM, AdvancedBaseListVMDataSource { //BaseFormVM, AdvancedBaseListVMDataSource {
 
     var blog                                            : Blog
-//    var contentGridViewModel                            : BlogCreateContentGridVM?
+    var contentTableViewModel                           : BlogDetailTVVM?
     
     // MARK: - Inputs
     // MARK: - Outputs
     
     deinit {
-        print("deinit BlogCreateEditVM")
+        print("deinit BlogDetailVM")
     }
     
-    init(blog: Blog, blogCreateEditMode: BlogCreateEditMode = .create) {
+    init(blog: Blog) {
         self.blog                                       = blog
         super.init()
-//        contentGridViewModel                            = BlogCreateContentGridVM(dataSource: self)
-//        childViewModels.append(contentGridViewModel!)
-//        let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, image: nil) }) ?? []
-//        contentGridViewModel?.contentAdd(items: contentArray)
+        contentTableViewModel                           = BlogDetailTVVM(dataSource: self)
+        childViewModels.append(contentTableViewModel!)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentTableViewModel?.addBlog(item: self.blog)
     }
     
     
     // MARK: - Network request
-    override func performSubmitRequest() {
-    }
     
 }

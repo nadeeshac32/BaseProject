@@ -609,6 +609,36 @@
             </objects>
             <point key="canvasLocation" x="3332" y="1055"/>
         </scene>
+        <!--Blog DetailVC-->
+        <scene sceneID="kPO-eU-lBC">
+            <objects>
+                <viewController storyboardIdentifier="BlogDetailVC" id="cGf-9o-upa" customClass="BlogDetailVC" customModule="Base_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cFY-kp-N9g">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yxr-vQ-bxg">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Yxr-vQ-bxg" firstAttribute="top" secondItem="WW8-Lz-j3k" secondAttribute="top" id="8T7-ru-8Ou"/>
+                            <constraint firstItem="Yxr-vQ-bxg" firstAttribute="trailing" secondItem="WW8-Lz-j3k" secondAttribute="trailing" id="8r2-N4-nhD"/>
+                            <constraint firstItem="Yxr-vQ-bxg" firstAttribute="leading" secondItem="WW8-Lz-j3k" secondAttribute="leading" id="Bbw-Es-yUk"/>
+                            <constraint firstItem="Yxr-vQ-bxg" firstAttribute="bottom" secondItem="WW8-Lz-j3k" secondAttribute="bottom" id="Do2-d5-aWg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WW8-Lz-j3k"/>
+                    </view>
+                    <connections>
+                        <outlet property="_contentTV" destination="Yxr-vQ-bxg" id="PDD-h9-MuT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qu1-aL-n5d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4079.7101449275365" y="1054.6875"/>
+        </scene>
         <!--Dynemic CollectionVC-->
         <scene sceneID="oaV-Zp-hsm">
             <objects>
