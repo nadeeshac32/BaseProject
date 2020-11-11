@@ -1,8 +1,8 @@
 //
-//  BlogComment.swift
+//  BlogChildComment.swift
 //  Base Project
 //
-//  Created by Nadeesha Chandrapala on 11/9/20.
+//  Created by Nadeesha Chandrapala on 11/10/20.
 //  Copyright © 2020 Swivel Tech. All rights reserved.
 //
 
@@ -10,51 +10,56 @@ import Foundation
 import ObjectMapper
 import RxSwift
 
-class BlogComment: BaseModel {
-    var blogCommentId                   : String?
+class BlogChildComment: BaseModel {
     var owner                           : Owner?
     var userId                          : String?
     var comment                         : String?
     var totalLikes                      : Int?
     var isLiked                         : Bool? = false
+    var createdDate                     : SwivelDate?
+    var updatedDate                     : SwivelDate?
     
     var _comment                        = BehaviorSubject<String>(value: "")
     
     override init() {
-        self.blogCommentId              = ""
+        super.init()
         self.comment                    = ""
         self.totalLikes                 = 0
         self.owner                      = Owner(id: UserAuth.si.userId, name: User.si.fullName, imageUrl: User.si.imageUrl)
         self.userId                     = owner?.id
-        super.init()
+        self.createdDate                = nil
+        self.updatedDate                = nil
     }
     
-    init(blogCommentId: String?, owner: Owner?, comment: String?, totalLikes: Int?, isLiked: Bool?) {
-        self.blogCommentId              = blogCommentId
+    init(blogCommentId: String?, owner: Owner?, comment: String?, totalLikes: Int?, isLiked: Bool?, createdDate: SwivelDate?, updatedDate: SwivelDate?) {
+        super.init(id: blogCommentId ?? "")
+        self.id                         = blogCommentId
         self.owner                      = owner
         self.userId                     = owner?.id
         self.comment                    = comment
         self.totalLikes                 = totalLikes ?? 0
         self.isLiked                    = isLiked ?? false
+        self.createdDate                = createdDate
+        self.updatedDate                = updatedDate
         
         _comment                        = BehaviorSubject<String>(value: comment ?? "")
-        super.init(id: self.blogCommentId!)
     }
     
     required init?(map: Map) {
         super.init(map: map)
-        self.id                         = self.blogCommentId
     }
 
     override func mapping(map: Map) {
-        blogCommentId                   <- map["commentId"]
+        super.mapping(map: map)
+        id                              <- map["id"]
         owner                           <- map["owner"]
         userId                          <- map["userId"]
         comment                         <- map["comment"]
         totalLikes                      <- map["totalLikes"]
         isLiked                         <- map["isLiked"]
+        createdDate                     <- map["createdDate"]
+        updatedDate                     <- map["updatedDate"]
         _comment                        = BehaviorSubject<String>(value: comment ?? "")
-        self.id                         = self.blogCommentId
     }
     
 //    func updateSaved() {

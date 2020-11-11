@@ -80,7 +80,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     
     override func configureCell(item: Blog, row: Int, selectable: Bool) {
         super.configureCell(item: item, row: row, selectable: selectable)
-        profileImageVw.image                    = UIImage(named: item.owner?.imageUrl ?? "")
+        profileImageVw.setImageWith(imagePath: item.owner?.imageUrl ?? "", completion: nil)
         userNameLbl.attributedText              = getUsername(username: item.owner?.name ?? "", location: item.location ?? "")
         timeAgoLbl.text                         = item.createdDate?.displayText ?? ""
         titleLbl.text                           = item.title
@@ -88,7 +88,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         postStatusLbl.text                      = "\(item.totalLikes!) Likes  •  \(item.totalComments!) Comments"
         
         carousel.delegate                       = self
-        carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: true, timer: 5.0, defaultImage: "defaultImage")
+        carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: AppConfig.si.default_ImageName)
         //  optional methods
         carousel.setCarouselOpaque(layer: true, describedTitle: false, pageIndicator: false)
         carousel.setCarouselLayout(displayStyle: 0, pageIndicatorPositon: 2, pageIndicatorColor: nil, describedTitleColor: nil, layerColor: nil)

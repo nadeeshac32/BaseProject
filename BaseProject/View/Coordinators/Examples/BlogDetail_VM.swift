@@ -24,15 +24,9 @@ class BlogDetailVM: BaseVM, AdvancedBaseListVMDataSource { //BaseFormVM, Advance
     init(blog: Blog) {
         self.blog                                       = blog
         super.init()
-        contentTableViewModel                           = BlogDetailTVVM(dataSource: self)
+        contentTableViewModel                           = BlogDetailTVVM(dataSource: self, blog: blog)
         childViewModels.append(contentTableViewModel!)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        contentTableViewModel?.addBlog(item: self.blog)
-    }
-    
+    }    
     
     // MARK: - Network request
     

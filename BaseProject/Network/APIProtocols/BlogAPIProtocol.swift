@@ -34,4 +34,10 @@ protocol BlogAPIProtocol {
                         page: Int, limit: Int,
                         onSuccess: ((_ blogs: [Blog], _ total: Int, _ page: Int, _ limit: Int) -> Void)?,
                         onError: ErrorCallback?)
+    
+    func getBlogComments(method: HTTPMethod!,
+                         blogId: String,
+                         page: Int, limit: Int,
+                         onSuccess: ((_ comments: [Comment], _ total: Int, _ page: Int, _ limit: Int, _ size: Int) -> Void)?,
+                         onError: ErrorCallback?)
 }

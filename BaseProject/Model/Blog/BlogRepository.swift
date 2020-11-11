@@ -14,7 +14,7 @@ class BlogRepository {
         var posts = [Blog]()
         
         let post1   = getPost(ownerName: "Liam Neeson",
-                              ownerImageName: "image_liam_neeson",
+                              ownerImageName: "https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F10ee0574-2919-11e9-a92b-e57f23e07fe4.jpg?crop=2994%2C1996%2C0%2C0",
                               blogId: "P0001",
                               displayTime: "1 hr ago",
                               title: "I will find you and I will kill you. Be prepared when I come for you",
@@ -30,7 +30,7 @@ class BlogRepository {
                               Shares: 189)
         
         let post2   = getPost(ownerName: "Will Smith",
-                              ownerImageName: "image_will_smith",
+                              ownerImageName: "https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzQzMTY2NDc4/will-smith-9542165-1-402.jpg",
                               blogId: "P0002",
                               displayTime: "3 hrs ago",
                               title: "Life is lived on the Edge",
@@ -45,7 +45,7 @@ class BlogRepository {
                               Shares: 3094)
         
         let post3   = getPost(ownerName: "Morgan Freeman",
-                              ownerImageName: "image_morgan_freeman",
+                              ownerImageName: "https://lh3.googleusercontent.com/proxy/Z8L_N5NOLRK4ezrPCr7rEuVVeDIB0bSQx13thQVr4gjYwbioWBH7BLfkh0u8CD-6RihhldgKKoVB2RtXEJlK9EJAR-eKbVOU8qQYoDkWCvVxNWMBKyozYQttP5M",
                               blogId: "P0003",
                               displayTime: "12 hrs ago",
                               title: "",

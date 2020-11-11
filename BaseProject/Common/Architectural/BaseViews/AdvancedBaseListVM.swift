@@ -73,7 +73,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     var apiDataDownloadedCount  : Int               = 0
     var apiDataTotalCount   : Int                   = 1
     var requestPage         : Int                   = 0
-    let limit               : Int                   = 200
+    var limit               : Int                   = 200
     
     /// Data list can be sorted from key if you wanted. In the Data model you should override getSortKey method as you want.
     var shouldSortFromKey   : Bool                  = false
@@ -182,14 +182,9 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
         }
     }
     
-    /// Get items count
-    func getCalculatedItemsCount() -> Int {
-        return apiDataDownloadedCount
-    }
-    
     /// Network request to fetch data from the Rest API.
     /// You have to override this methis in your subclass.
-    func perfomrGetItemsRequest(loadPage: Int, limit: Int) {
+    func performGetItemsRequest(loadPage: Int, limit: Int) {
         fatalError("This method must be overriden by the subclass")
     }
     
@@ -203,7 +198,6 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     func reloadList() {
         apiDataTotalCount                           = 1
         requestPage                                 = 0
-    
         removeAllAPIItems()                         //replaced emptying table itemsWithHeaders.onNext([])
         apiDataDownloadedCount                      = 0
         paginateNext()
@@ -212,10 +206,10 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     /// Paginate next data set from the Rest API.
     /// This method will be called the view has scroll to the bottom
     func paginateNext() {
-        if loadFromAPI && apiDataTotalCount > getCalculatedItemsCount() && searchText == "" {
+        if loadFromAPI && apiDataTotalCount > apiDataDownloadedCount && searchText == "" {
             self.apiDataTotalCount                  = 0
-            perfomrGetItemsRequest(loadPage: requestPage, limit: limit)
-        } else if loadFromAPI && apiDataTotalCount > getCalculatedItemsCount() && searchText != "" {
+            performGetItemsRequest(loadPage: requestPage, limit: limit)
+        } else if loadFromAPI && apiDataTotalCount > apiDataDownloadedCount && searchText != "" {
             self.apiDataTotalCount                  = 0
             performSearchItemsRequest(searchText: searchText, loadPage: requestPage, limit: limit)
         }
@@ -233,12 +227,12 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [BaseModel], total: Int, page: Int) {
+    func handleResponse(items: [BaseModel], total: Int, page: Int, size: Int) {
         self.apiDataTotalCount                      = total
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
-        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + items.count
+        self.apiDataDownloadedCount                 = apiDataDownloadedCount + size     // items.count
         self.requestLoading.onNext(false)
         if loadFromAPI && !loadAsDynemic && searchText == "" {
             paginateNext()
@@ -247,13 +241,13 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [String: [BaseModel]], total: Int, page: Int) {
+    func handleResponse(items: [String: [BaseModel]], total: Int, page: Int, size: Int) {
         self.apiDataTotalCount                      = total
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
-        let itemsCount                              = items.map({ $0.value.count }).reduce(0, { (result, nextValue) in result + nextValue })
-        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + itemsCount
+        //  let itemsCount                          = items.map({ $0.value.count }).reduce(0, { (result, nextValue) in result + nextValue })
+        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + size    //  itemsCount
         self.requestLoading.onNext(false)
         if loadFromAPI && !loadAsDynemic && searchText == ""  {
             paginateNext()
@@ -262,12 +256,12 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [BaseModel], total: Int, page: Int) {
+    func handleSearchResponse(searchTextOfData: String, items: [BaseModel], total: Int, page: Int, size: Int) {
         self.apiDataTotalCount                      = total
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
-        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + items.count
+        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + size    //  items.count
         self.requestLoading.onNext(false)
         if loadFromAPI && !loadAsDynemic && searchTextOfData == searchText {
             paginateNext()
@@ -276,13 +270,13 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [String: [BaseModel]], total: Int, page: Int) {
+    func handleSearchResponse(searchTextOfData: String, items: [String: [BaseModel]], total: Int, page: Int, size: Int) {
         self.apiDataTotalCount                      = total
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
-        let itemsCount                              = items.map({ $0.value.count }).reduce(0, { (result, nextValue) in result + nextValue })
-        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + itemsCount
+        //  let itemsCount                          = items.map({ $0.value.count }).reduce(0, { (result, nextValue) in result + nextValue })
+        self.apiDataDownloadedCount                 = self.apiDataDownloadedCount + size    //  itemsCount
         self.requestLoading.onNext(false)
         if loadFromAPI && !loadAsDynemic && searchTextOfData == searchText {
             paginateNext()
@@ -367,7 +361,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
         }
 
         let updatedSections: [SectionType]          = currentSections.filter { (existingSection) -> Bool in
-            return existingSection.header == sectionHeaderWhenStaticDataComesAsArray
+            return existingSection.header.lowercased() == sectionHeaderWhenStaticDataComesAsArray.lowercased()
         }
         self.itemsWithHeaders.onNext(updatedSections)
     }

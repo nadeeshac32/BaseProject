@@ -51,7 +51,6 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     let disposeBag                              = DisposeBag()
     weak var viewModel                          : ViewModel?
     
-    
     var dataSource : RxTableViewSectionedAnimatedDataSource<SectionType>?
     
     init(viewModel: ViewModel, tableView: UITableView!, delegate: BaseListDelagate) {
@@ -74,12 +73,9 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
                                                                                                                              deleteAnimation: .left),
                                                                               configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
                                                                                     (self?.setupCell(dataSource: ds, tableView: tv, indexPath: ip, dataModel: item) ?? UITableViewCell())
-                                                                              },
-                                                                              titleForHeaderInSection: { dataSource, index in
-                                                                                    return dataSource.sectionModels[index].header
                                                                               })
         dataSource.sectionIndexTitles           = { [weak self] dataSource in
-            if (self?.viewModel?.getCalculatedItemsCount() ?? 0) > 0 {
+            if (self?.viewModel?.apiDataDownloadedCount ?? 0) > 0 {
                 if self?.isDynemicSectionTitles == true {
                     return dataSource.sectionModels.map { $0.header }
                 } else {
@@ -124,7 +120,7 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return delegate?.viewForHeaderInSection(tableView, sectionTitle: self.dataSource?[section].header ?? "")
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if self.dataSource?[section].header.lowercased() == viewModel?.sectionHeaderWhenStaticDataComesAsArray.lowercased()
             || self.dataSource?[section].header.lowercased() == viewModel?.sectionHeaderWhenDataComesAsArray.lowercased() {

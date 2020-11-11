@@ -585,4 +585,12 @@ extension HTTPService: BlogAPIProtocol {
             return
         })
     }
+    
+    func getBlogComments(method: HTTPMethod! = .get, blogId: String, page: Int, limit: Int, onSuccess: ((_ comments: [Comment], _ total: Int, _ page: Int, _ limit: Int, _ size: Int) -> Void)?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/comment/\(blogId)/\(page)/\(limit)"
+        genericRequest(method: method!, parameters: nil, contextPath: contextPath, responseType: Comment.self, onError: onError, completionHandlerForArray: { (arrayResponse) in
+            onSuccess?(arrayResponse.items ?? [], arrayResponse.total ?? 0, arrayResponse.page ?? 0, limit, arrayResponse.size ?? 0)
+            return
+        })
+    }
 }
