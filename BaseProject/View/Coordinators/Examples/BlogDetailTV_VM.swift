@@ -10,8 +10,16 @@ import Foundation
 import RxSwift
 import ObjectMapper
 
+
 /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
 class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableViewSection> {
+    
+    // MARK:- Output
+    var showShareBlogOptions        = PublishSubject<[Any]>()
+    var displayContent              = PublishSubject<String>()
+    var typeCmmentForBlog           = PublishSubject<Bool>()
+    var typeReplyCommentFor         = PublishSubject<(commentId: String, commentIndexPath: IndexPath)>()
+    
     
     override var dataLoadIn         : DataLoadIn? { get { return .ViewWillAppear } set {} }
     override var limit              : Int { get { return 10 } set {} }
@@ -42,5 +50,16 @@ class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableVi
         }
     }
     
+    func shareBtnTapped(blog: Blog) {
+        var sharebles           = [Any]()
+        if let title            = blog.title { sharebles.append(title) }
+        if let desc             = blog.desc { sharebles.append(desc) }
+        if let content          = blog.content { sharebles.append(content.map { $0 }) }
+        showShareBlogOptions.onNext(sharebles)
+    }
+    
+    func viewContent(url: String) {
+        displayContent.onNext(url)
+    }
     
 }

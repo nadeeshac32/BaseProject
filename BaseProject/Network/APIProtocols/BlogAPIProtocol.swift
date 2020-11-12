@@ -40,4 +40,9 @@ protocol BlogAPIProtocol {
                          page: Int, limit: Int,
                          onSuccess: ((_ comments: [Comment], _ total: Int, _ page: Int, _ limit: Int, _ size: Int) -> Void)?,
                          onError: ErrorCallback?)
+    
+    func deleteBlogWithId(method: HTTPMethod!,
+                                 blogId: String,
+                                 onSuccess: SuccessEmptyDataCallback?,
+                                 onError: ErrorCallback?)
 }

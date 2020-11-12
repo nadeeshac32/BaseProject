@@ -67,10 +67,14 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         super.init()
         contentGridViewModel                              = BlogCreateContentGridVM(dataSource: self)
         childViewModels.append(contentGridViewModel!)
-        let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, image: nil) }) ?? []
-        contentGridViewModel?.contentAdd(items: contentArray)
         
         enableImagePicker.onNext(blogCreateEditMode == .create)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, image: nil) }) ?? []
+        contentGridViewModel?.contentAdd(items: contentArray)
     }
     
     func locationSelected(location: String?) {

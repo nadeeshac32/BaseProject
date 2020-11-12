@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Toast_Swift
+import DropDown
 import Alamofire
 import RxSwift
 import GoogleSignIn
@@ -40,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ToastManager.shared.position                = .center
         ToastManager.shared.duration                = 4.0
         ToastManager.shared.isTapToDismissEnabled   = true
+        
+        // Configure Drop down will handle its display with the keyboard displayed
+        DropDown.startListeningToKeyboard()
         
         if #available(iOS 13, *) {
             // this part is handled in SceneDelegate

@@ -115,7 +115,8 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     init(dataSource: AdvancedBaseListVMDataSource?) {
         super.init()
         self.dataSource     = dataSource
-        DisposeBag().insert([
+        
+        disposeBag.insert([
             errorMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
                 guard let `self` = self else { return }
                 self.dataSource?.errorMessage(listVM: self, detail: SuccessMessageDetailType)

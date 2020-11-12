@@ -593,4 +593,12 @@ extension HTTPService: BlogAPIProtocol {
             return
         })
     }
+    
+    func deleteBlogWithId(method: HTTPMethod! = .delete, blogId: String, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/\(blogId)"
+        genericRequest(method: method, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
 }

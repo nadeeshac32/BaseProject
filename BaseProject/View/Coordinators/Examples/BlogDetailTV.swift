@@ -24,41 +24,32 @@ class BlogDetailTV: AdvancedBaseList<BlogDetailTVCellType, BlogDetailTableViewSe
 extension BlogDetailTV: BlogTVCellDelegate {
     
     func likeError(restError: RestClientError) {
-        viewModel?.handleRestClientError(error: restError) // TODO: - parent child binding
+        viewModel?.handleRestClientError(error: restError)
     }
     
     func shareTappedFor(blog: Blog) {
-        print("shareTappedFor")
-//        viewModel?.shareBlogHasTapped.onNext(blog)
+        viewModel?.shareBtnTapped(blog: blog)
     }
     
     func commentTappedFor(blog: Blog) {
-//        viewModel?.commentBtnHasTapped.onNext(blog)
+        viewModel?.typeCmmentForBlog.onNext(true)
     }
     
     func tappedOnContentWith(url: String) {
-//        let agrume = Agrume(url: URL(string: url)!)
-//        agrume.download = { url, completion in
-//            let httpService = HTTPService()
-//            httpService.downloadImage(imagePath: url.absoluteString) { (image) in
-//                guard let image = image else { return }
-//                completion(image)
-//            }
-//        }
-//        agrume.show(from: self)
+        viewModel?.viewContent(url: url)
     }
 }
 
 extension BlogDetailTV: BlogCommentTVCellDelegate {
-    func replyForCommentTapped(commentId: String) {
-        print("replyForCommentTapped commentId: \(commentId)")
+    func replyForCommentTapped(commentId: String, indexPath: IndexPath) {
+        viewModel?.typeReplyCommentFor.onNext((commentId: commentId, commentIndexPath: indexPath))
     }
     
     func updateCellFor(indexPath: IndexPath, height: CGFloat) {
         if let cell = tableView.cellForRow(at: indexPath) as? BlogCommentTVCell {
             tableView.beginUpdates()
             cell.repliesTblVwHeightCons.constant = height
-            //  tableView.reloadRows(at: [indexPath], with: .automatic)
+            UIView.animate(withDuration: 0.3) { cell.layoutIfNeeded() }
             tableView.endUpdates()
         }
     }

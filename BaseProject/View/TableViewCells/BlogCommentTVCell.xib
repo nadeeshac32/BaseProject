@@ -74,7 +74,7 @@
                         <rect key="frame" x="35" y="77" width="308" height="0.0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" id="Gst-U6-X4J"/>
+                            <constraint firstAttribute="height" priority="999" id="Gst-U6-X4J"/>
                         </constraints>
                     </tableView>
                 </subviews>

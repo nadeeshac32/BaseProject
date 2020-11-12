@@ -121,7 +121,7 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     init(dataSource: BaseListVMDataSource?) {
         super.init()
         self.dataSource     = dataSource
-        DisposeBag().insert([
+        disposeBag.insert([
             errorMessage.subscribe(onNext: { [weak self] (SuccessMessageDetailType) in
                 guard let `self` = self else { return }
                 self.dataSource?.errorMessage(listVM: self, detail: SuccessMessageDetailType)

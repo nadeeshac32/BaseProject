@@ -609,10 +609,10 @@
             </objects>
             <point key="canvasLocation" x="3332" y="1055"/>
         </scene>
-        <!--Blog DetailVC-->
+        <!--Blog Detail-->
         <scene sceneID="kPO-eU-lBC">
             <objects>
-                <viewController storyboardIdentifier="BlogDetailVC" id="cGf-9o-upa" customClass="BlogDetailVC" customModule="Base_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlogDetailVC" title="Blog Detail" id="cGf-9o-upa" customClass="BlogDetailVC" customModule="Base_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cFY-kp-N9g">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -67,7 +67,7 @@ class SwivelNormalTextView: UITextView {
         updatePlaceHolderLabel()
     }
     
-    private func updatePlaceHolderLabel() {
+    func updatePlaceHolderLabel() {
         UIView.animate(withDuration: 0.25, animations: { [weak self] in
             self?.placeHolderLabel.alpha    = (self?.text.count == 0) ? 0.5 : 0
         }, completion: nil)

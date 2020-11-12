@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 protocol BlogCommentTVCellDelegate: BaseTVCellDelegate {
-    func replyForCommentTapped(commentId: String)
+    func replyForCommentTapped(commentId: String, indexPath: IndexPath)
     func updateCellFor(indexPath: IndexPath, height: CGFloat)
 }
 
@@ -96,10 +96,16 @@ class BlogCommentTVCell: BaseTVCell<Comment>, UITableViewDelegate {
     }
     
     @IBAction func replyBtnTapped(_ sender: Any) {
-        blogCommentDelegate?.replyForCommentTapped(commentId: item?.id ?? "")
+        // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
+        blogCommentDelegate?.replyForCommentTapped(commentId: item?.id ?? "", indexPath: IndexPath(row: row ?? 0, section: 1))
     }
     
     @IBAction func viewRepliesBtnTapped(_ sender: Any) {
+        let commentLblHeightCons                = commentLbl.heightAnchor.constraint(equalToConstant: commentLbl.frame.height)
+        commentLblHeightCons.priority           = UILayoutPriority(rawValue: 999)
+        let constraints                         = [commentLblHeightCons]
+        NSLayoutConstraint.activate(constraints)
+        
         if item?.isExpanded == false {
             _children.onNext(item?.children ?? [])
             viewRepliesBtn.setTitle("Hide Replies", for: .normal)
@@ -111,6 +117,8 @@ class BlogCommentTVCell: BaseTVCell<Comment>, UITableViewDelegate {
         
         // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
         blogCommentDelegate?.updateCellFor(indexPath: IndexPath(row: row ?? 0, section: 1), height: repliesTableView.contentSize.height)
+        
+        NSLayoutConstraint.deactivate(constraints)
     }
     
     

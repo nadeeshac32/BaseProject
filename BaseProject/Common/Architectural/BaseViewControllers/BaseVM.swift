@@ -14,6 +14,8 @@ import RxCocoa
 /// Handles all the RestClientErrors + authentication failure & logout functionality.
 /// Displaying Success / Warning / Error messages
 class BaseVM: NSObject {
+    let disposeBag                                                                                  = DisposeBag()
+    
     // MARK: - Inputs
     
     // MARK: - Outputs

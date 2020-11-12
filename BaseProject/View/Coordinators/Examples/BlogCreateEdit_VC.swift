@@ -35,7 +35,8 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
     override func customiseView() {
         initialise(scrollView: _scrollView, dynemicGapCons: _dynemicGapCons, scrollViewTopCons: _scrollViewTopCons, scrollViewBottomCons: _scrollViewBottomCons, submitButton: _submitButton, scrollViewBottomMargin: _scrollViewBottomMargin)
         super.customiseView()
-        self.addBackButton(title: self.previousVCTitle?.localized() ?? "Home")
+        self.addBackButton(title: self.previousVCTitle ?? "Home")
+        self.title                                          = "Create Blog"
         
         _scrollView.addBoarder(width: 0.5, cornerRadius: 8, color: .lightGray)
         userImageVw.layer.cornerRadius                      = userImageVw.frame.height / 2
@@ -64,33 +65,23 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
                 }),
                 viewModel.blog._title.bind(to: titleTxtFld.rx.text.orEmpty),
                 viewModel.blog._desc.bind(to: descTxtVw.rx.text.orEmpty),
-                viewModel.setupTitleViewInViewDidAppear.subscribe(onNext: { [weak self] (_) in
-                    self?.navigationController?.navigationBar.topItem?.title        = "Blog Feed"
-                }),
-                viewModel.removeTitleViewInViewWillDisappear.subscribe(onNext: { [weak self] (_) in
-                    self?.navigationController?.navigationBar.topItem?.titleView    = nil
-                }),
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
 //                    self?.presentImagePicker { [weak self] (image) in
 //                        if let image = image {
 //                            self?.viewModel?.contentSelected(content: [image])
 //                        }
 //                    }
-                    
                     let viewController = TLPhotosPickerViewController(withTLPHAssets: { [weak self] (assets) in // TLAssets
                         //  self?.viewModel?.contentSelected(content: [image])
                         print("assets selected: \(assets.count)")
                     }, didCancel: nil)
-                    //  viewController.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-                    //    print("exceed max selection")
-                    //  }
+                    
                     //  viewController.handleNoAlbumPermissions = { [weak self] (picker) in
                     //    print("handle denied albums permissions case")
                     //  }
                     //  viewController.handleNoCameraPermissions = { [weak self] (picker) in
                     //    print("handle denied camera permissions case")
                     //  }
-                    //  viewController.selectedAssets = self.selectedAssets
                     var configure = TLPhotosPickerConfigure()
                     configure.maxSelectedAssets = 10
                     viewController.configure = configure
@@ -110,6 +101,7 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
                 addLocationBtn.rx.tap.bind(to: viewModel.addLocationTapped)
             ])
         }
+        descTxtVw.updatePlaceHolderLabel()
     }
     
     func showLocationPicker() {
