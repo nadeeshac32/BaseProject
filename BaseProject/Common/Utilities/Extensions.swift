@@ -341,6 +341,9 @@ extension UIColor {
     }
 }
 
+import Agrume
+import AVKit
+
 extension UIViewController {
     func showInputDialog(title: String? = nil,
                          subtitle: String? = nil,
@@ -375,6 +378,24 @@ extension UIViewController {
         cancelAction.setValue(cancelColor, forKey: "titleTextColor")
         
         self.present(alert, animated: true, completion: nil)
+    }
+        
+    func displayMediaFrom(url: String) {
+        let httpService = HTTPService()
+        httpService.downloadImage(imagePath: url) { [weak self] (image) in
+            guard let `self`                = self else { return }
+            if let image = image {
+                let agrume                  = Agrume(image: image)
+                agrume.show(from: self)
+            } else if let url = URL(string: url) {
+                let player                  = AVPlayer(url: url)
+                let playerViewController    = AVPlayerViewController()
+                playerViewController.player = player
+                self.present(playerViewController, animated: true) {
+                    playerViewController.player!.play()
+                }
+            }
+        }
     }
 }
 
@@ -751,5 +772,4 @@ extension UITapGestureRecognizer {
         indexOfCharacter                    = indexOfCharacter + 4
         return NSLocationInRange(indexOfCharacter, targetRange)
     }
-    
 }

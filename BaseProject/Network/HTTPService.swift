@@ -272,6 +272,8 @@ extension HTTPService: FileAPIProtocol {
                     DispatchQueue.main.async(execute: {
                         if imagePath != "" && imageFromData != nil {
                             completion?(imageFromData!)
+                        } else {
+                            completion?(nil)
                         }
                     })
                 }

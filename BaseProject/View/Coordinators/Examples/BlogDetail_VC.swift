@@ -9,7 +9,7 @@
 import UIKit
 import Agrume
 import DropDown
-
+import AVKit
 
 class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate {    //BaseFormVC<BlogDetailVM>, BaseListDelagate {
     
@@ -69,16 +69,8 @@ class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate {    //BaseFormVC<Blo
                     let ac                                  = UIActivityViewController(activityItems: sharebles, applicationActivities: nil)
                     self?.present(ac, animated: true)
                 }),
-                viewModel.displayContent.subscribe(onNext: { (url) in
-                    let agrume = Agrume(url: URL(string: url)!)
-                    agrume.download = { url, completion in
-                        let httpService = HTTPService()
-                        httpService.downloadImage(imagePath: url.absoluteString) { (image) in
-                            guard let image = image else { return }
-                            completion(image)
-                        }
-                    }
-                    agrume.show(from: self)
+                viewModel.displayContent.subscribe(onNext: { [weak self] (url) in
+                    self?.displayMediaFrom(url: url)
                 })
             ])
         }

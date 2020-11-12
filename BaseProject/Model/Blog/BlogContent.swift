@@ -8,20 +8,17 @@
 
 import Foundation
 import ObjectMapper
+import Photos
 
 class BlogContent: BaseModel {
-    var mediaUrl        : String?
-    var image           : UIImage?
-    var videoThumbUrl   : String?
-    var videoFilePath   : String?
-    var isRemovable      : Bool = false
+    var mediaUrl            : String?
+    var asset               : PHAsset?
+    var isRemovable         : Bool = false
 
-    init(editable: Bool, mediaUrl: String?, image: UIImage?, videoThumbUrl: String? = nil, videoFilePath: String? = nil) {
+    init(editable: Bool, mediaUrl: String?, asset: PHAsset?) {
         self.mediaUrl       = mediaUrl ?? UUID().uuidString
-        self.image          = image
-        self.videoThumbUrl  = videoThumbUrl
-        self.videoFilePath  = videoFilePath
-        self.isRemovable     = editable
+        self.asset          = asset
+        self.isRemovable    = editable
         super.init(id: self.mediaUrl!)
     }
 

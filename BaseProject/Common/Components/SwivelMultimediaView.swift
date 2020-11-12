@@ -9,11 +9,14 @@
 import UIKit
 import Photos
 import PhotosUI
+import TLPhotoPicker
 
 class SwivelMultimediaView: GenericView {
     
     fileprivate var player                      : AVPlayer?
     fileprivate var playerLayer                 : AVPlayerLayer?
+    var autoPlay                                : Bool = false
+    var soundOn                                 : Bool = false
     
     fileprivate let imageView                   : UIImageView = {
         let view                                = UIImageView()
@@ -22,13 +25,9 @@ class SwivelMultimediaView: GenericView {
         return view
     }()
     
-    open var asset: PHAsset? {
+    var asset: PHAsset? {
         didSet {
-            guard let asset = self.asset else {
-                imageView.image                 = nil
-                return
-            }
-            
+            guard let asset = self.asset else { imageView.image = nil; return; }
             if asset.mediaType == .image {
                 previewPhoto(from: asset)
             } else {
@@ -37,7 +36,15 @@ class SwivelMultimediaView: GenericView {
         }
     }
     
+    var assetUrl: String? {
+        didSet {
+            guard let assetUrl = assetUrl else { imageView.image = nil; return; }
+            previewPhoto(from: assetUrl)
+        }
+    }
+    
     deinit {
+        print("SwivelMultimediaView deinit")
         player?.pause()
     }
     
@@ -46,7 +53,7 @@ class SwivelMultimediaView: GenericView {
         self.addAligned(imageView)
     }
         
-    func fetchImage(for asset: PHAsset, canHandleDegraded: Bool = true, completion: @escaping ((UIImage?) -> Void)) {
+    private func fetchImage(for asset: PHAsset, canHandleDegraded: Bool = true, completion: @escaping ((UIImage?) -> Void)) {
         let options                             = PHImageRequestOptions()
         options.isNetworkAccessAllowed          = true
         options.deliveryMode                    = .opportunistic
@@ -58,8 +65,34 @@ class SwivelMultimediaView: GenericView {
         })
     }
     
-    func previewVideo(from asset: PHAsset) {
-        PHCachingImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: { (avAsset, audio, info) in
+    private func previewPhoto(from url: String) {
+        let httpService                             = HTTPService()
+        httpService.downloadImage(imagePath: url) { [weak self] (image) in
+            if let image = image {
+                self?.imageView.image               = image
+            } else if let url = URL(string: url) {
+                self?.previewVideo(from: url)
+            }
+        }
+    }
+    
+    private func previewVideo(from url: URL) {
+        DispatchQueue.main.async { [weak self] in
+            let player                              = AVPlayer(url: url)
+            let playerLayer                         = AVPlayerLayer(player: player)
+            playerLayer.videoGravity                = AVLayerVideoGravity.resizeAspect
+            playerLayer.masksToBounds               = true
+            playerLayer.frame                       = self?.imageView.bounds ?? .zero
+            self?.imageView.layer.addSublayer(playerLayer)
+            self?.playerLayer                       = playerLayer
+            self?.player                            = player
+            player.isMuted                          = !(self?.soundOn ?? false)
+            if self?.autoPlay == true { player.play() }
+        }
+    }
+    
+    private func previewVideo(from asset: PHAsset) {
+        PHCachingImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: { [weak self] (avAsset, audio, info) in
             DispatchQueue.main.async { [weak self] in
                 if let avAsset = avAsset {
                     let playerItem              = AVPlayerItem(asset: avAsset)
@@ -73,7 +106,15 @@ class SwivelMultimediaView: GenericView {
                     self?.playerLayer           = playerLayer
                     self?.player                = player
                     
-                    player.play()
+                    if self?.soundOn == true {
+                        player.isMuted          = false
+                    } else {
+                        player.isMuted          = true
+                    }
+                    
+                    if self?.autoPlay == true {
+                        player.play()
+                    }
                 } else {
                     self?.previewPhoto(from: asset)
                 }
@@ -81,8 +122,14 @@ class SwivelMultimediaView: GenericView {
         })
     }
     
-    func previewPhoto(from asset: PHAsset) {
-        fetchImage(for: asset, canHandleDegraded: false, completion: { self.imageView.image = $0 })
+    private func previewPhoto(from asset: PHAsset) {
+        fetchImage(for: asset, canHandleDegraded: false, completion: { [weak self] in self?.imageView.image = $0 })
+    }
+    
+    func resetView() {
+        imageView.image                         = nil
+        player                                  = nil
+        playerLayer                             = nil
     }
 }
 

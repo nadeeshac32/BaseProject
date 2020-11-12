@@ -14,10 +14,14 @@ protocol BlogCreateImageCVCellDelegate: BaseCVCellDelegate {
 
 class BlogCreateImageCVCell: BaseCVCell<BlogContent> {
     
-    @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var multimediaVw: SwivelMultimediaView!
     @IBOutlet weak var removeBtn: UIButton!
     
-    var blogCreateImageGridDelegate: BlogCreateImageCVCellDelegate?
+    deinit {
+        print("BlogCreateImageCVCell deinit")
+    }
+    
+    weak var blogCreateImageGridDelegate: BlogCreateImageCVCellDelegate?
     override weak var delegate: BaseCVCellDelegate? {
         get {
             return blogCreateImageGridDelegate
@@ -34,26 +38,29 @@ class BlogCreateImageCVCell: BaseCVCell<BlogContent> {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor                        = .clear
-        self.selectedImageView.layer.cornerRadius   = 5
+        self.multimediaVw.layer.cornerRadius        = 5
         self.removeBtn.setImage(UIImage(named: "icon_cancel")?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.removeBtn.isHidden                     = true
-        self.selectedImageView.image                = UIImage(named: AppConfig.si.default_ImageName)
         self.addShadow()
     }
         
     override func configureCell(item: BlogContent, section: Int, row: Int, selectable: Bool) {
         super.configureCell(item: item, section: section, row: row, selectable: selectable)
         removeBtn.isHidden                          = !item.isRemovable
-        if item.isRemovable, let image = item.image {
-            selectedImageView.image                 = image
-        } else if let imagePath = item.mediaUrl {
-            // TODO: - Chech whether the mediaUrl is for an image
-            selectedImageView.setImageWith(imagePath: imagePath, completion: nil)
+        if item.isRemovable, let asset = item.asset {
+            multimediaVw.asset                      = asset
+        } else if let mediaUrl = item.mediaUrl {
+            multimediaVw.assetUrl                   = mediaUrl
         }
     }
     @IBAction func removeBtnTapped(_ sender: Any) {
         guard let item = self.item, item.isRemovable == true, let section = section, let row = row else { return }
         blogCreateImageGridDelegate?.removeContent(item: item, section: section, row: row)
     }
+    
+    override func prepareForReuse() {
+        multimediaVw.resetView()
+    }
+    
     
 }

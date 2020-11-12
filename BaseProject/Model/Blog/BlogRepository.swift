@@ -22,7 +22,8 @@ class BlogRepository {
                               contentImages: [
                                 "https://lincolnmartin.com/wp-content/uploads/2015/03/Blog-Lincoln-Martin-Strategic-Marketing-Harvard-Business-School-TAKEN-pricing-value-price-strategy-promotion-advertising-agency-branding-communications-marcomm.jpg",
                                 "https://img.cinemablend.com/filter:scale/quill/b/a/a/d/8/1/baad812ca258ac42bdf65bb994d5bc5920aaf04e.jpg?fw=1200",
-                                "https://www.irishtimes.com/polopoly_fs/1.1727586.1395008055!/image/image.jpg_gen/derivatives/box_620_330/image.jpg"
+                                "https://www.irishtimes.com/polopoly_fs/1.1727586.1395008055!/image/image.jpg_gen/derivatives/box_620_330/image.jpg",
+                                "https://fw-project.s3.ap-southeast-1.amazonaws.com/fid-2583de6a-378f-4b04-aa33-84ba92394b95.null"
                                 ],
                               likes: 3400,
                               isLiked: true,

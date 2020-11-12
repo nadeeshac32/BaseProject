@@ -37,6 +37,7 @@ class SwivelNormalTextView: UITextView {
         super.awakeFromNib()
         
         addBoarder(width: 1, cornerRadius: 5, color: .lightGray)
+        backgroundColor                     = .white
         textContainerInset                  = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 8)
         returnKeyType                       = .done
         addSubview(placeHolderLabel)

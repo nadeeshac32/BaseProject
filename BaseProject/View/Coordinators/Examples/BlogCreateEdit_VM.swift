@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import ObjectMapper
+import Photos
 
 enum BlogCreateEditMode {
     case edit, create
@@ -73,7 +74,7 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, image: nil) }) ?? []
+        let contentArray = blog.content?.map({ BlogContent(editable: false, mediaUrl: $0, asset: nil) }) ?? []
         contentGridViewModel?.contentAdd(items: contentArray)
     }
     
@@ -81,9 +82,9 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         blog._location.onNext(location ?? "")
     }
     
-    func contentSelected(content: [UIImage]) {
+    func contentSelected(content: [PHAsset]) {
         guard self.blogCreateEditMode == .create else { return }
-        let contentArray = content.map({ BlogContent(editable: true, mediaUrl: nil, image: $0) })
+        let contentArray = content.map({ BlogContent(editable: true, mediaUrl: nil, asset: $0) })
         contentGridViewModel?.contentAdd(items: contentArray)
     }
     

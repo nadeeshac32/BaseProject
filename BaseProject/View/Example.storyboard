@@ -431,7 +431,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="I8U-dt-NiJ"/>
                                         </constraints>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -490,7 +490,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="usernameLbl" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heV-Wd-z7r">
                                         <rect key="frame" x="98" y="20" width="271" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z0a-DU-vWp">
@@ -513,12 +513,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_defaultPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="Vew-rt-TTP">
+                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="akr-wf-BCl" customClass="SwivelMultimediaView" customModule="Base_Project" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="Vew-rt-TTP" secondAttribute="height" multiplier="1:1" id="lpg-N9-eCO"/>
+                                                                <constraint firstAttribute="width" secondItem="akr-wf-BCl" secondAttribute="height" multiplier="1:1" id="s8h-az-qcs"/>
                                                             </constraints>
-                                                        </imageView>
+                                                        </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pee-Y4-1BP">
                                                             <rect key="frame" x="66" y="0.0" width="30" height="30"/>
                                                             <constraints>
@@ -534,18 +535,18 @@
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="Vew-rt-TTP" secondAttribute="trailing" id="FR5-22-tjd"/>
-                                                        <constraint firstItem="Vew-rt-TTP" firstAttribute="top" secondItem="AA8-BW-6of" secondAttribute="top" id="IyX-xQ-ntN"/>
-                                                        <constraint firstItem="Vew-rt-TTP" firstAttribute="leading" secondItem="AA8-BW-6of" secondAttribute="leading" id="L91-AN-Lj0"/>
+                                                        <constraint firstItem="akr-wf-BCl" firstAttribute="top" secondItem="AA8-BW-6of" secondAttribute="top" id="OJp-Pa-J92"/>
                                                         <constraint firstItem="pee-Y4-1BP" firstAttribute="top" secondItem="AA8-BW-6of" secondAttribute="top" id="QAk-la-Kkd"/>
                                                         <constraint firstAttribute="trailing" secondItem="pee-Y4-1BP" secondAttribute="trailing" id="SAe-WY-bGo"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Vew-rt-TTP" secondAttribute="bottom" id="kCw-g6-Y7f"/>
+                                                        <constraint firstItem="akr-wf-BCl" firstAttribute="leading" secondItem="AA8-BW-6of" secondAttribute="leading" id="a0w-Mf-cOK"/>
+                                                        <constraint firstAttribute="trailing" secondItem="akr-wf-BCl" secondAttribute="trailing" id="ofl-UV-qG8"/>
+                                                        <constraint firstAttribute="bottom" secondItem="akr-wf-BCl" secondAttribute="bottom" id="opL-cY-T9Q"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <size key="customSize" width="96" height="96"/>
                                                 <connections>
+                                                    <outlet property="multimediaVw" destination="akr-wf-BCl" id="5tl-v4-teN"/>
                                                     <outlet property="removeBtn" destination="pee-Y4-1BP" id="xwE-Ne-xcs"/>
-                                                    <outlet property="selectedImageView" destination="Vew-rt-TTP" id="Azv-R0-LrH"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -607,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bv8-Xr-OgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3332" y="1055"/>
+            <point key="canvasLocation" x="3331.884057971015" y="1054.6875"/>
         </scene>
         <!--Blog Detail-->
         <scene sceneID="kPO-eU-lBC">
@@ -685,7 +686,6 @@
         <image name="icon_avatarPlaceHolder" width="128" height="128"/>
         <image name="icon_cancel" width="100" height="100"/>
         <image name="icon_checkbox_unchecked" width="100" height="100"/>
-        <image name="icon_defaultPlaceHolder" width="100" height="100"/>
         <image name="icon_location" width="44" height="44"/>
         <image name="icon_photo" width="44" height="44"/>
         <image name="icon_sync" width="100" height="100"/>

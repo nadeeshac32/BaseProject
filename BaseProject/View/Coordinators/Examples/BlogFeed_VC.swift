@@ -81,14 +81,6 @@ extension BlogFeedVC: BlogTVCellDelegate {
     }
     
     func tappedOnContentWith(url: String) {
-        let agrume = Agrume(url: URL(string: url)!)
-        agrume.download = { url, completion in
-            let httpService = HTTPService()
-            httpService.downloadImage(imagePath: url.absoluteString) { (image) in
-                guard let image = image else { return }
-                completion(image)
-            }
-        }
-        agrume.show(from: self)
+        self.displayMediaFrom(url: url)
     }
 }

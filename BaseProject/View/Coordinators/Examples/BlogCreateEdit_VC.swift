@@ -8,6 +8,7 @@
 
 import UIKit
 import TLPhotoPicker
+import Photos
 
 class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPresenting {
 
@@ -66,22 +67,9 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
                 viewModel.blog._title.bind(to: titleTxtFld.rx.text.orEmpty),
                 viewModel.blog._desc.bind(to: descTxtVw.rx.text.orEmpty),
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
-//                    self?.presentImagePicker { [weak self] (image) in
-//                        if let image = image {
-//                            self?.viewModel?.contentSelected(content: [image])
-//                        }
-//                    }
-                    let viewController = TLPhotosPickerViewController(withTLPHAssets: { [weak self] (assets) in // TLAssets
-                        //  self?.viewModel?.contentSelected(content: [image])
-                        print("assets selected: \(assets.count)")
+                    let viewController = TLPhotosPickerViewController(withPHAssets: { [weak self] (assets) in
+                        self?.viewModel?.contentSelected(content: assets)
                     }, didCancel: nil)
-                    
-                    //  viewController.handleNoAlbumPermissions = { [weak self] (picker) in
-                    //    print("handle denied albums permissions case")
-                    //  }
-                    //  viewController.handleNoCameraPermissions = { [weak self] (picker) in
-                    //    print("handle denied camera permissions case")
-                    //  }
                     var configure = TLPhotosPickerConfigure()
                     configure.maxSelectedAssets = 10
                     viewController.configure = configure
@@ -90,8 +78,8 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
                 viewModel.showLocationPicker.subscribe(onNext: { [weak self] (_) in
                     self?.showLocationPicker()
                 }),
-                viewModel.enableImagePicker.subscribe(onNext: { (enable) in
-                    self.addPhotoBtn.isEnabled              = enable
+                viewModel.enableImagePicker.subscribe(onNext: { [weak self] (enable) in
+                    self?.addPhotoBtn.isEnabled              = enable
                 }),
                 
                 // MARK: - Outputs
@@ -100,6 +88,16 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
                 addPhotoBtn.rx.tap.bind(to: viewModel.addPhotosTapped),
                 addLocationBtn.rx.tap.bind(to: viewModel.addLocationTapped)
             ])
+            
+            viewModel.contentGridViewModel?.doWithSelectedItem.subscribe(onNext: { [weak self] (blogContent) in
+                if let asset = blogContent.asset {
+                    let previewVC   = TLAssetPreviewViewController()
+                    previewVC.asset = asset
+                    self?.present(previewVC, animated: true, completion: nil)
+                } else if let mediaUrl = blogContent.mediaUrl {
+                    self?.displayMediaFrom(url: mediaUrl)
+                }
+            }).disposed(by: disposeBag)
         }
         descTxtVw.updatePlaceHolderLabel()
     }
