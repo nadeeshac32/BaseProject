@@ -52,9 +52,12 @@ final class RequestInterceptor: Alamofire.RequestInterceptor {
         var urlRequest = urlRequest
         
         
-        if (urlRequest.url?.absoluteString.contains(urls.authPath) == true || urlRequest.url?.absoluteString.contains(urls.blogPath) == true), let userId = storage.userId {
+        if (urlRequest.url?.absoluteString.contains(urls.authPath) == true
+            || urlRequest.url?.absoluteString.contains(urls.blogPath) == true
+            || urlRequest.url?.absoluteString.contains(urls.filePath) == true), let userId = storage.userId, let apiKey = AppConfig.si.x_API_Key {
             urlRequest.setValue(userId, forHTTPHeaderField: "x-user-id")
             urlRequest.setValue(TimeZone.current.identifier, forHTTPHeaderField: "X-Time-Zone")
+            urlRequest.setValue(apiKey, forHTTPHeaderField: "X-API-KEY")
         }
     
         if urlRequest.url?.absoluteString.contains(urls.otpPath) == true, let otpAppKey = storage.otpAppKey {
@@ -73,7 +76,10 @@ final class RequestInterceptor: Alamofire.RequestInterceptor {
             if let token = storage.accessToken, token != "" {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
-            urlRequest.setValue("application/json;charset=UTF-8", forHTTPHeaderField: "Content-Type")
+            
+            if urlRequest.url?.absoluteString.contains(urls.filePath) == false {
+                urlRequest.setValue("application/json;charset=UTF-8", forHTTPHeaderField: "Content-Type")
+            }
         }
 
         urlRequest.setValue("application/json;charset=UTF-8", forHTTPHeaderField: "Accept")

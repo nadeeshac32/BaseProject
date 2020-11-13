@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import ObjectMapper
 import Photos
+import TLPhotoPicker
 
 enum BlogCreateEditMode {
     case edit, create
@@ -82,7 +83,7 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         blog._location.onNext(location ?? "")
     }
     
-    func contentSelected(content: [PHAsset]) {
+    func contentSelected(content: [TLPHAsset]) {
         guard self.blogCreateEditMode == .create else { return }
         let contentArray = content.map({ BlogContent(editable: true, mediaUrl: nil, asset: $0) })
         contentGridViewModel?.contentAdd(items: contentArray)
@@ -97,19 +98,22 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         } catch let error { print("Fetal error: \(error)") }
         
         let httpService                                 = HTTPService()
-        if blog.blogId == "", contentGridViewModel?.isContentAdded() == true, let content = contentGridViewModel?.getContent() {
-            print(content.count)
-            
-//            httpService.uploadImageRequest(image: image, imageName: "\(customer.customerId ?? "")-\(Date().millisecondsSince1970)", onError: { [weak self] (error) in
-//                self?.handleRestClientError(error: error)
-//            }) { [weak self] (imageResponse) in
-//                self?.customer._imageUrl.onNext(imageResponse.imageUrl ?? "")
-//                self?.createOrUpdateCustomerRequest(httpService: httpService)
-//            }
-            
-            // TODO: - Upload media files
-            // TODO: - Update blog.content with response.urls: [String]
-            // TODO: - Call createOrUpdateCustomerRequest(httpService: httpService)
+        if blog.blogId == "", contentGridViewModel?.isContentAdded() == true, let content = contentGridViewModel?.getNewContent() {
+            guard let assets = content.filter({ $0.asset != nil}).map({ $0.asset }) as? [TLPHAsset] else { return }
+            getUrlsFrom(_assets: assets, _urls: []) { (multimediaPostDataArray) in
+                httpService.uploadFilesRequest(files: multimediaPostDataArray, onError: { [weak self] (error) in
+                    self?.handleRestClientError(error: error)
+                    FileManager.default.clearTmpDirectory()
+                }, progressHandler: { (progress) in
+                    print("progress: \(progress)")
+                }) { [weak self] (uploadResponse) in
+                    if let items = uploadResponse.data?.items, let urlsArray = items.filter({ $0.url != nil }).map({ $0.url }) as? [String] {
+                        self?.blog.content  = urlsArray
+                        self?.createOrUpdateCustomerRequest(httpService: httpService)
+                        FileManager.default.clearTmpDirectory()
+                    }
+                }
+            }
         } else {
             createOrUpdateCustomerRequest(httpService: httpService)
         }
@@ -139,4 +143,50 @@ class BlogCreateEditVM: BaseFormVM, BaseCollectionVMDataSource {
         self.successMessage.onNext(tupple)
     }
     
+    func getUrlsFrom(_assets: [TLPHAsset], _urls: [MultimediaPostData], completionHandler: @escaping ((_ urls: [MultimediaPostData]) -> Void)) {
+        var assets  = _assets
+        var urls    = _urls
+        if let asset = assets.popLast() {
+            if asset.type == .video {
+                asset.exportVideoFile { [weak self] (url, mimeType) in
+                    urls.append(MultimediaPostData(url: url, image: nil, mimeType: mimeType))
+                    if assets.count > 0 {
+                        self?.getUrlsFrom(_assets: assets, _urls: urls, completionHandler: completionHandler)
+                    } else {
+                        completionHandler(urls)
+                    }
+                }
+            } else if let image = asset.fullResolutionImage {
+                urls.append(MultimediaPostData(url: nil, image: image, mimeType: nil))
+                if assets.count > 0 {
+                    getUrlsFrom(_assets: assets, _urls: urls, completionHandler: completionHandler)
+                } else {
+                    completionHandler(urls)
+                }
+            } else {
+                if assets.count > 0 {
+                    getUrlsFrom(_assets: assets, _urls: urls, completionHandler: completionHandler)
+                } else {
+                    completionHandler(urls)
+                }
+            }
+        } else {
+            completionHandler(urls)
+        }
+    }
+    
+}
+
+extension FileManager {
+    func clearTmpDirectory() {
+        do {
+            let tmpDirectory = try contentsOfDirectory(atPath: NSTemporaryDirectory())
+            try tmpDirectory.forEach {[unowned self] file in
+                let path = String.init(format: "%@%@", NSTemporaryDirectory(), file)
+                try self.removeItem(atPath: path)
+            }
+        } catch {
+            print(error)
+        }
+    }
 }

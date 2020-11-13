@@ -10,8 +10,7 @@ import UIKit
 import TLPhotoPicker
 import Photos
 
-class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPresenting {
-
+class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {
     @IBOutlet weak var userImageVw                          : UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var titleTxtFld                          : SwivelNormalTextField!
@@ -61,25 +60,23 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
             disposeBag.insert([
                 // MARK: - Inputs
                 viewModel.updateWithLocation.subscribe(onNext: { [weak self] (locationDetail) in
-                    self?.usernameLbl.attributedText        = locationDetail.usernameString
+                    self?.usernameLbl.attributedText   = locationDetail.usernameString
                     self?.addLocationBtn.setImage(UIImage(named: locationDetail.isActiveLocationBtn ? "icon_location_active" : "icon_location"), for: .normal)
                 }),
                 viewModel.blog._title.bind(to: titleTxtFld.rx.text.orEmpty),
                 viewModel.blog._desc.bind(to: descTxtVw.rx.text.orEmpty),
                 viewModel.showImagePicker.subscribe(onNext: { [weak self] (_) in
-                    let viewController = TLPhotosPickerViewController(withPHAssets: { [weak self] (assets) in
-                        self?.viewModel?.contentSelected(content: assets)
-                    }, didCancel: nil)
-                    var configure = TLPhotosPickerConfigure()
-                    configure.maxSelectedAssets = 10
-                    viewController.configure = configure
+                    var configure                       = TLPhotosPickerConfigure()
+                    configure.maxSelectedAssets         = 10
+                    let viewController                  = TLPhotosPickerViewController(withTLPHAssets: { [weak self] (assets) in self?.viewModel?.contentSelected(content: assets) }, didCancel: nil)
+                    viewController.configure            = configure
                     self?.present(viewController, animated: true, completion: nil)
                 }),
                 viewModel.showLocationPicker.subscribe(onNext: { [weak self] (_) in
                     self?.showLocationPicker()
                 }),
                 viewModel.enableImagePicker.subscribe(onNext: { [weak self] (enable) in
-                    self?.addPhotoBtn.isEnabled              = enable
+                    self?.addPhotoBtn.isEnabled         = enable
                 }),
                 
                 // MARK: - Outputs
@@ -90,9 +87,9 @@ class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {  //, SwivelImagePickerPre
             ])
             
             viewModel.contentGridViewModel?.doWithSelectedItem.subscribe(onNext: { [weak self] (blogContent) in
-                if let asset = blogContent.asset {
+                if let asset = blogContent.asset, let phasset = asset.phAsset {
                     let previewVC   = TLAssetPreviewViewController()
-                    previewVC.asset = asset
+                    previewVC.asset = phasset
                     self?.present(previewVC, animated: true, completion: nil)
                 } else if let mediaUrl = blogContent.mediaUrl {
                     self?.displayMediaFrom(url: mediaUrl)

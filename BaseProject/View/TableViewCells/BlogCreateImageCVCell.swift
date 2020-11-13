@@ -47,7 +47,7 @@ class BlogCreateImageCVCell: BaseCVCell<BlogContent> {
     override func configureCell(item: BlogContent, section: Int, row: Int, selectable: Bool) {
         super.configureCell(item: item, section: section, row: row, selectable: selectable)
         removeBtn.isHidden                          = !item.isRemovable
-        if item.isRemovable, let asset = item.asset {
+        if item.isRemovable, let asset = item.asset?.phAsset {
             multimediaVw.asset                      = asset
         } else if let mediaUrl = item.mediaUrl {
             multimediaVw.assetUrl                   = mediaUrl

@@ -9,13 +9,14 @@
 import Foundation
 import ObjectMapper
 import Photos
+import TLPhotoPicker
 
 class BlogContent: BaseModel {
     var mediaUrl            : String?
-    var asset               : PHAsset?
+    var asset               : TLPHAsset?
     var isRemovable         : Bool = false
 
-    init(editable: Bool, mediaUrl: String?, asset: PHAsset?) {
+    init(editable: Bool, mediaUrl: String?, asset: TLPHAsset?) {
         self.mediaUrl       = mediaUrl ?? UUID().uuidString
         self.asset          = asset
         self.isRemovable    = editable

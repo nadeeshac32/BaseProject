@@ -21,6 +21,8 @@
 		C92F83F7255B15C500FED275 /* BlogCommentReplyTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F83F5255B15C500FED275 /* BlogCommentReplyTVCell.swift */; };
 		C92F83F8255B15C500FED275 /* BlogCommentReplyTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C92F83F6255B15C500FED275 /* BlogCommentReplyTVCell.xib */; };
 		C92F83FA255D73B000FED275 /* SwivelMultimediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F83F9255D73B000FED275 /* SwivelMultimediaView.swift */; };
+		C92F83FC255ECEF700FED275 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F83FB255ECEF600FED275 /* File.swift */; };
+		C92F83FE255ED2F600FED275 /* MultimediaPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F83FD255ED2F600FED275 /* MultimediaPostData.swift */; };
 		C94EF758254057040090A28A /* SocialSignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF757254057040090A28A /* SocialSignInVM.swift */; };
 		C94EF75A254057620090A28A /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF759254057620090A28A /* FacebookSignIn.swift */; };
 		C94EF75C254058260090A28A /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94EF75B254058260090A28A /* BaseButton.swift */; };
@@ -192,6 +194,8 @@
 		C92F83F5255B15C500FED275 /* BlogCommentReplyTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCommentReplyTVCell.swift; sourceTree = "<group>"; };
 		C92F83F6255B15C500FED275 /* BlogCommentReplyTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlogCommentReplyTVCell.xib; sourceTree = "<group>"; };
 		C92F83F9255D73B000FED275 /* SwivelMultimediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelMultimediaView.swift; sourceTree = "<group>"; };
+		C92F83FB255ECEF600FED275 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C92F83FD255ED2F600FED275 /* MultimediaPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaPostData.swift; sourceTree = "<group>"; };
 		C94EF757254057040090A28A /* SocialSignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInVM.swift; sourceTree = "<group>"; };
 		C94EF759254057620090A28A /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
 		C94EF75B254058260090A28A /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -821,6 +825,8 @@
 				C964B07125079DB3009E998C /* UserAuth.swift */,
 				C9E2AE432508EE25001F3961 /* ImagePostData.swift */,
 				C9E2AE78250A3E70001F3961 /* UserPostData.swift */,
+				C92F83FB255ECEF600FED275 /* File.swift */,
+				C92F83FD255ED2F600FED275 /* MultimediaPostData.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1053,6 +1059,7 @@
 				C964B03C25064BFD009E998C /* StoryboardInitializable.swift in Sources */,
 				C9E2AE65250A3A2C001F3961 /* OTPVerification_VM.swift in Sources */,
 				C9E2AE5D250A39DC001F3961 /* Signup_Coordinator.swift in Sources */,
+				C92F83FC255ECEF700FED275 /* File.swift in Sources */,
 				C97490EB2553EA6600EE607E /* BlogDetail_VM.swift in Sources */,
 				C9EC705225147146007E183B /* DynemicList_VC.swift in Sources */,
 				C9E2AE79250A3E70001F3961 /* UserPostData.swift in Sources */,
@@ -1066,6 +1073,7 @@
 				C92CD0092547FBD600FA7F1F /* BlogCreateEdit_VM.swift in Sources */,
 				C964B07C25089C75009E998C /* BaseTVCell.swift in Sources */,
 				C92CD016254BEDB900FA7F1F /* BlogCreateContentGridVM.swift in Sources */,
+				C92F83FE255ED2F600FED275 /* MultimediaPostData.swift in Sources */,
 				C964B01125064939009E998C /* BaseVM.swift in Sources */,
 				C9E2AE412508EDEC001F3961 /* FileAPIProtocol.swift in Sources */,
 				C9FA78A92538B00C006222CB /* ArrayDataType.swift in Sources */,

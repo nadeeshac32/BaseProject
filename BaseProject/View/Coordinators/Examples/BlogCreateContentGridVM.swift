@@ -14,9 +14,6 @@ import Photos
 /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
 class BlogCreateContentGridVM: BaseCollectionVM<BlogContent> {
     
-    // MARK:- Output
-    let displayAsset                               = PublishSubject<PHAsset>()
-    
     override var loadFromAPI        : Bool { get { return false } set {} }
     override var loadAsDynemic      : Bool { get { return false } set {} }
     
@@ -28,17 +25,16 @@ class BlogCreateContentGridVM: BaseCollectionVM<BlogContent> {
     }
     
     func contentRemove(item: BlogContent, section: Int, row: Int) {
-        
         self.removeExistingItems(items: [item])
         requestLoading.onNext(false)
     }
     
     func isContentAdded() -> Bool {
-        return false
+        return ((getNewContent()?.count ?? 0) > 0) == true
     }
     
-    func getContent() -> [BlogContent]? {
-        return nil
+    func getNewContent() -> [BlogContent]? {
+        do { return try items.value().filter({ $0.asset != nil }) } catch { return nil }
     }
     
 }

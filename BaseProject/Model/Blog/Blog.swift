@@ -47,7 +47,6 @@ class Blog: BaseModel {
         self.desc                       = desc
         self.location                   = location
         self.content                    = content
-//        self.content                    = ["https://cdn.aarp.net/content/dam/aarp/entertainment/movies-for-grownups/2020/07/1140-will-smith.jpg"]
         
         _title                          = BehaviorSubject<String>(value: title ?? "")
         _desc                           = BehaviorSubject<String>(value: desc ?? "")
@@ -110,10 +109,6 @@ class Blog: BaseModel {
         }
     }
     
-    func imageHasEdited() -> Bool {
-        return false
-    }
-
     func copy(with zone: NSZone? = nil) -> Any {
         if let edit = editedValues() {
             return Blog(blogId: blogId, owner: owner, title: edit.title, content: content, desc: edit.desc, location: edit.location)
