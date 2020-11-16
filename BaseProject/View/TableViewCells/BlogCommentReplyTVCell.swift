@@ -7,7 +7,12 @@
 //
 
 import UIKit
+import DropDown
 
+protocol BlogCommentReplyTVCellDelegate: class {
+    func replyCommentEdit(comment: String, commentId: String, indexPath: IndexPath)
+    func replyCommentDelete(commentId: String, indexPath: IndexPath)
+}
 
 class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
 
@@ -15,7 +20,12 @@ class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var commentLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var moreBtn: UIButton!
     @IBOutlet weak var hightlighterVw: UIView!
+    
+    let dropDown                                = DropDown()
+    
+    weak var replyCommentCellDelegate           : BlogCommentReplyTVCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +38,23 @@ class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
         usernameLbl.text                        = ""
         commentLbl.text                         = ""
         dateLbl.text                            = ""
+        
+        dropDown.anchorView     = moreBtn
+        dropDown.direction      = .bottom
+        dropDown.width          = 100
+        dropDown.bottomOffset   = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.dataSource     = ["Edit", "Delete"]
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            if index == 0 {
+                if let comment = self.item?.comment, let id = self.item?.id, let row = self.row {
+                    self.replyCommentCellDelegate?.replyCommentEdit(comment: comment, commentId: id, indexPath: IndexPath(row: row, section: 0))
+                }
+            } else if index == 1 {
+                if let id = self.item?.id, let row = self.row {
+                    self.replyCommentCellDelegate?.replyCommentDelete(commentId: id, indexPath: IndexPath(row: row, section: 0))
+                }
+            }
+        }
     }
     
     override func prepareForReuse() {
@@ -44,5 +71,9 @@ class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
         usernameLbl.text                        = item.owner?.name ?? ""
         dateLbl.text                            = item.createdDate?.displayDate ?? ""
         item._comment.bind(to: commentLbl.rx.text).disposed(by: disposeBag)
+    }
+    
+    @IBAction func moreBtnTapped(_ sender: Any) {
+        dropDown.show()
     }
 }

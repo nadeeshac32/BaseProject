@@ -8,22 +8,30 @@
 
 import UIKit
 import RxSwift
+import DropDown
 
 protocol BlogCommentTVCellDelegate: BaseTVCellDelegate {
-    func replyForCommentTapped(commentId: String, indexPath: IndexPath)
+    func replyForCommentTapped(commentId: String, commentOwner: String, indexPath: IndexPath)
     func updateCellFor(indexPath: IndexPath, height: CGFloat)
+    
+    func handleRestClientError(error: RestClientError)
+    func commentDelete(commentId: String, indexPath: IndexPath)
+    func editComment(isChildComment: Bool, commentId: String, commentIndexPath: IndexPath, comment: String, parentCommentIndexPath: IndexPath?, parentCommentOwner: String?)
 }
 
 class BlogCommentTVCell: BaseTVCell<Comment>, UITableViewDelegate {
 
     @IBOutlet weak var profileImageVw: UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
+    @IBOutlet weak var moreBtn: UIButton!
     @IBOutlet weak var commentLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var replyBtn: UIButton!
     @IBOutlet weak var viewRepliesBtn: UIButton!
     @IBOutlet weak var repliesTableView: UITableView!
     @IBOutlet weak var repliesTblVwHeightCons: NSLayoutConstraint!
+    
+    let dropDown                                        = DropDown()
     
     let _disposeBag = DisposeBag()
     weak var blogCommentDelegate: BlogCommentTVCellDelegate?
@@ -63,11 +71,32 @@ class BlogCommentTVCell: BaseTVCell<Comment>, UITableViewDelegate {
         repliesTableView.estimatedRowHeight     = 44
         repliesTableView.register(UINib(nibName: String(describing: BlogCommentReplyTVCell.self), bundle: nil), forCellReuseIdentifier: String(describing: BlogCommentReplyTVCell.self))
         
+        
+        dropDown.anchorView     = moreBtn
+        dropDown.direction      = .bottom
+        dropDown.width          = 100
+        dropDown.bottomOffset   = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.dataSource     = ["Edit", "Delete"]
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            if index == 0 {
+                // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
+                if let comment = self.item?.parent?.comment, let commentId = self.item?.parent?.id, let row = self.row {
+                    self.blogCommentDelegate?.editComment(isChildComment: false, commentId: commentId, commentIndexPath: IndexPath(row: row, section: 1), comment: comment, parentCommentIndexPath: nil, parentCommentOwner: nil)
+                }
+            } else if index == 1 {
+                if let id = self.item?.parent?.id, let row = self.row {
+                    // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
+                    self.blogCommentDelegate?.commentDelete(commentId: id, indexPath: IndexPath(row: row, section: 1))
+                }
+            }
+        }
+        
         _disposeBag.insert([
             repliesTableView.rx.setDelegate(self)
         ])
         self._children.bind(to: repliesTableView.rx.items(cellIdentifier: String(describing: BlogCommentReplyTVCell.self), cellType: BlogCommentReplyTVCell.self)) { (row, element, cell) in
             cell.configureCell(item: element, row: row, selectable: false)
+            cell.replyCommentCellDelegate       = self
         }.disposed(by: _disposeBag)
     }
     
@@ -97,7 +126,7 @@ class BlogCommentTVCell: BaseTVCell<Comment>, UITableViewDelegate {
     
     @IBAction func replyBtnTapped(_ sender: Any) {
         // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
-        blogCommentDelegate?.replyForCommentTapped(commentId: item?.id ?? "", indexPath: IndexPath(row: row ?? 0, section: 1))
+        blogCommentDelegate?.replyForCommentTapped(commentId: item?.id ?? "", commentOwner: item?.parent?.owner?.name ?? "", indexPath: IndexPath(row: row ?? 0, section: 1))
     }
     
     @IBAction func viewRepliesBtnTapped(_ sender: Any) {
@@ -121,6 +150,52 @@ class BlogCommentTVCell: BaseTVCell<Comment>, UITableViewDelegate {
         NSLayoutConstraint.deactivate(constraints)
     }
     
+    @IBAction func moreBtnTapped(_ sender: Any) {
+        dropDown.show()
+    }
     
+    var ongoingNetworkCall              = false
+    func deleteChildComment(commentId: String, indexPath: IndexPath) {
+        if ongoingNetworkCall { return }
+        let httpService                 = HTTPService()
+        ongoingNetworkCall              = true
+        // Show activity indicator
+        httpService.deleteCommentWithId(commentId: commentId, onSuccess: { [unowned self] in
+            self.ongoingNetworkCall    = false
+            // Hide activity indicator
+            
+            self.item?.children.remove(at: indexPath.row)
+            let commentLblHeightCons                = self.commentLbl.heightAnchor.constraint(equalToConstant: self.commentLbl.frame.height)
+            commentLblHeightCons.priority           = UILayoutPriority(rawValue: 999)
+            let constraints                         = [commentLblHeightCons]
+            NSLayoutConstraint.activate(constraints)
+            self._children.onNext(self.item?.children ?? [])
+            
+            self.viewRepliesBtn.setTitle((self.item?.children.count ?? 0) > 0 ? "Hide Replies" : "View Replies", for: .normal)
+            self.item?.isExpanded                   = (self.item?.children.count ?? 0) > 0 ? true : false
+            
+            // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
+            self.blogCommentDelegate?.updateCellFor(indexPath: IndexPath(row: self.row ?? 0, section: 1), height: self.repliesTableView.contentSize.height)
+            NSLayoutConstraint.deactivate(constraints)
+            
+        }) { [weak self] (error) in
+            self?.ongoingNetworkCall    = false
+            // Hide activity indicator
+            self?.blogCommentDelegate?.handleRestClientError(error: error)
+        }
+    }
 }
 
+
+extension BlogCommentTVCell: BlogCommentReplyTVCellDelegate {
+    func replyCommentEdit(comment: String, commentId: String, indexPath: IndexPath) {
+        // TODO: - This hard coded section index need to be dynamic. ConfigureCell method -> change row into indexpath
+        if let row = self.row, let ownerName = self.item?.parent?.owner?.name {
+            self.blogCommentDelegate?.editComment(isChildComment: true, commentId: commentId, commentIndexPath: indexPath, comment: comment, parentCommentIndexPath: IndexPath(row: row, section: 1), parentCommentOwner: ownerName)
+        }
+    }
+    
+    func replyCommentDelete(commentId: String, indexPath: IndexPath) {
+        deleteChildComment(commentId: commentId, indexPath: indexPath)
+    }
+}

@@ -30,13 +30,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="commentLbl" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQf-Co-56h">
-                        <rect key="frame" x="53" y="22" width="247" height="13.5"/>
+                        <rect key="frame" x="53" y="22" width="222" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dateLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avj-pe-6sa">
-                        <rect key="frame" x="260" y="6" width="40" height="14"/>
+                        <rect key="frame" x="235" y="6" width="40" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -45,9 +45,22 @@
                         <rect key="frame" x="8" y="6" width="4" height="25"/>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEs-sp-5On">
+                        <rect key="frame" x="287" y="6" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="iEs-sp-5On" secondAttribute="height" multiplier="1:1" id="S2V-uo-WEH"/>
+                        </constraints>
+                        <color key="tintColor" red="0.30196078430000001" green="0.25098039220000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="5"/>
+                        <state key="normal" title="Button" image="icon_more"/>
+                        <connections>
+                            <action selector="moreBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="QVo-Wk-JAa"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="FQf-Co-56h" firstAttribute="trailing" secondItem="avj-pe-6sa" secondAttribute="trailing" id="1jP-5D-lde"/>
+                    <constraint firstAttribute="trailing" secondItem="iEs-sp-5On" secondAttribute="trailing" constant="8" id="8dd-0b-R9a"/>
                     <constraint firstItem="61k-Yq-ao6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="53" id="9pS-gB-Xx1"/>
                     <constraint firstItem="61k-Yq-ao6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="FhN-Tc-EHP"/>
                     <constraint firstItem="61k-Yq-ao6" firstAttribute="leading" secondItem="rFf-qO-dHd" secondAttribute="trailing" constant="8" id="NsG-1I-pWR"/>
@@ -57,11 +70,13 @@
                     <constraint firstItem="61k-Yq-ao6" firstAttribute="top" secondItem="rFf-qO-dHd" secondAttribute="top" id="dA2-i9-Cij"/>
                     <constraint firstItem="FQf-Co-56h" firstAttribute="leading" secondItem="61k-Yq-ao6" secondAttribute="leading" id="dSx-0z-FDH"/>
                     <constraint firstItem="sDO-jA-UmQ" firstAttribute="top" secondItem="rFf-qO-dHd" secondAttribute="top" id="dZH-tW-tx9"/>
+                    <constraint firstItem="iEs-sp-5On" firstAttribute="bottom" secondItem="rFf-qO-dHd" secondAttribute="bottom" id="f2D-cj-EeH"/>
                     <constraint firstItem="FQf-Co-56h" firstAttribute="top" secondItem="61k-Yq-ao6" secondAttribute="bottom" id="ijj-yO-mTT"/>
                     <constraint firstItem="avj-pe-6sa" firstAttribute="top" secondItem="61k-Yq-ao6" secondAttribute="top" id="pjy-ol-Cte"/>
                     <constraint firstAttribute="bottom" secondItem="FQf-Co-56h" secondAttribute="bottom" constant="8.5" id="rGn-j6-HJY"/>
-                    <constraint firstAttribute="trailing" secondItem="avj-pe-6sa" secondAttribute="trailing" constant="20" id="v3i-QC-0nG"/>
+                    <constraint firstItem="iEs-sp-5On" firstAttribute="top" secondItem="avj-pe-6sa" secondAttribute="top" id="tlo-6o-i93"/>
                     <constraint firstItem="sDO-jA-UmQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="yUk-HJ-e4z"/>
+                    <constraint firstItem="iEs-sp-5On" firstAttribute="leading" secondItem="FQf-Co-56h" secondAttribute="trailing" constant="12" id="zab-l8-O24"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -69,10 +84,14 @@
                 <outlet property="commentLbl" destination="FQf-Co-56h" id="GMI-XH-i5K"/>
                 <outlet property="dateLbl" destination="avj-pe-6sa" id="Ek0-wb-Ej3"/>
                 <outlet property="hightlighterVw" destination="sDO-jA-UmQ" id="3wb-kf-EOe"/>
+                <outlet property="moreBtn" destination="iEs-sp-5On" id="70j-8Y-ddy"/>
                 <outlet property="profileImageVw" destination="rFf-qO-dHd" id="OmO-gT-xgt"/>
                 <outlet property="usernameLbl" destination="61k-Yq-ao6" id="yqg-Lh-nW3"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="151.33928571428569"/>
+            <point key="canvasLocation" x="137.68115942028987" y="150.66964285714286"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon_more" width="48" height="48"/>
+    </resources>
 </document>

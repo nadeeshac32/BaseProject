@@ -687,4 +687,42 @@ extension HTTPService: BlogAPIProtocol {
             return
         })
     }
+    
+    func createComment(method: HTTPMethod! = .post, blogId: String!, comment: String!, parentCommentId: String?, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/comment"
+        var parameters                  : [String : AnyObject] = [
+            "blogId"                    : "\(blogId!)" as AnyObject,
+            "comment"                   : "\(comment!)" as AnyObject
+        ]
+        
+        if let parentCommentId = parentCommentId {
+            parameters["parentCommentId"] = parentCommentId as AnyObject
+        }
+        
+        genericRequest(method: method!, parameters: parameters, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
+    
+    func editComment(method: HTTPMethod! = .put, commentId: String!, comment: String!, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/comment"
+        let parameters                  : [String : AnyObject] = [
+            "commentId"                 : "\(commentId!)" as AnyObject,
+            "comment"                   : "\(comment!)" as AnyObject
+        ]
+        
+        genericRequest(method: method!, parameters: parameters, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
+    
+    func deleteCommentWithId(method: HTTPMethod! = .delete, commentId: String, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
+        let contextPath                 = "\(urls.blogPath)/blog/comments/\(commentId)"
+        genericRequest(method: method, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
+            onSuccess?()
+            return
+        })
+    }
 }

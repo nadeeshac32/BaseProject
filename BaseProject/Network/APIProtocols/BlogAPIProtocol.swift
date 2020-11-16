@@ -45,4 +45,23 @@ protocol BlogAPIProtocol {
                                  blogId: String,
                                  onSuccess: SuccessEmptyDataCallback?,
                                  onError: ErrorCallback?)
+    
+    func createComment(method: HTTPMethod!,
+                       blogId: String!,
+                       comment: String!,
+                       parentCommentId: String?,
+                       onSuccess: SuccessEmptyDataCallback?,
+                       onError: ErrorCallback?)
+    
+    func editComment(method: HTTPMethod!,
+                     commentId: String!,
+                     comment: String!,
+                     onSuccess: SuccessEmptyDataCallback?,
+                     onError: ErrorCallback?)
+    
+    func deleteCommentWithId(method: HTTPMethod!,
+                             commentId: String,
+                             onSuccess: SuccessEmptyDataCallback?,
+                             onError: ErrorCallback?)
+    
 }

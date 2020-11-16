@@ -11,7 +11,7 @@ import Agrume
 import DropDown
 import AVKit
 
-class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate {    //BaseFormVC<BlogDetailVM>, BaseListDelagate {
+class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate, UIGestureRecognizerDelegate, UITextFieldDelegate {    //BaseFormVC<BlogDetailVM>, BaseListDelagate {
     
 //    @IBOutlet public weak var _scrollView                   : BaseScrollView!
 //    @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!
@@ -22,6 +22,9 @@ class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate {    //BaseFormVC<Blo
     
     @IBOutlet public weak var _contentTV                    : UITableView!
     var contentTV                                           : BlogDetailTV?
+    @IBOutlet weak var commentTxtFld                        : UITextField!
+    @IBOutlet weak var sendBtn                              : UIButton!
+    @IBOutlet weak var commentingVwBottomCons               : NSLayoutConstraint!
     
 //    override var dynemicGapShouldCalculate                  : Bool { get { return false } set {} }
 //    override var scrollViewContentHeightWithouDynemicGap    : CGFloat { get { return 475 } set {} }
@@ -59,18 +62,66 @@ class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate {    //BaseFormVC<Blo
             self.contentTV                                  = BlogDetailTV(viewModel: contentTableViewModel, tableView: _contentTV, delegate: self)
             contentTV?.setupBindings()
         }
+        
+        let tap                     = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard(_:)))
+        tap.cancelsTouchesInView    = false
+        self._contentTV.addGestureRecognizer(tap)
+        
+        commentTxtFld.delegate  = self
+    }
+    
+    @objc func hideKeyboard(_ sender: UITapGestureRecognizer? = nil) {
+        if commentingVwBottomCons.constant != 0 {
+            self.viewModel?.contentTableViewModel?.endCommenting.onNext(true)
+        }
     }
     
     override func setupBindings() {
         super.setupBindings()
-        if let viewModel = self.viewModel?.contentTableViewModel {
+        if let viewModel = self.viewModel {
             disposeBag.insert([
-                viewModel.showShareBlogOptions.subscribe(onNext: { [weak self] (sharebles) in
+                viewModel.adjustForKeyboardHeightChange.subscribe(onNext: { [weak self] (keyboardHeight) in
+                    if keyboardHeight == 0 {
+                        viewModel.contentTableViewModel?.setForNormalComment()
+                    }
+                    self?.commentingVwBottomCons.constant   = keyboardHeight
+                    UIView.animate(withDuration: 1.5, animations: { [weak self] in
+                         self?.view.layoutIfNeeded()
+                    })
+                })
+            ])
+        }
+        
+        if let tvViewModel = viewModel?.contentTableViewModel {
+            disposeBag.insert([
+                // MARK: - Outputs
+                commentTxtFld.rx.text.orEmpty.bind(to: tvViewModel.comment),
+                
+                // MARK: - inputs
+                sendBtn.rx.tap.bind(onNext: tvViewModel.performCommentRequest),
+                tvViewModel.showShareBlogOptions.subscribe(onNext: { [weak self] (sharebles) in
                     let ac                                  = UIActivityViewController(activityItems: sharebles, applicationActivities: nil)
                     self?.present(ac, animated: true)
                 }),
-                viewModel.displayContent.subscribe(onNext: { [weak self] (url) in
+                tvViewModel.displayContent.subscribe(onNext: { [weak self] (url) in
                     self?.displayMediaFrom(url: url)
+                }),
+                tvViewModel.newCommentWithPlaceholder.subscribe(onNext: { [weak self] (placeholder) in
+                    self?.commentTxtFld.placeholder         = placeholder
+                    self?.commentTxtFld.becomeFirstResponder()
+                }),
+                tvViewModel.endCommentWithPlaceholder.subscribe(onNext: { [weak self] (placeHolder) in
+                    self?.commentTxtFld.placeholder         = placeHolder
+                    self?.commentTxtFld.text                = ""
+                    self?.view.endEditing(true)
+                }),
+                tvViewModel.editCommentWithPlaceholder.subscribe(onNext: { [weak self] (customise) in
+                    self?.commentTxtFld.text                = customise.comment
+                    self?.commentTxtFld.placeholder         = customise.placeholder
+                    self?.commentTxtFld.becomeFirstResponder()
+                }),
+                tvViewModel.isEnable.subscribe(onNext: { [weak self] (enable) in
+                    self?.sendBtn.isEnabled                 = enable
                 })
             ])
         }

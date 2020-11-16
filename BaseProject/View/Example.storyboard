@@ -619,21 +619,66 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yxr-vQ-bxg">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="764"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5A-wj-aur">
+                                <rect key="frame" x="0.0" y="808" width="414" height="8"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96078431369999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="iFG-OG-mkb"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-TO-Onw">
+                                <rect key="frame" x="0.0" y="816" width="414" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbn-TH-1OB">
+                                        <rect key="frame" x="354" y="10" width="52" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Kbn-TH-1OB" secondAttribute="height" multiplier="1:1" id="DZl-tM-a7A"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.30196078430000001" green="0.25098039220000001" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="icon_send"/>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type Comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qci-6a-rcf">
+                                        <rect key="frame" x="25" y="19" width="329" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Kbn-TH-1OB" firstAttribute="leading" secondItem="Qci-6a-rcf" secondAttribute="trailing" id="0sf-B9-wqs"/>
+                                    <constraint firstAttribute="height" constant="80" id="8me-9s-HI7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kbn-TH-1OB" secondAttribute="bottom" constant="18" id="Ema-hd-cAO"/>
+                                    <constraint firstItem="Qci-6a-rcf" firstAttribute="centerY" secondItem="Kbn-TH-1OB" secondAttribute="centerY" id="QIh-NS-0mK"/>
+                                    <constraint firstItem="Kbn-TH-1OB" firstAttribute="top" secondItem="YW0-TO-Onw" secondAttribute="top" constant="10" id="SXD-Ry-VEA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kbn-TH-1OB" secondAttribute="trailing" constant="8" id="UsG-Mk-Yes"/>
+                                    <constraint firstItem="Qci-6a-rcf" firstAttribute="leading" secondItem="YW0-TO-Onw" secondAttribute="leading" constant="25" id="rrv-1R-Ubo"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="d5A-wj-aur" firstAttribute="leading" secondItem="Yxr-vQ-bxg" secondAttribute="leading" id="6no-IT-GwE"/>
+                            <constraint firstItem="d5A-wj-aur" firstAttribute="trailing" secondItem="Yxr-vQ-bxg" secondAttribute="trailing" id="705-nn-hEV"/>
                             <constraint firstItem="Yxr-vQ-bxg" firstAttribute="top" secondItem="WW8-Lz-j3k" secondAttribute="top" id="8T7-ru-8Ou"/>
                             <constraint firstItem="Yxr-vQ-bxg" firstAttribute="trailing" secondItem="WW8-Lz-j3k" secondAttribute="trailing" id="8r2-N4-nhD"/>
+                            <constraint firstItem="d5A-wj-aur" firstAttribute="top" secondItem="Yxr-vQ-bxg" secondAttribute="bottom" id="8x2-PZ-aWr"/>
                             <constraint firstItem="Yxr-vQ-bxg" firstAttribute="leading" secondItem="WW8-Lz-j3k" secondAttribute="leading" id="Bbw-Es-yUk"/>
-                            <constraint firstItem="Yxr-vQ-bxg" firstAttribute="bottom" secondItem="cFY-kp-N9g" secondAttribute="bottom" id="Do2-d5-aWg"/>
+                            <constraint firstAttribute="bottom" secondItem="YW0-TO-Onw" secondAttribute="bottom" id="NYm-gi-dgQ"/>
+                            <constraint firstItem="YW0-TO-Onw" firstAttribute="trailing" secondItem="d5A-wj-aur" secondAttribute="trailing" id="d7Q-Jh-1yF"/>
+                            <constraint firstItem="YW0-TO-Onw" firstAttribute="leading" secondItem="d5A-wj-aur" secondAttribute="leading" id="svm-se-eMi"/>
+                            <constraint firstItem="YW0-TO-Onw" firstAttribute="top" secondItem="d5A-wj-aur" secondAttribute="bottom" id="xzD-gJ-WVo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WW8-Lz-j3k"/>
                     </view>
                     <connections>
                         <outlet property="_contentTV" destination="Yxr-vQ-bxg" id="sXy-fB-jJ3"/>
+                        <outlet property="commentTxtFld" destination="Qci-6a-rcf" id="rJA-ZJ-qwb"/>
+                        <outlet property="commentingVwBottomCons" destination="NYm-gi-dgQ" id="0wy-ag-icK"/>
+                        <outlet property="sendBtn" destination="Kbn-TH-1OB" id="KUc-ox-uXC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu1-aL-n5d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -688,6 +733,7 @@
         <image name="icon_checkbox_unchecked" width="100" height="100"/>
         <image name="icon_location" width="44" height="44"/>
         <image name="icon_photo" width="44" height="44"/>
+        <image name="icon_send" width="64" height="64"/>
         <image name="icon_sync" width="100" height="100"/>
     </resources>
 </document>
