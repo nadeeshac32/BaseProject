@@ -32,7 +32,7 @@ class BlogFeedVM: BaseTableViewVM<Blog> {
     override var loadAsDynemic      : Bool { get { return blogFeedType == .mySpace ? true : false } set {} }
     
     deinit {
-        print("deinit BlogFeedVM")
+        print("deinit BlogFeedVM :\(blogFeedType)")
     }
     
     init(blogFeedType: BlogFeedType) {

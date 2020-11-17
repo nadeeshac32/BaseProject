@@ -10,8 +10,8 @@ import UIKit
 import DropDown
 
 protocol BlogCommentReplyTVCellDelegate: class {
-    func replyCommentEdit(comment: String, commentId: String, indexPath: IndexPath)
-    func replyCommentDelete(commentId: String, indexPath: IndexPath)
+    func replyCommentEdit(comment: String, commentId: String)
+    func replyCommentDelete(commentId: String)
 }
 
 class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
@@ -31,7 +31,6 @@ class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
         super.awakeFromNib()
         self.selectionStyle                     = .none
         self.backgroundColor                    = .white
-        //  self.hideSeparator()
         hightlighterVw.layer.cornerRadius       = 2
         profileImageVw.layer.cornerRadius       = self.profileImageVw.frame.width / 2
         profileImageVw.image                    = UIImage(named: AppConfig.si.defaultAvatar_ImageName)
@@ -39,19 +38,19 @@ class BlogCommentReplyTVCell: BaseTVCell<BlogChildComment> {
         commentLbl.text                         = ""
         dateLbl.text                            = ""
         
-        dropDown.anchorView     = moreBtn
-        dropDown.direction      = .bottom
-        dropDown.width          = 100
-        dropDown.bottomOffset   = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.dataSource     = ["Edit", "Delete"]
+        dropDown.anchorView                     = moreBtn
+        dropDown.direction                      = .bottom
+        dropDown.width                          = 100
+        dropDown.bottomOffset                   = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.dataSource                     = ["Edit", "Delete"]
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if index == 0 {
-                if let comment = self.item?.comment, let id = self.item?.id, let row = self.row {
-                    self.replyCommentCellDelegate?.replyCommentEdit(comment: comment, commentId: id, indexPath: IndexPath(row: row, section: 0))
+                if let comment = self.item?.comment, let id = self.item?.id {
+                    self.replyCommentCellDelegate?.replyCommentEdit(comment: comment, commentId: id)
                 }
             } else if index == 1 {
-                if let id = self.item?.id, let row = self.row {
-                    self.replyCommentCellDelegate?.replyCommentDelete(commentId: id, indexPath: IndexPath(row: row, section: 0))
+                if let id = self.item?.id {
+                    self.replyCommentCellDelegate?.replyCommentDelete(commentId: id)
                 }
             }
         }

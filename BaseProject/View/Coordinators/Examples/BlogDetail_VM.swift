@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class BlogDetailVM: BaseVM, AdvancedBaseListVMDataSource { //BaseFormVM, AdvancedBaseListVMDataSource {
+class BlogDetailVM: BaseVM, AdvancedBaseListVMDataSource {
 
     var blog                                            : Blog
     var contentTableViewModel                           : BlogDetailTVVM?

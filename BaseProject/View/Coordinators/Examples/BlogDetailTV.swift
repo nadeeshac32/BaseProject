@@ -41,29 +41,24 @@ extension BlogDetailTV: BlogTVCellDelegate {
 }
 
 extension BlogDetailTV: BlogCommentTVCellDelegate {
-    func replyForCommentTapped(commentId: String, commentOwner: String, indexPath: IndexPath) {
-        viewModel?.typeReplyCommentFor.onNext((commentId: commentId, commentOwner: commentOwner, commentIndexPath: indexPath))
+    func replyForCommentTapped(commentId: String, commentOwner: String) {
+        viewModel?.typeReplyCommentFor.onNext((commentId: commentId, commentOwner: commentOwner))
     }
     
-    func updateCellFor(indexPath: IndexPath, height: CGFloat) {
-        if let cell = tableView.cellForRow(at: indexPath) as? BlogCommentTVCell {
-            tableView.beginUpdates()
-            cell.repliesTblVwHeightCons.constant = height
-            UIView.animate(withDuration: 0.3) { cell.layoutIfNeeded() }
-            tableView.endUpdates()
-        }
+    func updateCell(update: (UITableView) -> Void) {
+        update(self.tableView)
     }
     
     func handleRestClientError(error: RestClientError) {
         viewModel?.handleRestClientError(error: error)
     }
     
-    func commentDelete(commentId: String, indexPath: IndexPath) {
-        viewModel?.deleteChildComment(commentId: commentId, indexPath: indexPath)
+    func commentDelete(commentId: String, item: Comment) {
+        viewModel?.deleteParentComment(commentId: commentId, comment: item)
     }
     
-    func editComment(isChildComment: Bool, commentId: String, commentIndexPath: IndexPath, comment: String, parentCommentIndexPath: IndexPath?, parentCommentOwner: String?) {
-        viewModel?.editCommentFor.onNext((isChildComment: isChildComment, commentId: commentId, commentIndexPath: commentIndexPath, comment: comment, parentCommentIndexPath: parentCommentIndexPath, parentCommentOwner: parentCommentOwner))
+    func editComment(isChildComment: Bool, commentId: String, comment: String, parentCommentOwner: String?) {
+        viewModel?.editCommentFor.onNext((isChildComment: isChildComment, commentId: commentId, comment: comment, parentCommentOwner: parentCommentOwner))
     }
 }
 

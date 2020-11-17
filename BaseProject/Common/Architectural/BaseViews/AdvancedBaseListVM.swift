@@ -361,8 +361,9 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
             print("error: \(error)")
         }
 
-        let updatedSections: [SectionType]          = currentSections.filter { (existingSection) -> Bool in
-            return existingSection.header.lowercased() == sectionHeaderWhenStaticDataComesAsArray.lowercased()
+        let updatedSections: [SectionType]          = currentSections.filter { [weak self] (existingSection) -> Bool in
+            guard let `self` = self else { return false }
+            return existingSection.header.lowercased() == self.sectionHeaderWhenStaticDataComesAsArray.lowercased()
         }
         self.itemsWithHeaders.onNext(updatedSections)
     }

@@ -11,26 +11,13 @@ import Agrume
 import DropDown
 import AVKit
 
-class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate, UIGestureRecognizerDelegate, UITextFieldDelegate {    //BaseFormVC<BlogDetailVM>, BaseListDelagate {
-    
-//    @IBOutlet public weak var _scrollView                   : BaseScrollView!
-//    @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!
-//    @IBOutlet public weak var _scrollViewTopCons            : NSLayoutConstraint!
-//    @IBOutlet public weak var _scrollViewBottomCons         : NSLayoutConstraint!
-//    @IBOutlet public weak var _submitButton                 : UIButton!
-//    @IBOutlet public weak var _scrollViewBottomMargin       : NSLayoutConstraint!
+class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate, UIGestureRecognizerDelegate, UITextFieldDelegate {
     
     @IBOutlet public weak var _contentTV                    : UITableView!
     var contentTV                                           : BlogDetailTV?
     @IBOutlet weak var commentTxtFld                        : UITextField!
     @IBOutlet weak var sendBtn                              : UIButton!
     @IBOutlet weak var commentingVwBottomCons               : NSLayoutConstraint!
-    
-//    override var dynemicGapShouldCalculate                  : Bool { get { return false } set {} }
-//    override var scrollViewContentHeightWithouDynemicGap    : CGFloat { get { return 475 } set {} }
-//    override var scrollViewMinimumDynemicGap                : CGFloat { get { return 50 } set {} }
-//    override var scrollViewBottomConsRealValue              : CGFloat { get { return 34 } set {} }
- 
     
     var customRightButton                                   = SwivelUIMaker.makeButtonWith(imageName: "icon_more")
     let dropDown                                            = DropDown()

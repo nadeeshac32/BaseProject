@@ -14,7 +14,6 @@ import ObjectMapper
 /// If you initialise a instance of this class in side another BaseVM instance you should add newly created instance to the parent BaseVM's childViewModels array.
 class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableViewSection> {
     
-    var commentIndexPath            : IndexPath?
     var replyingToParentCommentId   : String?
     var edittingCommentId           : String?
     
@@ -22,13 +21,11 @@ class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableVi
     var comment                     = BehaviorSubject<String>(value: "")
     var typeCmmentForBlog           = PublishSubject<Bool>()
     var endCommenting               = PublishSubject<Bool>()
-    var typeReplyCommentFor         = PublishSubject<(commentId: String, commentOwner: String, commentIndexPath: IndexPath)>()
+    var typeReplyCommentFor         = PublishSubject<(commentId: String, commentOwner: String)>()
     
     var editCommentFor              = PublishSubject<(isChildComment: Bool,
                                                         commentId: String,
-                                                        commentIndexPath: IndexPath,
                                                         comment: String,
-                                                        parentCommentIndexPath: IndexPath?,
                                                         parentCommentOwner: String?)>()
     
     // MARK:- Output
@@ -51,14 +48,12 @@ class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableVi
         
         newCommentWithPlaceholder   = Observable.merge([
             typeCmmentForBlog.asObservable().map({ [weak self] _ in
-                self?.commentIndexPath          = nil
                 self?.replyingToParentCommentId = nil
                 self?.edittingCommentId         = nil
                 return "Type Comment"
             }),
-            typeReplyCommentFor.asObservable().map({ [weak self] commentId, commentOwner, commentIndexPath in
+            typeReplyCommentFor.asObservable().map({ [weak self] commentId, commentOwner in
                 self?.replyingToParentCommentId = commentId
-                self?.commentIndexPath          = commentIndexPath
                 self?.edittingCommentId         = nil
                 return "Reply to \(commentOwner)"
             })
@@ -66,13 +61,11 @@ class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableVi
         
         editCommentWithPlaceholder  = editCommentFor.asObservable().map({ [weak self] (commentDetails) in
             self?.replyingToParentCommentId     = nil
-            self?.commentIndexPath              = commentDetails.isChildComment == true ? commentDetails.parentCommentIndexPath : commentDetails.commentIndexPath
             self?.edittingCommentId             = commentDetails.commentId
             return (comment: commentDetails.comment, placeholder: commentDetails.isChildComment == true ? "Reply to \(commentDetails.parentCommentOwner ?? "")" : "Type Comment")
         })
         
         endCommentWithPlaceholder               = endCommenting.asObservable().map({ [weak self] _ in
-            self?.commentIndexPath              = nil
             self?.replyingToParentCommentId     = nil
             self?.edittingCommentId             = nil
             return "Type Comment"
@@ -116,7 +109,6 @@ class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableVi
     }
     
     func setForNormalComment() {
-        self.commentIndexPath           = nil
         self.replyingToParentCommentId  = nil
         self.edittingCommentId          = nil
     }
@@ -152,14 +144,15 @@ class BlogDetailTVVM: AdvancedBaseListVM<BlogDetailTVCellType, BlogDetailTableVi
         }
     }
     
-    
-    func deleteChildComment(commentId: String, indexPath: IndexPath) {
+    func deleteParentComment(commentId: String, comment: Comment) {
         do { guard try !freezeForRequestLoading.value() else { return } } catch { return }
         let httpService                 = HTTPService()
         freezeForRequestLoading.onNext(true)
         httpService.deleteCommentWithId(commentId: commentId, onSuccess: { [weak self] in
             self?.freezeForRequestLoading.onNext(false)
-            self?.reloadList()
+            if let cellType = BlogDetailTVCellType(model: comment) {
+                self?.removeExistingItems(items: [cellType])
+            }
         }) { [weak self] (error) in
             self?.handleRestClientError(error: error)
         }

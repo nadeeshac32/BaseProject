@@ -31,7 +31,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
     @IBOutlet weak var shareBtn                 : UIButton!
     
     
-    var blogDelegate: BlogTVCellDelegate?
+    weak var blogDelegate: BlogTVCellDelegate?
     override weak var delegate   : BaseTVCellDelegate? {
         get {
             return blogDelegate
@@ -74,7 +74,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         timeAgoLbl.text                         = ""
         titleLbl.text                           = ""
         captionLbl.text                         = ""
-        // TODO: - carousel clear
+        carousel.setCarouselData(paths: [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: AppConfig.si.default_ImageName)
         postStatusLbl.text                      = ""
     }
     

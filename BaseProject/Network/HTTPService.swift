@@ -719,7 +719,7 @@ extension HTTPService: BlogAPIProtocol {
     }
     
     func deleteCommentWithId(method: HTTPMethod! = .delete, commentId: String, onSuccess: SuccessEmptyDataCallback?, onError: ErrorCallback?) {
-        let contextPath                 = "\(urls.blogPath)/blog/comments/\(commentId)"
+        let contextPath                 = "\(urls.blogPath)/blog/comment/\(commentId)"
         genericRequest(method: method, parameters: nil, contextPath: contextPath, responseType: Blog.self, onError: onError, completionHandlerForNull: {
             onSuccess?()
             return
