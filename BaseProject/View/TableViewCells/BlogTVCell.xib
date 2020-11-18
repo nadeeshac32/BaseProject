@@ -47,7 +47,7 @@
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvX-p3-uM7" customClass="AACarousel" customModule="AACarousel">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvX-p3-uM7" customClass="SwivelCarousel" customModule="Base_Project" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="142" width="414" height="220"/>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -162,7 +162,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="captionLbl" destination="oK1-Pn-fUn" id="4Gi-kk-yvS"/>
-                <outlet property="carousel" destination="dvX-p3-uM7" id="8Lx-Gd-nXX"/>
+                <outlet property="carousel" destination="dvX-p3-uM7" id="eWz-RT-t0P"/>
                 <outlet property="commentBtn" destination="SjY-fS-sT4" id="qsn-Kz-9PV"/>
                 <outlet property="likeBtn" destination="c2S-QW-6Ik" id="i3M-Fq-C4O"/>
                 <outlet property="postStatusLbl" destination="Yc2-wA-yDV" id="tb2-zh-CWk"/>

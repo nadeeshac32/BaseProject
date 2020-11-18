@@ -9,10 +9,8 @@
 import UIKit
 
 public protocol SwivelCarouselDelegate: class {
-   func didSelectCarouselView(_ view: SwivelCarousel, _ index: Int)
+    func didSelectCarouselView(_ view: SwivelCarousel, _ index: Int, _ mediaUrl: String)
 }
-
-let needDownload = "http"
 
 public enum SwivelPageControlPosition                   : Int {
     case top = 0, center = 1, bottom = 2, topLeft = 3, bottomLeft = 4, topRight = 5, bottomRight = 6
@@ -21,7 +19,7 @@ public enum SwivelPageControlPosition                   : Int {
 struct SwivelCarouselConfig {
     var isAutoScroll                                    : Bool = false
     var timer                                           : Double? = 5.0
-    var defaultImage                                    : String?
+    var defaultImage                                    : String? = AppConfig.si.default_ImageName
     var isDescLayerHidden                               : Bool = true
     var isDescribedTitleHidden                          : Bool = true
     var isPageIndicatorHidden                           : Bool = false
@@ -139,7 +137,9 @@ public class SwivelCarousel: UIView, UIScrollViewDelegate {
      
     //MARK:- UITapGestureRecognizer
     @objc fileprivate func didSelectMediaView(_ sender: UITapGestureRecognizer) {
-        delegate?.didSelectCarouselView(self, currentIndex)
+        if mediaUrls.count > currentIndex {
+            delegate?.didSelectCarouselView(self, currentIndex, mediaUrls[currentIndex])
+        }
     }
     
     //MARK:- frame method
@@ -314,8 +314,8 @@ public class SwivelCarousel: UIView, UIScrollViewDelegate {
         case .none:
             break
         case .right:
-            beforeMediaView.assetUrl                    = currentMediaView.assetUrl
-            currentMediaView.assetUrl                   = mediaUrls[currentIndex]
+            copyAsset(from: currentMediaView, to: beforeMediaView)
+            copyAsset(from: afterMediaView, to: currentMediaView)
             if currentIndex + 1 > mediaUrls.count - 1 {
                 afterMediaView.assetUrl                 = mediaUrls[0]
             } else {
@@ -323,11 +323,11 @@ public class SwivelCarousel: UIView, UIScrollViewDelegate {
             }
             break
         case .left:
-            afterMediaView.assetUrl                     = currentMediaView.assetUrl
-            currentMediaView.assetUrl                   =  mediaUrls[currentIndex]
+            copyAsset(from: currentMediaView, to: afterMediaView)
+            copyAsset(from: beforeMediaView, to: currentMediaView)
             if currentIndex - 1 < 0 {
                 beforeMediaView.assetUrl                = mediaUrls[mediaUrls.count - 1]
-            }else {
+            } else {
                 beforeMediaView.assetUrl                = mediaUrls[currentIndex - 1]
             }
             break
@@ -335,6 +335,16 @@ public class SwivelCarousel: UIView, UIScrollViewDelegate {
 
         describedLabel.text                             = describedString[currentIndex]
         scrollView.contentOffset                        = CGPoint.init(x: frame.size.width * 2, y: 0)
+    }
+    
+    fileprivate func copyAsset(from: SwivelMultimediaView, to: SwivelMultimediaView) {
+        if let image = from.getImage() {
+            to.setImage(image: image)
+        } else if let player = from.getVideo() {
+            to.setVideo(player: player)
+        } else {
+            to.assetUrl                                 =  mediaUrls[currentIndex]
+        }
     }
     
     //MARK:- public control method
@@ -346,7 +356,11 @@ public class SwivelCarousel: UIView, UIScrollViewDelegate {
         stopAutoScroll()
     }
     
-    
+    public func reset() {
+        beforeMediaView.resetView()
+        currentMediaView.resetView()
+        afterMediaView.resetView()
+    }
 }
 
 

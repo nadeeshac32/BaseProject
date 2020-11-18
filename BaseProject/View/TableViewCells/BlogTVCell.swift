@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AACarousel
 import ActiveLabel
 
 protocol BlogTVCellDelegate: BaseTVCellDelegate {
@@ -17,22 +16,22 @@ protocol BlogTVCellDelegate: BaseTVCellDelegate {
     func tappedOnContentWith(url: String)
 }
 
-class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
+class BlogTVCell: BaseTVCell<Blog>, SwivelCarouselDelegate {
     
     @IBOutlet weak var profileImageVw           : UIImageView!
     @IBOutlet weak var userNameLbl              : UILabel!
     @IBOutlet weak var timeAgoLbl               : UILabel!
     @IBOutlet weak var titleLbl                 : UILabel!
     @IBOutlet weak var captionLbl               : ActiveLabel!
-    @IBOutlet weak var carousel                 : AACarousel!
+    @IBOutlet weak var carousel                 : SwivelCarousel!
     @IBOutlet weak var postStatusLbl            : UILabel!
     @IBOutlet weak var likeBtn                  : UIButton!
     @IBOutlet weak var commentBtn               : UIButton!
     @IBOutlet weak var shareBtn                 : UIButton!
     
     
-    weak var blogDelegate: BlogTVCellDelegate?
-    override weak var delegate   : BaseTVCellDelegate? {
+    weak var blogDelegate                       : BlogTVCellDelegate?
+    override weak var delegate                  : BaseTVCellDelegate? {
         get {
             return blogDelegate
         }
@@ -74,7 +73,7 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         timeAgoLbl.text                         = ""
         titleLbl.text                           = ""
         captionLbl.text                         = ""
-        carousel.setCarouselData(paths: [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: AppConfig.si.default_ImageName)
+        carousel.reset()
         postStatusLbl.text                      = ""
     }
     
@@ -88,29 +87,14 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         postStatusLbl.text                      = "\(item.totalLikes!) Likes  •  \(item.totalComments!) Comments"
         
         carousel.delegate                       = self
-        carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: AppConfig.si.default_ImageName)
-        carousel.setCarouselOpaque(layer: true, describedTitle: false, pageIndicator: false)
-        carousel.setCarouselLayout(displayStyle: 0, pageIndicatorPositon: 2, pageIndicatorColor: nil, describedTitleColor: nil, layerColor: nil)
+        carousel.configCarousel(mediaUrls: item.content ?? [])
         
         likeBtn.tintColor                       = item.isLiked == true ? AppConfig.si.colorPrimary : .darkGray
         
     }
     
-    func didSelectCarouselView(_ view: AACarousel, _ index: Int) {
-        if let contentUrl = item?.content?[index] {
-            blogDelegate?.tappedOnContentWith(url: contentUrl)
-        }
-    }
-    
-    func downloadImages(_ url: String, _ index: Int) {
-        let httpService                         = HTTPService()
-        httpService.downloadImage(imagePath: url) { [weak self](image) in
-            if let image = image {
-                self?.carousel.images[index]    = image
-            } else {
-                print("nil image")
-            }
-        }
+    func didSelectCarouselView(_ view: SwivelCarousel, _ index: Int, _ mediaUrl: String) {
+        blogDelegate?.tappedOnContentWith(url: mediaUrl)
     }
     
     func getUsername(username: String, location: String) -> NSAttributedString {
@@ -126,12 +110,6 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
             attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: 0, length: username.count))
             attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 17, weight: .semibold), range: NSRange(location: username.count + is_in_string.count, length: location.count))
             return attributedString
-        }
-    }
-    
-    func callBackFirstDisplayView(_ imageView: UIImageView, _ url: [String], _ index: Int) {
-        if index < url.count {
-            imageView.setImageWith(imagePath: url[index], completion: nil)
         }
     }
     

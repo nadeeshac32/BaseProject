@@ -28,6 +28,7 @@ class SwivelMultimediaView: GenericView {
     var asset: PHAsset? {
         didSet {
             guard let asset = self.asset else { imageView.image = nil; return; }
+            resetView()
             if asset.mediaType == .image {
                 previewPhoto(from: asset)
             } else {
@@ -39,6 +40,7 @@ class SwivelMultimediaView: GenericView {
     var assetUrl: String? {
         didSet {
             guard let assetUrl = assetUrl else { imageView.image = nil; return; }
+            resetView()
             previewPhoto(from: assetUrl)
         }
     }
@@ -53,18 +55,6 @@ class SwivelMultimediaView: GenericView {
         self.addAligned(imageView)
     }
         
-    private func fetchImage(for asset: PHAsset, canHandleDegraded: Bool = true, completion: @escaping ((UIImage?) -> Void)) {
-        let options                             = PHImageRequestOptions()
-        options.isNetworkAccessAllowed          = true
-        options.deliveryMode                    = .opportunistic
-        PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
-            if !canHandleDegraded {
-                if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, isDegraded { return }
-            }
-            completion(image)
-        })
-    }
-    
     private func previewPhoto(from url: String) {
         let httpService                             = HTTPService()
         httpService.downloadImage(imagePath: url) { [weak self] (image) in
@@ -76,18 +66,39 @@ class SwivelMultimediaView: GenericView {
         }
     }
     
+    func setVideo(player: AVPlayer) {
+        self.imageView.image                        = nil
+        let playerLayer                             = AVPlayerLayer(player: player)
+        playerLayer.videoGravity                    = AVLayerVideoGravity.resizeAspect
+        playerLayer.masksToBounds                   = true
+        playerLayer.frame                           = self.imageView.bounds
+        self.imageView.layer.addSublayer(playerLayer)
+        self.playerLayer                            = playerLayer
+        self.player                                 = player
+        player.isMuted                              = !(self.soundOn)
+        if self.autoPlay == true { player.play() }
+    }
+    
+    func setImage(image: UIImage) {
+        player                                      = nil
+        playerLayer?.removeFromSuperlayer()
+        playerLayer                                 = nil
+        imageView.image                             = image
+    }
+    
     private func previewVideo(from url: URL) {
         DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
             let player                              = AVPlayer(url: url)
             let playerLayer                         = AVPlayerLayer(player: player)
             playerLayer.videoGravity                = AVLayerVideoGravity.resizeAspect
             playerLayer.masksToBounds               = true
-            playerLayer.frame                       = self?.imageView.bounds ?? .zero
-            self?.imageView.layer.addSublayer(playerLayer)
-            self?.playerLayer                       = playerLayer
-            self?.player                            = player
-            player.isMuted                          = !(self?.soundOn ?? false)
-            if self?.autoPlay == true { player.play() }
+            playerLayer.frame                       = self.imageView.bounds
+            self.imageView.layer.addSublayer(playerLayer)
+            self.playerLayer                        = playerLayer
+            self.player                             = player
+            player.isMuted                          = !(self.soundOn)
+            if self.autoPlay == true { player.play() }
         }
     }
     
@@ -126,10 +137,31 @@ class SwivelMultimediaView: GenericView {
         fetchImage(for: asset, canHandleDegraded: false, completion: { [weak self] in self?.imageView.image = $0 })
     }
     
+    private func fetchImage(for asset: PHAsset, canHandleDegraded: Bool = true, completion: @escaping ((UIImage?) -> Void)) {
+        let options                             = PHImageRequestOptions()
+        options.isNetworkAccessAllowed          = true
+        options.deliveryMode                    = .opportunistic
+        PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
+            if !canHandleDegraded {
+                if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, isDegraded { return }
+            }
+            completion(image)
+        })
+    }
+        
     func resetView() {
         imageView.image                         = nil
         player                                  = nil
+        playerLayer?.removeFromSuperlayer()
         playerLayer                             = nil
+    }
+    
+    func getImage() -> UIImage? {
+        return self.imageView.image
+    }
+    
+    func getVideo() -> AVPlayer? {
+        return self.player
     }
 }
 
