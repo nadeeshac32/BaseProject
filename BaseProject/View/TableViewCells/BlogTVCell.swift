@@ -89,12 +89,28 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         
         carousel.delegate                       = self
         carousel.setCarouselData(paths: item.content ?? [],  describedTitle: [], isAutoScroll: false, timer: 5.0, defaultImage: AppConfig.si.default_ImageName)
-        //  optional methods
         carousel.setCarouselOpaque(layer: true, describedTitle: false, pageIndicator: false)
         carousel.setCarouselLayout(displayStyle: 0, pageIndicatorPositon: 2, pageIndicatorColor: nil, describedTitleColor: nil, layerColor: nil)
         
         likeBtn.tintColor                       = item.isLiked == true ? AppConfig.si.colorPrimary : .darkGray
         
+    }
+    
+    func didSelectCarouselView(_ view: AACarousel, _ index: Int) {
+        if let contentUrl = item?.content?[index] {
+            blogDelegate?.tappedOnContentWith(url: contentUrl)
+        }
+    }
+    
+    func downloadImages(_ url: String, _ index: Int) {
+        let httpService                         = HTTPService()
+        httpService.downloadImage(imagePath: url) { [weak self](image) in
+            if let image = image {
+                self?.carousel.images[index]    = image
+            } else {
+                print("nil image")
+            }
+        }
     }
     
     func getUsername(username: String, location: String) -> NSAttributedString {
@@ -113,24 +129,9 @@ class BlogTVCell: BaseTVCell<Blog>, AACarouselDelegate {
         }
     }
     
-    func didSelectCarouselView(_ view: AACarousel, _ index: Int) {
-        if let contentUrl = item?.content?[index] {
-            blogDelegate?.tappedOnContentWith(url: contentUrl)
-        }
-    }
-    
     func callBackFirstDisplayView(_ imageView: UIImageView, _ url: [String], _ index: Int) {
-        imageView.setImageWith(imagePath: url.first ?? "", completion: nil)
-    }
-    
-    func downloadImages(_ url: String, _ index: Int) {
-        let httpService                         = HTTPService()
-        httpService.downloadImage(imagePath: url) { [weak self](image) in
-            if let image = image {
-                self?.carousel.images[index]    = image
-            } else {
-                print("nil image")
-            }
+        if index < url.count {
+            imageView.setImageWith(imagePath: url[index], completion: nil)
         }
     }
     

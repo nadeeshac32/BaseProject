@@ -121,6 +121,7 @@
 		C9A793332521B33400430872 /* BaseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A793322521B33400430872 /* BaseCollectionVC.swift */; };
 		C9A793352521B33D00430872 /* BaseCollectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A793342521B33D00430872 /* BaseCollectionVM.swift */; };
 		C9A793372521B4CD00430872 /* BaseCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A793362521B4CD00430872 /* BaseCVCell.swift */; };
+		C9BD5467256501CA00160D54 /* SwivelCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BD5466256501CA00160D54 /* SwivelCarousel.swift */; };
 		C9DB8F012537039B00351DAE /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DB8F002537039B00351DAE /* RequestInterceptor.swift */; };
 		C9E2AE3B2508A652001F3961 /* SettingValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E2AE3A2508A652001F3961 /* SettingValue.swift */; };
 		C9E2AE3D2508A66F001F3961 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E2AE3C2508A66F001F3961 /* Setting.swift */; };
@@ -296,6 +297,7 @@
 		C9A793322521B33400430872 /* BaseCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionVC.swift; sourceTree = "<group>"; };
 		C9A793342521B33D00430872 /* BaseCollectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionVM.swift; sourceTree = "<group>"; };
 		C9A793362521B4CD00430872 /* BaseCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCVCell.swift; sourceTree = "<group>"; };
+		C9BD5466256501CA00160D54 /* SwivelCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwivelCarousel.swift; sourceTree = "<group>"; };
 		C9DB8F002537039B00351DAE /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		C9E2AE3A2508A652001F3961 /* SettingValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingValue.swift; sourceTree = "<group>"; };
 		C9E2AE3C2508A66F001F3961 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -583,7 +585,7 @@
 				C9A39570250BB66200FEE5DA /* SwivelImagePicker */,
 				C964B04C2507927A009E998C /* SwivelCustomTextFields */,
 				C92CD00E2549778300FA7F1F /* SwivelCustomTextView */,
-				C92F83F9255D73B000FED275 /* SwivelMultimediaView.swift */,
+				C9BD5465256501B500160D54 /* SwivelCarousel */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -784,6 +786,15 @@
 				C9A39574250BB6A300FEE5DA /* SwivelDocument.swift */,
 			);
 			path = SwivelDocumentPicker;
+			sourceTree = "<group>";
+		};
+		C9BD5465256501B500160D54 /* SwivelCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				C92F83F9255D73B000FED275 /* SwivelMultimediaView.swift */,
+				C9BD5466256501CA00160D54 /* SwivelCarousel.swift */,
+			);
+			path = SwivelCarousel;
 			sourceTree = "<group>";
 		};
 		C9CC086925516A6B00C86FE6 /* Common */ = {
@@ -1072,6 +1083,7 @@
 				C9E2AE5B250A39B4001F3961 /* LanguageSelection_VC.swift in Sources */,
 				C92CD0092547FBD600FA7F1F /* BlogCreateEdit_VM.swift in Sources */,
 				C964B07C25089C75009E998C /* BaseTVCell.swift in Sources */,
+				C9BD5467256501CA00160D54 /* SwivelCarousel.swift in Sources */,
 				C92CD016254BEDB900FA7F1F /* BlogCreateContentGridVM.swift in Sources */,
 				C92F83FE255ED2F600FED275 /* MultimediaPostData.swift in Sources */,
 				C964B01125064939009E998C /* BaseVM.swift in Sources */,
