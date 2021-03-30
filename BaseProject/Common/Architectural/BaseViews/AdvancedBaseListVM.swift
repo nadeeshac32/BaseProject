@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/6/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -72,6 +72,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     var sectionHeaderWhenDataComesAsArray           = "Section_Header_When_Data_Comes_As_Array"
     var apiDataDownloadedCount  : Int               = 0
     var apiDataTotalCount   : Int                   = 1
+	var hasNextPage 		: Bool 					= true
     var requestPage         : Int                   = 0
     var limit               : Int                   = 200
     
@@ -106,6 +107,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     let toSelectableMode    : PublishSubject<Bool>                              = PublishSubject()
     let refreshTableView    : PublishSubject<Bool>                              = PublishSubject()
     
+    var updateScrollPropertion     : BehaviorSubject<CGFloat>                   = BehaviorSubject(value: 0)
     
     private override init() {
         super.init()
@@ -198,6 +200,7 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     /// Reset pagination and reload data
     func reloadList() {
         apiDataTotalCount                           = 1
+		hasNextPage 								= true
         requestPage                                 = 0
         removeAllAPIItems()                         //replaced emptying table itemsWithHeaders.onNext([])
         apiDataDownloadedCount                      = 0
@@ -207,11 +210,13 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     /// Paginate next data set from the Rest API.
     /// This method will be called the view has scroll to the bottom
     func paginateNext() {
-        if loadFromAPI && apiDataTotalCount > apiDataDownloadedCount && searchText == "" {
+        if loadFromAPI && (apiDataTotalCount > apiDataDownloadedCount || hasNextPage == true) && searchText == "" {
             self.apiDataTotalCount                  = 0
+			self.hasNextPage 						= false
             performGetItemsRequest(loadPage: requestPage, limit: limit)
-        } else if loadFromAPI && apiDataTotalCount > apiDataDownloadedCount && searchText != "" {
+        } else if loadFromAPI && (apiDataTotalCount > apiDataDownloadedCount || hasNextPage == true) && searchText != "" {
             self.apiDataTotalCount                  = 0
+			self.hasNextPage 						= false
             performSearchItemsRequest(searchText: searchText, loadPage: requestPage, limit: limit)
         }
     }
@@ -228,8 +233,9 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [BaseModel], total: Int, page: Int, size: Int) {
+	func handleResponse(items: [BaseModel], total: Int, page: Int, size: Int, hasNextPage: Bool = false) {
         self.apiDataTotalCount                      = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -242,8 +248,9 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [String: [BaseModel]], total: Int, page: Int, size: Int) {
+	func handleResponse(items: [String: [BaseModel]], total: Int, page: Int, size: Int, hasNextPage: Bool = false) {
         self.apiDataTotalCount                      = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -257,8 +264,9 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [BaseModel], total: Int, page: Int, size: Int) {
+	func handleSearchResponse(searchTextOfData: String, items: [BaseModel], total: Int, page: Int, size: Int, hasNextPage: Bool = false) {
         self.apiDataTotalCount                      = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -271,8 +279,9 @@ class AdvancedBaseListVM<Model: AdvancedAnimatableSectionModelTypeSupportedItem,
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [String: [BaseModel]], total: Int, page: Int, size: Int) {
+	func handleSearchResponse(searchTextOfData: String, items: [String: [BaseModel]], total: Int, page: Int, size: Int, hasNextPage: Bool = false) {
         self.apiDataTotalCount                      = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.apiDataTotalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)

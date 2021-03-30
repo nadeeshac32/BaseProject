@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -31,7 +31,6 @@ class BaseFormVC<ViewModel: BaseFormVM>: BaseVC<ViewModel> {
     var scrollViewBottomConsRealValue                       : CGFloat               = 0
     var scrollViewFrameHeight                               : CGFloat?
     var contentHeight                                       : CGFloat?
-    var previousVCTitle                                     : String?
     
     override func viewDidLoad() {
         self.viewDidLoad(extraFormFields: nil)

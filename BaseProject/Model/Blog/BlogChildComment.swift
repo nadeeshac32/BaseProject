@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/10/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -16,8 +16,8 @@ class BlogChildComment: BaseModel {
     var comment                         : String?
     var totalLikes                      : Int?
     var isLiked                         : Bool? = false
-    var createdDate                     : SwivelDate?
-    var updatedDate                     : SwivelDate?
+    var createdDate                     : NCDate?
+    var updatedDate                     : NCDate?
     
     var _comment                        = BehaviorSubject<String>(value: "")
     
@@ -31,7 +31,7 @@ class BlogChildComment: BaseModel {
         self.updatedDate                = nil
     }
     
-    init(blogCommentId: String?, owner: Owner?, comment: String?, totalLikes: Int?, isLiked: Bool?, createdDate: SwivelDate?, updatedDate: SwivelDate?) {
+    init(blogCommentId: String?, owner: Owner?, comment: String?, totalLikes: Int?, isLiked: Bool?, createdDate: NCDate?, updatedDate: NCDate?) {
         super.init(id: blogCommentId ?? "")
         self.id                         = blogCommentId
         self.owner                      = owner
@@ -116,7 +116,7 @@ class BlogChildComment: BaseModel {
     
     
 //    // TODO: This method will be deleted once the api integrated
-//    init(blogId: String, owner: Owner, content: [String]?, title: String?, description: String?, location: String?, createdDate: SwivelDate?, updatedDate: SwivelDate?, totalLikes: Int, isLiked: Bool, totalComments: Int, totalShares: Int) {
+//    init(blogId: String, owner: Owner, content: [String]?, title: String?, description: String?, location: String?, createdDate: NCDate?, updatedDate: NCDate?, totalLikes: Int, isLiked: Bool, totalComments: Int, totalShares: Int) {
 //        self.blogId                     = blogId
 //        self.owner                      = owner
 //        self.content                    = content

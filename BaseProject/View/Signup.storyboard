@@ -36,7 +36,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="XzI-3i-qks"/>
                                 </constraints>
-                                <string key="text">Welcome to the App by SwivelGroup.
+                                <string key="text">Welcome to the App by NC.
 Please select your language.</string>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -203,7 +203,7 @@ Please select your language.</string>
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ca-WF-ncA" customClass="BaseScrollView" customModule="Base_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EvS-m8-bqQ" customClass="SwivelNormalTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EvS-m8-bqQ" customClass="NCNormalTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="40" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="PkQ-OH-elq"/>
@@ -223,7 +223,7 @@ Please select your language.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gqf-u6-VAi" customClass="SwivelRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gqf-u6-VAi" customClass="NCRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="110" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="B0m-P2-3cU"/>
@@ -243,7 +243,7 @@ Please select your language.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iOz-sO-WEC" customClass="SwivelRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iOz-sO-WEC" customClass="NCRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="180" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="4L8-rt-Asx"/>
@@ -263,7 +263,7 @@ Please select your language.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-EG-knn" customClass="SwivelPrefixSelectTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-EG-knn" customClass="NCPrefixSelectTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="250" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="g8V-wH-fue"/>

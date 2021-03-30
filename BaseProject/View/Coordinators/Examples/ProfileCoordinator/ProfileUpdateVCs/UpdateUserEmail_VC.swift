@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/10/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import CountryPickerView
 
 class UpdateUserEmailVC: BaseFormVC<UpdateUserEmailVM> {
     
-    @IBOutlet weak var emailTxtFld                          : SwivelNormalTextField!
+    @IBOutlet weak var emailTxtFld                          : NCNormalTextField!
 
     @IBOutlet public weak var _scrollView                   : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!

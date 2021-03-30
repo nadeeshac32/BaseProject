@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -47,6 +47,7 @@ extension BaseListVMDataSource where Self: BaseVM {
 public enum DataLoadIn {
     case ViewDidLoad
     case ViewWillAppear
+    case StopAutoLoading
 }
 
 /// Base ViewModel that supports BaseListVC & BaseList.
@@ -74,9 +75,10 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
      */
     var loadAsDynemic       : Bool                  = true
     
+	var hasNextPage 		: Bool 					= true
     var totalCount          : Int                   = 1
     var requestPage         : Int                   = 0
-    let limit               : Int                   = 200
+    var limit               : Int                   = 200
     
     /// Data list can be sorted from key if you wanted. In the Data model you should override getSortKey method as you want.
     var shouldSortFromKey   : Bool                  = false
@@ -229,6 +231,7 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     /// Reset pagination and reload data
     func reloadList() {
         totalCount                                  = 1
+		hasNextPage 								= true
         requestPage                                 = 0
         items.onNext([])
         itemsWithHeaders.onNext([])
@@ -238,11 +241,13 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     /// Paginate next data set from the Rest API.
     /// This method will be called the view has scroll to the bottom
     func paginateNext() {
-        if loadFromAPI && totalCount > getCalculatedItemsCount() && searchText == "" {
+        if loadFromAPI && (totalCount > getCalculatedItemsCount() || hasNextPage == true) && searchText == "" {
             self.totalCount                         = 0
+			self.hasNextPage 						= false
             perfomrGetItemsRequest(loadPage: requestPage, limit: limit)
-        } else if loadFromAPI && totalCount > getCalculatedItemsCount() && searchText != "" {
+        } else if loadFromAPI && (totalCount > getCalculatedItemsCount() || hasNextPage == true) && searchText != "" {
             self.totalCount                         = 0
+			self.hasNextPage 						= false
             performSearchItemsRequest(searchText: searchText, loadPage: requestPage, limit: limit)
         }
     }
@@ -349,11 +354,12 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [Model], total: Int, page: Int) {
+    func handleResponse(items: [Model], total: Int, page: Int, hasNextPage: Bool = false) {
         if page == 0 {
             self.items.onNext([])
         }
         self.totalCount                             = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -365,11 +371,12 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [String: [Model]], total: Int, page: Int) {
+    func handleResponse(items: [String: [Model]], total: Int, page: Int, hasNextPage: Bool = false) {
         if page == 0 {
             self.itemsWithHeaders.onNext([])
         }
         self.totalCount                             = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -381,11 +388,12 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [Model], total: Int, page: Int) {
+    func handleSearchResponse(searchTextOfData: String, items: [Model], total: Int, page: Int, hasNextPage: Bool = false) {
         if page == 0 {
             self.items.onNext([])
         }
         self.totalCount                             = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -397,11 +405,12 @@ class BaseTableViewVM<Model: BaseModel>: BaseVM {
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [String: [Model]], total: Int, page: Int) {
+    func handleSearchResponse(searchTextOfData: String, items: [String: [Model]], total: Int, page: Int, hasNextPage: Bool = false) {
         if page == 0 {
             self.itemsWithHeaders.onNext([])
         }
         self.totalCount                             = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)

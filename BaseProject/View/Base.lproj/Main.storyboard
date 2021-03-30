@@ -18,7 +18,7 @@
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R11-qg-O4k" customClass="BaseScrollView" customModule="Base_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="efC-nm-tLS" customClass="SwivelRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="efC-nm-tLS" customClass="NCRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="42" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="97k-5A-EwE"/>
@@ -38,7 +38,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-enter password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-vO-Eyg" customClass="SwivelRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-enter password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-vO-Eyg" customClass="NCRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="112" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="L9I-uI-CBm"/>
@@ -129,7 +129,7 @@
                                             <constraint firstAttribute="height" constant="125" id="YuP-Ua-3pe"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email or Mobile number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="DeH-AP-YLd" customClass="SwivelUsernameTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email or Mobile number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="DeH-AP-YLd" customClass="NCUsernameTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="257" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="SPT-9L-5jF"/>
@@ -149,7 +149,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Q2v-cF-SJn" customClass="SwivelRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Q2v-cF-SJn" customClass="NCRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="337" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="nJ8-Ub-LSo"/>
@@ -213,7 +213,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZ8-DL-qAv">
                                         <rect key="frame" x="107" y="615" width="200" height="45"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZP-wu-Yru" customClass="SwivelFBLoginButton" customModule="Base_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZP-wu-Yru" customClass="NCFBLoginButton" customModule="Base_Project" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="45"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -301,7 +301,7 @@
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBH-hx-lFi" customClass="BaseScrollView" customModule="Base_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MLU-i4-sCg" customClass="SwivelRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MLU-i4-sCg" customClass="NCRightButtonActionTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="40" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="RmE-HF-X9N"/>
@@ -382,7 +382,7 @@
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtD-SA-dqS" customClass="BaseScrollView" customModule="Base_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TJT-aZ-0Rz" customClass="SwivelPrefixSelectTextField" customModule="Base_Project" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TJT-aZ-0Rz" customClass="NCPrefixSelectTextField" customModule="Base_Project" customModuleProvider="target">
                                         <rect key="frame" x="25" y="40" width="364" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="yWG-zd-2JW"/>

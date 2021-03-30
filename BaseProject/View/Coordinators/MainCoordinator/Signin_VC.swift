@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/10/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -16,12 +16,12 @@ import FBSDKLoginKit
 
 class SigninVC: BaseFormVC<SigninVM>, DropDownPresentable, GoogleSignable, FacebookSignable {
 
-    @IBOutlet weak var usernameTxtFld                                   : SwivelUsernameTextField!
-    @IBOutlet weak var passwordTxtFld                                   : SwivelRightButtonActionTextField!
+    @IBOutlet weak var usernameTxtFld                                   : NCUsernameTextField!
+    @IBOutlet weak var passwordTxtFld                                   : NCRightButtonActionTextField!
     @IBOutlet weak var forgetPasswordBtn                                : UIButton!
     @IBOutlet weak var registerBtn                                      : UIButton!
     @IBOutlet weak var googleSigninBtn                                  : GIDSignInButton!
-    @IBOutlet weak var facebookSigninBtn                                : SwivelFBLoginButton!
+    @IBOutlet weak var facebookSigninBtn                                : NCFBLoginButton!
     
     @IBOutlet public weak var _scrollView                               : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons                           : NSLayoutConstraint!

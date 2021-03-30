@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/28/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,7 @@ class BaseCollectionVC<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Coll
     var itemCountString                             : String?
     
     var searchBar                                   = UISearchBar()
-    var searchBtn                                   = SwivelUIMaker.makeButtonWith(imageName: "icon_search")
+    var searchBtn                                   = NCUIMaker.makeButtonWith(imageName: "icon_search")
     var searchBarButtonItem                         : UIBarButtonItem?
     
     var multiSelectable                             : Bool = false

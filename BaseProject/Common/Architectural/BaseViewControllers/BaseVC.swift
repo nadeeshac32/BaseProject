@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -27,6 +27,10 @@ class BaseVC<ViewModel: BaseVM>: BaseSuperVC {
                 print("incorrect BaseVM type for BaseVC")
             }
         }
+    }
+    
+    deinit {
+        print("deinit \(String(describing: Self.self))")
     }
     
     override func viewDidLoad() {
@@ -153,13 +157,13 @@ class BaseVC<ViewModel: BaseVM>: BaseSuperVC {
                     self?.view.makeToast(message)
                 }),
                 viewModel.successMessage.subscribe(onNext: { (tupple) in
-                    CustomMessageMaker.showSuccessMessage(text: tupple.message, blockScreen: tupple.blockScreen, completion: tupple.completionHandler)
+                    NCCustomMessageMaker.showSuccessMessage(text: tupple.message, blockScreen: tupple.blockScreen, completion: tupple.completionHandler)
                 }),
                 viewModel.warningMessage.subscribe(onNext: { (tupple) in
-                    CustomMessageMaker.showWarningMessage(text: tupple.message, blockScreen: tupple.blockScreen, completion: tupple.completionHandler)
+                    NCCustomMessageMaker.showWarningMessage(text: tupple.message, blockScreen: tupple.blockScreen, completion: tupple.completionHandler)
                 }),
                 viewModel.errorMessage.subscribe(onNext: { (tupple) in
-                    CustomMessageMaker.showErrorMessage(text: tupple.message, blockScreen: tupple.blockScreen, completion: tupple.completionHandler)
+                    NCCustomMessageMaker.showErrorMessage(text: tupple.message, blockScreen: tupple.blockScreen, completion: tupple.completionHandler)
                 }),
                 viewModel.hideKeyBoard.subscribe(onNext: { [weak self] (hide) in
                     self?.view.endEditing(true)

@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 10/27/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -13,8 +13,8 @@ import Photos
 class BlogCreateEditVC: BaseFormVC<BlogCreateEditVM> {
     @IBOutlet weak var userImageVw                          : UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
-    @IBOutlet weak var titleTxtFld                          : SwivelNormalTextField!
-    @IBOutlet weak var descTxtVw                            : SwivelNormalTextView!
+    @IBOutlet weak var titleTxtFld                          : NCNormalTextField!
+    @IBOutlet weak var descTxtVw                            : NCNormalTextView!
     @IBOutlet weak var postItemsContainer                   : UIView!
     @IBOutlet weak var addPhotoBtn                          : UIButton!
     @IBOutlet weak var addLocationBtn                       : UIButton!

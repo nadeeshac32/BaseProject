@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -19,7 +19,7 @@ class BaseModel: Mappable, IdentifiableType, Equatable {
     var identity        : Identity { return id }
     var isSelected      : Bool = false
     
-    static var arrayKey : String {
+    class var arrayKey : String {
         return String(describing: self.self).lowercased()+"s"
     }
     
@@ -46,3 +46,39 @@ class BaseModel: Mappable, IdentifiableType, Equatable {
         return id
     }
 }
+
+
+//class BaseModel: Mappable, IdentifiableType, Equatable {
+//    typealias Identity  = Int
+//    
+//    var id              : Int!
+//    var identity        : Identity { return id }
+//    var isSelected      : Bool = false
+//    
+//    static var arrayKey : String {
+//        return String(describing: self.self).lowercased()+"s"
+//    }
+//    
+//    init() {
+//        self.id         = 0
+//    }
+//    
+//    init(id: Int) {
+//        self.id         = id
+//    }
+//    
+//    required init?(map: Map) {
+//        self.id         = 0
+//    }
+//    
+//    func mapping(map: Map) { }
+//    
+//    static func == (lhs: BaseModel, rhs: BaseModel) -> Bool {
+//        return lhs.identity == rhs.identity
+//    }
+//    
+//    /// when you're retrieving a list, when you want to sort the array, you can override this method to supply the key you want to support
+//    func getSortKey() -> String {
+//        return String(id)
+//    }
+//}

@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 10/29/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -78,6 +78,8 @@ class BaseList<Model:BaseModel, ViewModel: BaseTableViewVM<Model>, TableViewCell
     var tableView                               : UITableView!
     var itemCountLabel                          : UILabel?
     var itemCountString                         : String?
+    var showActivityIndicator                   : Bool = false
+    
     var isDynemicSectionTitles                  : Bool = true
     var shouldSetRowHeight                      : Bool = false {
         didSet {
@@ -190,6 +192,10 @@ class BaseList<Model:BaseModel, ViewModel: BaseTableViewVM<Model>, TableViewCell
             ])
             let isLoading = tableView.rx.isLoading(loadingMessage: delegate?.getItemsLoadingText(tableView) ?? "", noItemsMessage: delegate?.getNoItemsText(tableView) ?? "", imageName: delegate?.getNoItemsImageName(tableView))
             viewModel.requestLoading.map ({ $0 }).bind(to: isLoading).disposed(by: disposeBag)
+            
+            if showActivityIndicator {
+                viewModel.requestLoading.asObservable().bind(to: tableView.rx.isAnimating).disposed(by: disposeBag)
+            }
         }
     }
 }

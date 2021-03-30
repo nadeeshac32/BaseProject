@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/8/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -42,6 +42,72 @@ extension loadingViewable where Self : UIViewController {
     }
 }
 
+extension loadingViewable where Self : UICollectionView {
+    func startAnimating(){
+        let activityView                    : UIActivityIndicatorView!
+        if #available(iOS 13.0, *) {
+            activityView                    = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        } else {
+            activityView                    = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        }
+        activityView.color                  = AppConfig.si.colorPrimary
+        if let parentView = self.superview {
+            parentView.addSubview(activityView)
+            activityView.restorationIdentifier  = "activityView"
+            parentView.bringSubviewToFront(activityView)
+            activityView.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+            }
+            activityView.startAnimating()
+        }
+    }
+    func stopAnimating() {
+        if let parentView = self.superview {
+            for item in parentView.subviews
+                where item.restorationIdentifier == "activityView" {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        item.alpha = 0
+                    }) { (_) in
+                        item.removeFromSuperview()
+                    }
+            }
+        }
+    }
+}
+
+
+extension loadingViewable where Self : UITableView {
+    func startAnimating(){
+        let activityView                    : UIActivityIndicatorView!
+        if #available(iOS 13.0, *) {
+            activityView                    = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        } else {
+            activityView                    = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        }
+        activityView.color                  = AppConfig.si.colorPrimary
+        if let parentView = self.superview {
+            parentView.addSubview(activityView)
+            activityView.restorationIdentifier  = "activityView"
+            parentView.bringSubviewToFront(activityView)
+            activityView.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+            }
+            activityView.startAnimating()
+        }
+    }
+    func stopAnimating() {
+        if let parentView = self.superview {
+            for item in parentView.subviews
+                where item.restorationIdentifier == "activityView" {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        item.alpha = 0
+                    }) { (_) in
+                        item.removeFromSuperview()
+                    }
+            }
+        }
+    }
+}
 
 protocol loadingFreezable {
     func startFreezeAnimation()

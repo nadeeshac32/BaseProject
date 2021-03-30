@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/5/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,7 @@ class BlogDetailVC: BaseVC<BlogDetailVM>, BaseListDelagate, UIGestureRecognizerD
     @IBOutlet weak var sendBtn                              : UIButton!
     @IBOutlet weak var commentingVwBottomCons               : NSLayoutConstraint!
     
-    var customRightButton                                   = SwivelUIMaker.makeButtonWith(imageName: "icon_more")
+    var customRightButton                                   = NCUIMaker.makeButtonWith(imageName: "icon_more")
     let dropDown                                            = DropDown()
     
     deinit { print("deinit BlogDetailVC") }

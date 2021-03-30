@@ -3,13 +3,13 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/18/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
 import RxSwift
 
-class ManuTabBarWithListsGridsVC: BaseMenuVC<BaseMenuVM, SwivelManuTabCell_Circle> {
+class ManuTabBarWithListsGridsVC: BaseMenuVC<BaseMenuVM, NCManuTabCell_Circle> {
     
     @IBOutlet weak var _menuBarView                             : UIView!
     

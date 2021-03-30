@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -20,11 +20,11 @@ protocol BaseMenuTabProtocol: class {
 
 /// Base tab bar controller functionality.
 /// You only have to override `getTabNames` and `getMenuTabViewControllerFor` functions.
-class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<ViewModel>, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: NCManuTabCell>: BaseVC<ViewModel>, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     
     /// Actual tab bar showing the tabs are changing.
-    var menuBarView                                         : SwivelManuTab<ManuTabCell>!
+    var menuBarView                                         : NCManuTab<ManuTabCell>!
     
     var currentIndex                                        = 0
     var tabs                                                : [MenuTabCellAttributes] = []
@@ -32,8 +32,8 @@ class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<
     
     /// Bind the actual UI MenuBarView with the Base class variables.
     /// - Note: Because from the subclass, IBOutlets cannot be made directly to Base class variables.
-    func customiseView(menuBarView: UIView!) {
-        self.menuBarView                                    = SwivelManuTab<ManuTabCell>(frame: CGRect(x: 0, y: 0, width: menuBarView.frame.width, height: menuBarView.frame.height))
+    func customiseView(menuBarView: UIView!, scrollingEnabled: Bool = true) {
+        self.menuBarView                                    = NCManuTab<ManuTabCell>(frame: CGRect(x: 0, y: 0, width: menuBarView.frame.width, height: menuBarView.frame.height))
         menuBarView.addSubview(self.menuBarView)
         super.customiseView()
         self.tabs                                           = getTabNames()
@@ -45,7 +45,9 @@ class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<
         
         self.menuBarView.menuDelegate                       = self
         pageController.delegate                             = self
-        pageController.dataSource                           = self
+        if scrollingEnabled {
+            pageController.dataSource                       = self
+        }
         
         //For Intial Display
         self.menuBarView.collView.selectItem(at: IndexPath.init(item: 0, section: 0), animated: true, scrollPosition: .centeredVertically)
@@ -64,11 +66,15 @@ class BaseMenuVC<ViewModel: BaseMenuVM, ManuTabCell: SwivelManuTabCell>: BaseVC<
     }
     
     func presentPageVCOnView() {
-        self.pageController                                 = SwivelPageViewController.initFromStoryboard(name: Storyboards.common.rawValue)
+        let bottomBarHeight                                 = CGFloat(84)
+        self.pageController                                 = NCPageViewController.initFromStoryboard(name: Storyboards.common.rawValue)
         self.pageController.view.frame                      = CGRect.init(x: 0,
-                                                                          y: menuBarView.frame.height,
+//                                                                        y: menuBarView.frame.height + menuBarView.frame.maxY,
+                                                                          y: -1,
                                                                           width: self.view.frame.width,
-                                                                          height: self.view.frame.height - menuBarView.frame.maxY)
+                                                                          height: self.view.frame.height - bottomBarHeight
+//                                                                        height: self.view.frame.height
+                                                                            )
         self.addChild(self.pageController)
         self.view.addSubview(self.pageController.view)
         self.pageController.didMove(toParent: self)

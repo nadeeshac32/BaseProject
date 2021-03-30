@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -127,8 +127,8 @@ class BaseVM: NSObject {
         self.requestLoading.onNext(false)
         self.freezeForRequestLoading.onNext(false)
         switch error {
-        case let .ServerError(code, message):
-            self.handleServerError(code: code, message: message, blockScreen: blockScreen)
+        case let .BackendError(code, message):
+            self.handleBackendError(code: code, message: message, blockScreen: blockScreen)
             break
         
         case let .AuthenticationError(_, _, message):
@@ -137,6 +137,10 @@ class BaseVM: NSObject {
             
         case let .AlamofireError(message):
             self.handleAlamofireError(message: message, blockScreen: blockScreen)
+            break
+            
+        case .InternalServerError:
+            self.handleDefaultError(blockScreen: blockScreen)
             break
             
         default:
@@ -150,7 +154,7 @@ class BaseVM: NSObject {
         self.errorMessage.onNext(tupple)
     }
     
-    func handleServerError(code: Int, message: String, blockScreen: Bool? = false) {
+    func handleBackendError(code: Int, message: String, blockScreen: Bool? = false) {
         let tupple = (message: message, blockScreen: blockScreen!, completionHandler: {})
         self.errorMessage.onNext(tupple)
     }
@@ -167,6 +171,5 @@ class BaseVM: NSObject {
         let tupple = (message: "Something went wrong.".localized(), blockScreen: blockScreen!, completionHandler: {})
         self.errorMessage.onNext(tupple)
     }
-    
     
 }

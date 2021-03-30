@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/3/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -16,14 +16,14 @@ protocol BlogTVCellDelegate: BaseTVCellDelegate {
     func tappedOnContentWith(url: String)
 }
 
-class BlogTVCell: BaseTVCell<Blog>, SwivelCarouselDelegate {
+class BlogTVCell: BaseTVCell<Blog>, NCCarouselDelegate {
     
     @IBOutlet weak var profileImageVw           : UIImageView!
     @IBOutlet weak var userNameLbl              : UILabel!
     @IBOutlet weak var timeAgoLbl               : UILabel!
     @IBOutlet weak var titleLbl                 : UILabel!
     @IBOutlet weak var captionLbl               : ActiveLabel!
-    @IBOutlet weak var carousel                 : SwivelCarousel!
+    @IBOutlet weak var carousel                 : NCCarousel!
     @IBOutlet weak var postStatusLbl            : UILabel!
     @IBOutlet weak var likeBtn                  : UIButton!
     @IBOutlet weak var commentBtn               : UIButton!
@@ -93,7 +93,7 @@ class BlogTVCell: BaseTVCell<Blog>, SwivelCarouselDelegate {
         
     }
     
-    func didSelectCarouselView(_ view: SwivelCarousel, _ index: Int, _ mediaUrl: String) {
+    func didSelectCarouselView(_ view: NCCarousel, _ index: Int, _ mediaUrl: String) {
         blogDelegate?.tappedOnContentWith(url: mediaUrl)
     }
     

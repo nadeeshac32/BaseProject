@@ -3,14 +3,13 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/8/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 // MARK: - UserDefault keys
 public enum Defaults: String {
     case userSignedIn
     case userGuideShown
-    case reportDownloadDate
 }
 
 // MARK: - Storyboard keys
@@ -20,6 +19,7 @@ public enum Storyboards: String {
     case common         = "Common"
     case launchScreen   = "LaunchScreen"
     case example        = "Example"
+    case profile        = "Profile"
 }
 
 // MARK: - FormValidationError

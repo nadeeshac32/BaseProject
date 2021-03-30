@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 10/25/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import RxSwift
@@ -69,8 +69,8 @@ class BlogRepository {
     
     static func getPost(ownerName: String, ownerImageName: String, blogId: String, displayTime: String, title: String, desc: String, contentImages: [String]?, likes: Int, isLiked: Bool, comments: Int, Shares: Int) -> Blog {
         let owner = Owner(id: "", name: ownerName, imageUrl: ownerImageName)
-        let createdDate = SwivelDate(displayText: displayTime)
-        let updatedDate = SwivelDate(displayText: displayTime)
+        let createdDate = NCDate(displayText: displayTime)
+        let updatedDate = NCDate(displayText: displayTime)
         let post = Blog(blogId: blogId, owner: owner, content: contentImages, title: title, description: desc, location: nil, createdDate: createdDate, updatedDate: updatedDate, totalLikes: likes, isLiked: isLiked, totalComments: comments, totalShares: Shares)
         return post
     }

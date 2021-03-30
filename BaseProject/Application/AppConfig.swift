@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/8/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -75,15 +75,11 @@ class AppConfig: NSObject, CLLocationManagerDelegate {
     var x_API_Key: String! {
         guard let string        = apiKeys["X-API-Key"] else { return "" }
         return (string as! String)
-        //        let string        = "tiu-c2cc3496-c9f8-5432-a83c-82841b4412ohe"
-        //        return string
     }
     
     var otpAppKey: String! {
         guard let string        = apiKeys["google-clientID"] else { return "" }
         return (string as! String)
-    //        let string        = "tokoin-otp-c2cc3496-c9f8-4068-a83c-82841b44727b"
-    //        return string
     }
     
     var googleClientID: String! {

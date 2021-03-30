@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/10/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -12,8 +12,8 @@ import RxSwift
 
 class PasswordResetVC: BaseFormVC<PasswordResetVM>, DropDownPresentable {
     
-    @IBOutlet weak var passwordTxtFld                       : SwivelRightButtonActionTextField!
-    @IBOutlet weak var reenterPasswordTxtFld                : SwivelRightButtonActionTextField!
+    @IBOutlet weak var passwordTxtFld                       : NCRightButtonActionTextField!
+    @IBOutlet weak var reenterPasswordTxtFld                : NCRightButtonActionTextField!
     
     @IBOutlet public weak var _scrollView                   : BaseScrollView!
     @IBOutlet public weak var _dynemicGapCons               : NSLayoutConstraint!

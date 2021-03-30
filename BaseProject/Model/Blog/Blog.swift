@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 10/26/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -18,8 +18,8 @@ class Blog: BaseModel {
     var desc            : String?
     var location        : String?
     var content         : [String]?
-    var createdDate     : SwivelDate?
-    var updatedDate     : SwivelDate?
+    var createdDate     : NCDate?
+    var updatedDate     : NCDate?
     var totalLikes      : Int?
     var isLiked         : Bool? = false
     var totalComments   : Int?
@@ -78,7 +78,7 @@ class Blog: BaseModel {
         _desc                           = BehaviorSubject<String>(value: desc ?? "")
         _location                       = BehaviorSubject<String>(value: location ?? "")
         
-        self.id         = self.blogId
+        self.id         				= self.blogId
     }
     
     func updateSaved() {
@@ -131,7 +131,7 @@ class Blog: BaseModel {
     
     
     // TODO: This method will be deleted once the api integrated
-    init(blogId: String, owner: Owner, content: [String]?, title: String?, description: String?, location: String?, createdDate: SwivelDate?, updatedDate: SwivelDate?, totalLikes: Int, isLiked: Bool, totalComments: Int, totalShares: Int) {
+    init(blogId: String, owner: Owner, content: [String]?, title: String?, description: String?, location: String?, createdDate: NCDate?, updatedDate: NCDate?, totalLikes: Int, isLiked: Bool, totalComments: Int, totalShares: Int) {
         self.blogId                     = blogId
         self.owner                      = owner
         self.content                    = content

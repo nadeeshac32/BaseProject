@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/9/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -95,7 +95,7 @@ class Comment: BaseModel {
     
     
 //    // TODO: This method will be deleted once the api integrated
-//    init(blogId: String, owner: Owner, content: [String]?, title: String?, description: String?, location: String?, createdDate: SwivelDate?, updatedDate: SwivelDate?, totalLikes: Int, isLiked: Bool, totalComments: Int, totalShares: Int) {
+//    init(blogId: String, owner: Owner, content: [String]?, title: String?, description: String?, location: String?, createdDate: NCDate?, updatedDate: NCDate?, totalLikes: Int, isLiked: Bool, totalComments: Int, totalShares: Int) {
 //        self.blogId                     = blogId
 //        self.owner                      = owner
 //        self.content                    = content

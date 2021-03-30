@@ -3,14 +3,14 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/10/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import RxSwift
 
-class BottomTabBarVC: SwivelTabBarController, StoryboardInitializable {
+class BottomTabBarVC: NCTabBarController, StoryboardInitializable {
 
     private let disposeBag                      = DisposeBag()
     var viewModel                               : BottomTabBarVM?
@@ -43,16 +43,16 @@ class BottomTabBarVC: SwivelTabBarController, StoryboardInitializable {
         
         blogHomeCoordinator                     = BlogFeedVC.initCoordinatorFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogHomeVM, type: BlogCoordinator.self, window: window, nav: nav) as? BlogCoordinator
         blogHomeCoordinator.initialiseVC()
-        let blogHomeTabBarItem                  = SwivelTabBarItem(icon: UIImage(named: "icon_home")!, selectedIcon: UIImage(named: "icon_home_active")!, title: "Home", viewController: blogHomeCoordinator.rootVC!)
+        let blogHomeTabBarItem                  = NCTabBarItem(icon: UIImage(named: "icon_home")!, selectedIcon: UIImage(named: "icon_home_active")!, title: "Home", viewController: blogHomeCoordinator.rootVC!)
         
         blogMySpaceCoordinator                  = BlogFeedVC.initCoordinatorFromStoryboard(name: Storyboards.example.rawValue, withViewModel: blogMySpaceVM, type: BlogCoordinator.self, window: window, nav: nav) as? BlogCoordinator
         blogMySpaceCoordinator.initialiseVC()
-        let blogMySpaceTabBarItem               = SwivelTabBarItem(icon: UIImage(named: "icon_social_feed")!, selectedIcon: UIImage(named: "icon_social_feed_active")!, title: "My Space", viewController: blogMySpaceCoordinator.rootVC!)
+        let blogMySpaceTabBarItem               = NCTabBarItem(icon: UIImage(named: "icon_social_feed")!, selectedIcon: UIImage(named: "icon_social_feed_active")!, title: "My Space", viewController: blogMySpaceCoordinator.rootVC!)
         
 
         listGridCoordinator                     = ManuTabBarWithListsGridsVC.initCoordinatorFromStoryboard(name: Storyboards.example.rawValue, withViewModel: manuTabBarWithListsGridsVM, type: ListGridCoordinator.self, window: window, nav: nav) as? ListGridCoordinator
         listGridCoordinator.initialiseVC()
-        let listTabBarItem                      = SwivelTabBarItem(icon: UIImage(named: "icon_list")!, selectedIcon: UIImage(named: "icon_list_active")!, title: "List & Grid", viewController: listGridCoordinator.rootVC!)
+        let listTabBarItem                      = NCTabBarItem(icon: UIImage(named: "icon_list")!, selectedIcon: UIImage(named: "icon_list_active")!, title: "List & Grid", viewController: listGridCoordinator.rootVC!)
 
 
         
@@ -83,7 +83,7 @@ class BottomTabBarVC: SwivelTabBarController, StoryboardInitializable {
             })
         ])
 
-        var tabBarItems                         = [SwivelTabBarItem]()
+        var tabBarItems                         = [NCTabBarItem]()
         tabBarItems.append(blogHomeTabBarItem)
         tabBarItems.append(blogMySpaceTabBarItem)
         tabBarItems.append(listTabBarItem)

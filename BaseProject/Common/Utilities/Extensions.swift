@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/8/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -450,7 +450,7 @@ extension UITableView {
 }
 
 extension UICollectionView {
-    func setNoDataPlaceholder(_ message: String,_ imageName: String?) {
+    func setNoDataPlaceholder(_ message: String,_ imageName: String?, _ scrollingEnableWhileItemsLoading: Bool) {
         if imageName == nil {
             let label               = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             label.textAlignment     = .center
@@ -458,7 +458,7 @@ extension UICollectionView {
             label.text              = message
             label.numberOfLines     = 5
             label.sizeToFit()
-            self.isScrollEnabled    = false
+            self.isScrollEnabled    = scrollingEnableWhileItemsLoading
             self.backgroundView     = label
             
         } else {
@@ -484,7 +484,7 @@ extension UICollectionView {
                 make.left.equalToSuperview().offset(20)
                 make.right.equalToSuperview().offset(-20)
             }
-            self.isScrollEnabled    = false
+            self.isScrollEnabled    = scrollingEnableWhileItemsLoading
             self.backgroundView     = view
         }
     }
@@ -574,6 +574,18 @@ extension UINavigationController {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+	
+	func setStatusBar(backgroundColor: UIColor) {
+        let statusBarFrame: CGRect
+        if #available(iOS 13.0, *) {
+            statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+        } else {
+            statusBarFrame = UIApplication.shared.statusBarFrame
+        }
+        let statusBarView = UIView(frame: statusBarFrame)
+        statusBarView.backgroundColor = backgroundColor
+        view.addSubview(statusBarView)
+    }
 }
 
 extension UINavigationBar {
@@ -651,7 +663,7 @@ extension SwipeNavigationController: UIGestureRecognizerDelegate {
     }
 }
 
-// MARK: - Extensions used by SwivelTabBarController
+// MARK: - Extensions used by NCTabBarController
 extension UIView {
     
     func addConstraints(withFormat format: String, arrayOf views: [UIView]) {

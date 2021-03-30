@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/28/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -64,10 +64,11 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
      When this is set to true, pagination will happen when the user scroll to the bottom
      */
     var loadAsDynemic       : Bool                  = true
-    
+    var hasNextPage 		: Bool 					= true
     var totalCount          : Int                   = 1
     var requestPage         : Int                   = 0
-    let limit               : Int                   = 200
+    var limit               : Int                   = 200
+    var sectionHeaderWhenDataComesAsArray           = "Section_Header_When_Data_Comes_As_Array"
     
     /// Data list can be sorted from key if you wanted. In the Data model you should override getSortKey method as you want.
     var shouldSortFromKey   : Bool                  = false
@@ -205,7 +206,6 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
         }
     }
     
-    
     /// Network request to fetch data from the Rest API.
     /// You have to override this methis in your subclass.
     func perfomrGetItemsRequest(loadPage: Int, limit: Int) {
@@ -221,6 +221,7 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     /// Reset pagination and reload data
     func reloadList() {
         totalCount                                  = 1
+		hasNextPage 								= true
         requestPage                                 = 0
         items.onNext([])
         itemsWithHeaders.onNext([])
@@ -230,30 +231,35 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     /// Paginate next data set from the Rest API.
     /// This method will be called the view has scroll to the bottom
     func paginateNext() {
-        if loadFromAPI && totalCount > getCalculatedItemsCount() && searchText == "" {
+        if loadFromAPI && (totalCount > getCalculatedItemsCount() || hasNextPage == true) && searchText == "" {
             self.totalCount                         = 0
+			self.hasNextPage 						= false
             perfomrGetItemsRequest(loadPage: requestPage, limit: limit)
-        } else if loadFromAPI && totalCount > getCalculatedItemsCount() && searchText != "" {
+        } else if loadFromAPI && (totalCount > getCalculatedItemsCount() || hasNextPage == true) && searchText != "" {
             self.totalCount                         = 0
+			self.hasNextPage 						= false
             performSearchItemsRequest(searchText: searchText, loadPage: requestPage, limit: limit)
         }
     }
     
-    
     /// Appending data to the data array
-    func addNewItems(items: [Model]) {
-        var currentItems: [Model]                   = []
-        do {
-            currentItems                            = try self.items.value()
-        } catch {
-            print("error: \(error)")
-        }
-        if self.shouldSortFromKey {
-            currentItems.append(contentsOf: items.sorted(by: { $0.getSortKey().lowercased() < $1.getSortKey().lowercased() }))
+    func addNewItems(items: [Model], loadInGridWithHeadersButWithoutHeaders: Bool = false) {
+        if !loadInGridWithHeadersButWithoutHeaders {
+            var currentItems: [Model]                   = []
+            do {
+                currentItems                            = try self.items.value()
+            } catch {
+                print("error: \(error)")
+            }
+            if self.shouldSortFromKey {
+                currentItems.append(contentsOf: items.sorted(by: { $0.getSortKey().lowercased() < $1.getSortKey().lowercased() }))
+            } else {
+                currentItems.append(contentsOf: items)
+            }
+            self.items.onNext(currentItems)
         } else {
-            currentItems.append(contentsOf: items)
+            addNewItems(items: [sectionHeaderWhenDataComesAsArray : items])
         }
-        self.items.onNext(currentItems)
     }
     
     /// Removing data from the data array
@@ -343,14 +349,19 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [Model], total: Int, page: Int) {
+    func handleResponse(items: [Model], total: Int, page: Int, hasNextPage: Bool = false, loadInGridWithHeadersButWithoutHeaders: Bool = false) {
         if page == 0 {
-            self.items.onNext([])
+            if !loadInGridWithHeadersButWithoutHeaders {
+                self.items.onNext([])
+            } else {
+                self.itemsWithHeaders.onNext([])
+            }
         }
         self.totalCount                             = total
+        self.hasNextPage                             = hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
-        self.addNewItems(items: items)
+        self.addNewItems(items: items, loadInGridWithHeadersButWithoutHeaders: loadInGridWithHeadersButWithoutHeaders)
         self.requestLoading.onNext(false)
         if loadFromAPI && !loadAsDynemic && searchText == "" {
             paginateNext()
@@ -359,11 +370,12 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     
     /// You override the `perfomrGetItemsRequest(loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleResponse(items: [String: [Model]], total: Int, page: Int) {
+    func handleResponse(items: [String: [Model]], total: Int, page: Int, hasNextPage: Bool = false) {
         if page == 0 {
             self.itemsWithHeaders.onNext([])
         }
         self.totalCount                             = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)
@@ -375,14 +387,19 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response array you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [Model], total: Int, page: Int) {
+    func handleSearchResponse(searchTextOfData: String, items: [Model], total: Int, page: Int, hasNextPage: Bool = false, loadInGridWithHeadersButWithoutHeaders: Bool = false) {
         if page == 0 {
-            self.items.onNext([])
+            if !loadInGridWithHeadersButWithoutHeaders {
+                self.items.onNext([])
+            } else {
+                self.itemsWithHeaders.onNext([])
+            }
         }
         self.totalCount                             = total
+        self.hasNextPage                            = hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
-        self.addNewItems(items: items)
+        self.addNewItems(items: items, loadInGridWithHeadersButWithoutHeaders: loadInGridWithHeadersButWithoutHeaders)
         self.requestLoading.onNext(false)
         if loadFromAPI && !loadAsDynemic && searchTextOfData == searchText {
             paginateNext()
@@ -391,11 +408,12 @@ class BaseCollectionVM<Model: BaseModel>: BaseVM {
     
     /// You override the `performSearchItemsRequest(searchText: String, loadPage: Int, limit: Int)` method in you subclass.
     /// Then you can pass the response map you get there to this method, so this method will handle the rest.
-    func handleSearchResponse(searchTextOfData: String, items: [String: [Model]], total: Int, page: Int) {
+    func handleSearchResponse(searchTextOfData: String, items: [String: [Model]], total: Int, page: Int, hasNextPage: Bool = false) {
         if page == 0 {
             self.itemsWithHeaders.onNext([])
         }
         self.totalCount                             = total
+		self.hasNextPage 							= hasNextPage
         self.totalItemsCount.onNext(self.totalCount)
         self.requestPage                            = page + 1
         self.addNewItems(items: items)

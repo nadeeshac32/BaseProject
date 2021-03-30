@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 10/21/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import FBSDKLoginKit
 
 protocol FacebookSignInSupport: class {
     var facebookSignInVM: SocialSignInVM { get }
-    func configureFacebookSignIn(facebookSignInButton: SwivelFBLoginButton)
+    func configureFacebookSignIn(facebookSignInButton: NCFBLoginButton)
     func signedInWithFacebookToken(token: String)
 }
 
@@ -23,7 +23,7 @@ extension FacebookSignInSupport where Self: SocialSignInSupportVC {
         return viewModel!
     }
     
-    func configureFacebookSignIn(facebookSignInButton: SwivelFBLoginButton) {
+    func configureFacebookSignIn(facebookSignInButton: NCFBLoginButton) {
         facebookSigninBtn.loginCompletionHandler = { [weak self] (button, result) in
             switch result {
             case .success(let result):

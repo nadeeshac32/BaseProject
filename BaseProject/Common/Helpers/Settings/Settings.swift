@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/9/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -156,7 +156,7 @@ extension Bundle {
         UserDefaults.standard.synchronize()
 
         guard let path = Bundle.main.path(forResource: languageCode, ofType: "lproj") else {
-            print("Failed to get a bundle path languageCode: \(languageCode)")
+            print("Setting.swift: Failed to get a bundle path languageCode: \(languageCode)\nLanguage bundles are not set yet")
             return
         }
 

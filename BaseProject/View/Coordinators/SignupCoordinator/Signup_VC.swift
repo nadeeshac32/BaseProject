@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/10/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -12,10 +12,10 @@ import CountryPickerView
 
 class SignupVC: BaseFormVC<SignupVM>, DropDownPresentable {
 
-    @IBOutlet weak var fullNameTxtFld                                   : SwivelNormalTextField!
-    @IBOutlet weak var passwordTxtFld                                   : SwivelRightButtonActionTextField!
-    @IBOutlet weak var confirmPasswordTxtFld                            : SwivelRightButtonActionTextField!
-    @IBOutlet weak var mobileTxtFld                                     : SwivelPrefixSelectTextField!
+    @IBOutlet weak var fullNameTxtFld                                   : NCNormalTextField!
+    @IBOutlet weak var passwordTxtFld                                   : NCRightButtonActionTextField!
+    @IBOutlet weak var confirmPasswordTxtFld                            : NCRightButtonActionTextField!
+    @IBOutlet weak var mobileTxtFld                                     : NCPrefixSelectTextField!
     @IBOutlet weak var privacyPolicyLbl                                 : UILabel!
     
     @IBOutlet public weak var _scrollView                               : BaseScrollView!

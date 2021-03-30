@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/7/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -16,7 +16,8 @@ class BaseSuperVC: UIViewController, StoryboardInitializable, SearchViewAnimateb
 
     weak var baseViewModel          : BaseVM?
     let disposeBag                  = DisposeBag()
-    var isDarkStatusBar: Bool = false {
+    var previousVCTitle             : String?
+    var isDarkStatusBarContent: Bool = false {
         didSet {
             UIView.animate(withDuration: 0.4) {
                 self.setNeedsStatusBarAppearanceUpdate()
@@ -25,10 +26,14 @@ class BaseSuperVC: UIViewController, StoryboardInitializable, SearchViewAnimateb
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.isDarkStatusBar ? .default : .lightContent
+        if #available(iOS 13.0, *) {
+            return self.isDarkStatusBarContent ? .darkContent : .lightContent
+        } else {
+            print("Not available iOS 13.0, isDarkStatusBarContent: \(isDarkStatusBarContent)")
+            return self.isDarkStatusBarContent ? .default : .lightContent
+        }
     }
 }
-
 
 protocol SearchViewAnimateble : class { }
 extension SearchViewAnimateble where Self: BaseSuperVC {
@@ -39,7 +44,7 @@ extension SearchViewAnimateble where Self: BaseSuperVC {
         self.navigationController?.navigationBar.topItem?.setLeftBarButton(nil, animated: false)
         self.navigationController?.navigationBar.topItem?.setRightBarButton(nil, animated: false)
         self.navigationController?.navigationBar.topItem?.titleView     = searchBar
-        self.isDarkStatusBar                                            = true
+        self.isDarkStatusBarContent                                            = true
         
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.navigationController?.navigationBar.setGradientBackground(colors: [.white], direction: .leftToRight)
@@ -54,7 +59,7 @@ extension SearchViewAnimateble where Self: BaseSuperVC {
         self.navigationController?.navigationBar.topItem?.titleView     = titleView
         self.navigationController?.navigationBar.topItem?.setLeftBarButton(leftBarButtonItem, animated: true)
         self.navigationController?.navigationBar.topItem?.setRightBarButton(searchBarButtonItem, animated: true)
-        self.isDarkStatusBar                                            = false
+        self.isDarkStatusBarContent                                            = false
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.navigationController?.navigationBar.setGradientBackground(colors: [AppConfig.si.colorGradient1, AppConfig.si.colorGradient2], direction: .leftToRight)
             self?.navigationController?.navigationBar.tintColor         = .white

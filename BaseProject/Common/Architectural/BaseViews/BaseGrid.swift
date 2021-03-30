@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/2/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -85,6 +85,8 @@ class BaseCollection<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Collec
     var collectionView                              : UICollectionView!
     var itemCountLabel                              : UILabel?
     var itemCountString                             : String?
+    var showActivityIndicator                       : Bool = false
+    var scrollingEnableWhileItemsLoading            : Bool = false
     
     var multiSelectable                             : Bool = false
     
@@ -154,8 +156,12 @@ class BaseCollection<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Collec
                     }
                 })
             ])
-            let isLoading = collectionView.rx.isLoading(loadingMessage: delegate?.getItemsLoadingText(collectionView) ?? "", noItemsMessage: delegate?.getNoItemsText(collectionView) ?? "", imageName: delegate?.getNoItemsImageName(collectionView))
+            let isLoading = collectionView.rx.isLoading(loadingMessage: delegate?.getItemsLoadingText(collectionView) ?? "", noItemsMessage: delegate?.getNoItemsText(collectionView) ?? "", imageName: delegate?.getNoItemsImageName(collectionView), scrollingEnableWhileItemsLoading: scrollingEnableWhileItemsLoading)
             viewModel.requestLoading.map ({ $0 }).bind(to: isLoading).disposed(by: disposeBag)
+            
+            if showActivityIndicator {
+                viewModel.requestLoading.asObservable().bind(to: collectionView.rx.isAnimating).disposed(by: disposeBag)
+            }
         }
     }
     
@@ -166,10 +172,18 @@ class BaseCollection<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, Collec
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset: CGFloat                     = 100
-        let bottomEdge                          = scrollView.contentOffset.y + scrollView.frame.size.height;
-        if (bottomEdge + offset >= scrollView.contentSize.height) {
-            viewModel?.paginateNext()
+        guard viewModel?.getCalculatedItemsCount() ?? 0 > 0 else { return }
+        let offset: CGFloat                         = 500
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout, layout.scrollDirection == .horizontal {
+            let rightEdge                           = scrollView.contentOffset.x + scrollView.frame.size.width
+            if (rightEdge + offset >= scrollView.contentSize.width) {
+                viewModel?.paginateNext()
+            }
+        } else {
+            let bottomEdge                          = scrollView.contentOffset.y + scrollView.frame.size.height
+            if (bottomEdge + offset >= scrollView.contentSize.height) {
+                viewModel?.paginateNext()
+            }
         }
     }
     
@@ -264,9 +278,14 @@ class BaseGridWithHeaders<Model:BaseModel, ViewModel: BaseCollectionVM<Model>, C
  
     func viewForHeaderInSection(dataSource: CollectionViewSectionedDataSource<SectionOfCustomData<Model>>, collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: CollectionViewSectionHeder.self), for: indexPath) as! CollectionViewSectionHeder
-            sectionHeader.configureCell(header: dataSource.sectionModels[indexPath.section].header)
-            return sectionHeader
+            let header = dataSource.sectionModels[indexPath.section].header
+            if header.lowercased() == viewModel?.sectionHeaderWhenDataComesAsArray.lowercased() {
+                return UICollectionReusableView()
+            } else {
+                let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: CollectionViewSectionHeder.self), for: indexPath) as! CollectionViewSectionHeder
+                sectionHeader.configureCell(header: header)
+                return sectionHeader
+            }
         } else { //No footer in this case but can add option for that
              return UICollectionReusableView()
         }

@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 11/6/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -32,6 +32,15 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
     var tableView                               : UITableView!
     var itemCountLabel                          : UILabel?
     var itemCountString                         : String?
+    var showActivityIndicator                   : Bool = false
+    
+    /*
+     * This will be used to calculate the top offset of the table view when the user scroll it.
+     * Caculated value will be send to the viewmodel as a percentage
+     * 100% will be send when the user scroll to the value of `fullHeightForScrollPropotion`
+     */
+    var fullHeightForScrollPropotion            : CGFloat = 300
+    
     var isDynemicSectionTitles                  : Bool = true
     var shouldSetRowHeight                      : Bool = false {
         didSet {
@@ -68,7 +77,7 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
         }
         self.tableView.estimatedRowHeight       = self.delegate?.getCellHeight(self.tableView) ?? 70
         
-        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionType>(animationConfiguration: AnimationConfiguration(insertAnimation: .top,
+        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionType>(animationConfiguration: AnimationConfiguration(insertAnimation: .fade,
                                                                                                                              reloadAnimation: .none,
                                                                                                                              deleteAnimation: .left),
                                                                               configureCell: { [weak self] (ds, tv, ip, item) -> UITableViewCell in
@@ -135,6 +144,24 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
         if (bottomEdge + offset >= scrollView.contentSize.height) {
             viewModel?.paginateNext()
         }
+        
+        let offsetValueToCalculate              : CGFloat
+        if scrollView.contentOffset.y < 0 {
+            offsetValueToCalculate              = 0
+        } else if scrollView.contentOffset.y > fullHeightForScrollPropotion {
+            offsetValueToCalculate              = fullHeightForScrollPropotion
+        } else {
+            offsetValueToCalculate              = scrollView.contentOffset.y
+        }
+        
+        let scrollPercentage                    : CGFloat
+        if offsetValueToCalculate == 0 {
+            scrollPercentage                    = 0
+        } else {
+            scrollPercentage                    = offsetValueToCalculate / fullHeightForScrollPropotion
+        }
+        
+        viewModel?.updateScrollPropertion.onNext(scrollPercentage)
     }
     
     func setMultiSelectableMode(multiSelectEnabled: Bool) {
@@ -174,6 +201,10 @@ class AdvancedBaseList<Model:AdvancedAnimatableSectionModelTypeSupportedItem, Se
             ])
             let isLoading = tableView.rx.isLoading(loadingMessage: delegate?.getItemsLoadingText(tableView) ?? "", noItemsMessage: delegate?.getNoItemsText(tableView) ?? "", imageName: delegate?.getNoItemsImageName(tableView))
             viewModel.requestLoading.map ({ $0 }).bind(to: isLoading).disposed(by: disposeBag)
+            
+            if showActivityIndicator {
+                viewModel.requestLoading.asObservable().bind(to: tableView.rx.isAnimating).disposed(by: disposeBag)
+            }
             
             disposeBag.insert([
                 // MARK: - Inputs

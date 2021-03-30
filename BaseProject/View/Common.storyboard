@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
     </dependencies>
     <scenes>
-        <!--Swivel Page View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="BZm-ln-Nm2">
             <objects>
-                <pageViewController storyboardIdentifier="SwivelPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="NC6-0J-Km8" customClass="SwivelPageViewController" customModule="Base_Project" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="NCPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="NC6-0J-Km8" customClass="NCPageViewController" customModule="Base_Project" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wd-Wa-u3m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="575" y="-196"/>

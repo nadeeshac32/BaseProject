@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 9/9/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import Foundation
@@ -57,8 +57,10 @@ class BaseTVCell<Model: BaseModel>: UITableViewCell {
         }
     }
     
+    /// Change Cell UI for multiple selection
     func setForMultiSelectMode(enableMultiSelect: Bool) { }
     
+    /// Handle selection / unselection
     func multiSelectHighlighted(highlighted: Bool) { }
     
 }

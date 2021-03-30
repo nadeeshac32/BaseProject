@@ -3,7 +3,7 @@
 //  Base Project
 //
 //  Created by Nadeesha Chandrapala on 10/27/20.
-//  Copyright © 2020 Swivel Tech. All rights reserved.
+//  Copyright © 2020 Nadeesha Lakmal. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ protocol BlogCreateImageCVCellDelegate: BaseCVCellDelegate {
 
 class BlogCreateImageCVCell: BaseCVCell<BlogContent> {
     
-    @IBOutlet weak var multimediaVw: SwivelMultimediaView!
+    @IBOutlet weak var multimediaVw: NCMultimediaView!
     @IBOutlet weak var removeBtn: UIButton!
     
     deinit {
