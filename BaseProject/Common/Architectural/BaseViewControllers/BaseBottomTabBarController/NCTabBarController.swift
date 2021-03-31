@@ -42,7 +42,7 @@ class NCTabBarController: UITabBarController {
         ncTabBar.tabItems[0].color        = selectedColor
         ncTabBar.tabItems[0].isForcused   = true
     }
-    
+
     func setupView(items: [NCTabBarItem], normalColor: UIColor, selectedColor: UIColor) {
         
         self.selectedColor                  = selectedColor
