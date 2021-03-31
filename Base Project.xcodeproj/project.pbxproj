@@ -436,6 +436,7 @@
 			children = (
 				C964AFFA25063171009E998C /* Application */,
 				C9CC086925516A6B00C86FE6 /* Common */,
+				C983C0BB2614422600E6CBA6 /* NetworkClients */,
 				C964B0012506321D009E998C /* View */,
 				C964B0002506320C009E998C /* Model */,
 				C964AFFC250631D8009E998C /* Resources */,
@@ -623,7 +624,6 @@
 				C9E2AE402508EDEC001F3961 /* FileAPIProtocol.swift */,
 				C9E2AE452509F654001F3961 /* UserAPIProtocol.swift */,
 				C9E2AE84250A4061001F3961 /* ProfileAPIProtocol.swift */,
-				C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */,
 			);
 			path = APIProtocols;
 			sourceTree = "<group>";
@@ -772,6 +772,23 @@
 			path = AppInitialising;
 			sourceTree = "<group>";
 		};
+		C983C0BB2614422600E6CBA6 /* NetworkClients */ = {
+			isa = PBXGroup;
+			children = (
+				C92CD0112549E16600FA7F1F /* BlogAPIProtocol.swift */,
+			);
+			path = NetworkClients;
+			sourceTree = "<group>";
+		};
+		C983C0BD2614431800E6CBA6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C9E2AE68250A3A99001F3961 /* Signin_VC.swift */,
+				C9E2AE6A250A3AAF001F3961 /* Signin_MV.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		C984DDF5261246E90082D6CB /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +856,7 @@
 		C9CC086A25516D9E00C86FE6 /* GeneralReusableInstance */ = {
 			isa = PBXGroup;
 			children = (
+				C983C0BD2614431800E6CBA6 /* ViewControllers */,
 				C983BFDB26143B7700E6CBA6 /* AppInitialising */,
 				C9E2AE422508EE1B001F3961 /* Network */,
 			);
@@ -868,8 +886,6 @@
 			isa = PBXGroup;
 			children = (
 				C9E2AE66250A3A7F001F3961 /* Main_Coordinator.swift */,
-				C9E2AE68250A3A99001F3961 /* Signin_VC.swift */,
-				C9E2AE6A250A3AAF001F3961 /* Signin_MV.swift */,
 				C9E2AE72250A3B06001F3961 /* PasswordReset_VC.swift */,
 				C9E2AE74250A3B1D001F3961 /* PasswordReset_VM.swift */,
 				C9E2AE70250A3AF0001F3961 /* AlertPopoverVC.swift */,
@@ -880,9 +896,9 @@
 		C9E2AE4C250A38DA001F3961 /* SignupCoordinator */ = {
 			isa = PBXGroup;
 			children = (
-				C9E2AE5C250A39DC001F3961 /* Signup_Coordinator.swift */,
 				C9E2AE5E250A39F0001F3961 /* Signup_VC.swift */,
 				C9E2AE60250A3A02001F3961 /* Signup_VM.swift */,
+				C9E2AE5C250A39DC001F3961 /* Signup_Coordinator.swift */,
 				C9E2AE62250A3A16001F3961 /* OTPVerification_VC.swift */,
 				C9E2AE64250A3A2C001F3961 /* OTPVerification_VM.swift */,
 			);

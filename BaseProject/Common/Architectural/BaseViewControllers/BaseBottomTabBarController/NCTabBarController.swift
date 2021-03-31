@@ -36,6 +36,13 @@ class NCTabBarController: UITabBarController {
         tabBar.frame.origin.y               = view.frame.height - ncTabBarHeight
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard ncTabBar.tabItems.count > 0 else { return }
+        ncTabBar.tabItems[0].color        = selectedColor
+        ncTabBar.tabItems[0].isForcused   = true
+    }
+    
     func setupView(items: [NCTabBarItem], normalColor: UIColor, selectedColor: UIColor) {
         
         self.selectedColor                  = selectedColor
