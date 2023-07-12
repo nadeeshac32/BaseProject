@@ -22,17 +22,17 @@ This project can be used as a Base Project which can be extended and implement o
 - [x] Base Menu View Controller - This is an Andoid style(UI) tab bar controller which is it's tab item highlighting animation can be styled with underline or border.
 
 ## Common components
-- [x] Swivel Bottom Tab Bar Controller - Tab bar controller that can be customise with Customised Tab Bar Items.
+- [x] Bottom Tab Bar Controller - Tab bar controller that can be customise with Customised Tab Bar Items.
 - [x] GoogleSignable and FacebookSignable - Social sign in capability with these protocols and there default implementations. Both adopts to Base MVVM architecture.
-- [x] Swivel Document Picker - Re-usable Document picker to brows files and pick.
-- [x] Swivel Document Viewer - Re-usable Document presenter to display documents.
-- [x] Swivel Image Picker Controller - Re-usable Image picker controller.
-- [x] Swivel Custom Text Fields - Re-usable Text fields that supports to Base Form view which abstracts validations within.
-  - Swivel Normal Text Field - Normal text field with error message animation.
-  - Swivel Right Button Action TextField - Action can be configured to a button which is inside the text field. Ex:- Clear, Hide/Show Secure text.
-  - Swivel Prefix Select TextField - Prefix Selection can be configured to append to the text as a prefix. Ex:- Country Code Picker.
-  - Swivel Max Charachters TextField - Charactor counter is appeared at the corner of the text field. Max charactor count, Color, Max count exeeding action can be configured.
-  - Swivel Username Text Field - Once the user start to type numeric value it will show a country picker and changed to a mobile number input field. But when you type a letter it will change back to email input field.
+- [x] Document Picker - Re-usable Document picker to brows files and pick.
+- [x] Document Viewer - Re-usable Document presenter to display documents.
+- [x] Image Picker Controller - Re-usable Image picker controller.
+- [x] Custom Text Fields - Re-usable Text fields that supports to Base Form view which abstracts validations within.
+  - Normal Text Field - Normal text field with error message animation.
+  - Right Button Action TextField - Action can be configured to a button which is inside the text field. Ex:- Clear, Hide/Show Secure text.
+  - Prefix Select TextField - Prefix Selection can be configured to append to the text as a prefix. Ex:- Country Code Picker.
+  - Max Charachters TextField - Charactor counter is appeared at the corner of the text field. Max charactor count, Color, Max count exeeding action can be configured.
+  - Username Text Field - Once the user start to type numeric value it will show a country picker and changed to a mobile number input field. But when you type a letter it will change back to email input field.
 
 
 ## Requirements:
